@@ -47,3 +47,17 @@
   .cta-button:hover {
     background-color: rgb(131, 114, 92); 
   }
+
+  .hero-text h1 {
+    font-family: 'Open Sauce Sans', 'Arial', sans-serif;
+    font-size: 50px;
+
+  }
+
+  .hero-image {
+    width: 100%; /* Make the image take up 100% of the width of the hero section */
+    height: auto; /* Maintain the aspect ratio */
+    max-width: 800px; /* Limit the width of the image */
+    object-fit: cover; /* Make sure the image covers the area without distortion */
+    margin-top: 30px;
+  }
