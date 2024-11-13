@@ -4,19 +4,21 @@ import { Schema, model, Document, ObjectId } from "mongoose";
 
 interface IReview extends Document {
     content: string,
-    username: ObjectId
+    username: ObjectId,
+    progress: string
 }
 
 const reviewSchema = new Schema<IReview>(
     {
         content: {
             type: String,
-            minlength: 1,
-            required: true
         },
         username: {
             type: Schema.Types.ObjectId,
             ref: 'User'
+        },
+        progress: {
+            type: String
         }
     }  
 )
