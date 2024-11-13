@@ -1,3 +1,7 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
+
+
 #hero {
     background-image: url('../../assets/bookhub.png'); 
     background-size: cover; 
@@ -6,6 +10,22 @@
     display: flex;
     align-items: center; 
     justify-content: center;
+  }
+
+  header {
+    background-color: #faefe0; 
+  }
+
+  .header-text {
+    font-size: 40px;  /* Adjust font size */
+    font-weight: bold;  /* Make the text bold */
+    margin-left: 20px;  /* Add space between logo and text */
+    font-family: 'Open Sauce Sans', 'Arial', sans-serif;
+  }
+  
+  .logo {
+    width: 50px;  
+    height: 50px;
   }
   
 
