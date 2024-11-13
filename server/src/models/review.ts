@@ -21,4 +21,4 @@ const reviewSchema = new Schema<IReview>(
     }  
 )
 
-export const Book = model('Review', reviewSchema)
+export const Review = model('Review', reviewSchema)
