@@ -13,24 +13,30 @@
   }
 
   header {
+    display: flex;
     background-color: #faefe0; 
+    padding-bottom: 2%;
+    border-bottom: 5px solid black;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .header-text {
-    font-size: 40px;  /* Adjust font size */
-    font-weight: bold;  /* Make the text bold */
-    margin-left: 20px;  /* Add space between logo and text */
+    font-size: 30px;  
+    /* font-weight: bold;   */
+    margin-left: 10px;  
     font-family: 'Open Sauce Sans', 'Arial', sans-serif;
+    margin-top: 20px;
   }
   
   .logo {
-    width: 50px;  
-    height: 50px;
+    width: 30px;  
+    height: 30px;
+    margin-top: 20px;
   }
   
 
   .cta-button {
-    display: inline-block;
     padding: 0.8rem 2rem;
     background-color: #d0ba9e; 
     color: #fff;
@@ -38,9 +44,6 @@
     text-decoration: none;
     font-weight: bold;
     border-radius: 0.5rem;
-    position: absolute;  
-    right: 25%;         
-    bottom: 40%;         
   }
   
   
@@ -50,7 +53,9 @@
 
   .hero-text h1 {
     font-family: 'Open Sauce Sans', 'Arial', sans-serif;
-    font-size: 50px;
+    font-size: 80px;
+    margin-top: 20%;
+    margin-left: 10%;
 
   }
 
