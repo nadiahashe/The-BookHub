@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // Import Link for navigation
+import './css/Login.css';
+import LoginPic from '../assets/loginpic.png'
+
 
 // Define the login mutation
 const LOGIN_MUTATION = gql`
@@ -35,25 +39,31 @@ const Login: React.FC<LoginFormProps> = () => {
         localStorage.setItem('token', data.login.token);
 
         // Redirect to a protected route (e.g., dashboard)
-        navigate('/dashboard');
+        navigate('/home');
       }
     } catch (err) {
       console.error("Login failed:", err);
     }
   };
 
-  // Optional logout function to clear the token and redirect to login page
-  const handleLogout = () => {
-    localStorage.removeItem('token'); // Remove token
-    navigate('/login');               // Redirect to login page
-  };
+  // Optional logout function to clear the token and redirect to landing page
+  // const handleLogout = () => {
+  //   localStorage.removeItem('token'); 
+  //   navigate('/');               
+  // };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label htmlFor="username">Username:</label>
+    <div className='login-container'>
+      
+      <div className='left-grid'>
+      <img src={LoginPic} alt="pic" className="side-content" />
+      </div>
+
+      <form className='right-grid' onSubmit={handleLogin}>
+        <h1>The Book Hub</h1>
+        <h2 >Connect. Share. Discover.</h2>
+        <div className='form-input'>
+          <label htmlFor="username">Username or Email</label>
           <input
             type="text"
             id="username"
@@ -63,8 +73,8 @@ const Login: React.FC<LoginFormProps> = () => {
           />
         </div>
 
-        <div>
-          <label htmlFor="password">Password:</label>
+        <div className='form-input'>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -84,14 +94,26 @@ const Login: React.FC<LoginFormProps> = () => {
             Login failed: {error.message || "Invalid credentials. Please try again."}
           </p>
         )}
+
+        <div>
+          {/* Sign Up button */}
+          <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+        </div>
       </form>
 
+
+      
+
       {/* Logout button for demonstration (could be elsewhere in app) */}
-      <button onClick={handleLogout} style={{ marginTop: '20px' }}>
+      {/* <button onClick={handleLogout} style={{ marginTop: '20px' }}>
         Logout
-      </button>
+      </button> */}
     </div>
   );
 };
 
 export default Login;
+
+
+
+
