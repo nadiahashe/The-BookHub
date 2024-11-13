@@ -1,0 +1,29 @@
+#hero {
+    background-image: url('../../assets/bookhub.png'); 
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+  }
+  
+
+  .cta-button {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background-color: #d0ba9e; 
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    position: absolute;  
+    right: 25%;         
+    bottom: 40%;         
+  }
+  
+  
+  .cta-button:hover {
+    background-color: rgb(131, 114, 92); 
+  }
