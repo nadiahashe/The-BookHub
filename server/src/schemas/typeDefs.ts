@@ -18,7 +18,7 @@ type Book {
 
 type Review {
     content: String
-    username: User
+    username: String
     progress: String
     shared: Boolean
 }
@@ -44,7 +44,6 @@ type Comment {
 
 type Auth {
     token: String
-    user: User
 }
 
 type Query {

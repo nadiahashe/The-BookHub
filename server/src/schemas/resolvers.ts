@@ -23,7 +23,7 @@ const resolvers = {
         me: async (_parent: any, _arg: any, context: any) => {
                 
                 if (context.user) {
-                        return await User.findOne({_id:context.user._id})
+                        return await User.findOne({_id:context.user._id}).populate(['books', 'groups'])
                 }
                 else {
                         throw new Error("Could not find user")
@@ -74,7 +74,7 @@ const resolvers = {
                         throw new Error("Authentication failed")
                 }
                 const token = signToken(user.username, user._id)
-                return {token, user}                
+                return {token}                
         },
 // create user (signup): arg username, password, email, returns Auth object (json token + user)
         signup: async (_parent: any, {email, password, username}: any, _context: any) => {
@@ -84,7 +84,7 @@ const resolvers = {
                         throw new Error('User signup failed')
                 }
                 const token = signToken(newUser.username, newUser._id)
-                return {token, user: newUser} 
+                return {token} 
         },
 // create book: arg title, author, image, bookId, return book object; updates logged-in user's book array
         addBook: async (_parent: any, {title, authors, image, bookId}: any, context: any) => {
