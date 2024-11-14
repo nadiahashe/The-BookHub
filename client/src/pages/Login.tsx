@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom'; // Import Link for navigation
 import './css/Login.css';
 import LoginPic from '../assets/loginpic.png'
+import { Link } from 'react-router-dom'; // Import Link for navigation
+
+
 
 
 // Define the login mutation
@@ -27,6 +29,8 @@ const Login: React.FC<LoginFormProps> = () => {
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
   const navigate = useNavigate();
 
+  
+
   // Handle login form submission
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -45,6 +49,8 @@ const Login: React.FC<LoginFormProps> = () => {
       console.error("Login failed:", err);
     }
   };
+
+
 
   // Optional logout function to clear the token and redirect to landing page
   // const handleLogout = () => {
@@ -98,17 +104,14 @@ const Login: React.FC<LoginFormProps> = () => {
         <div>
           {/* Sign Up button */}
           <p>Don't have an account? <Link to="/signup">Sign up here</Link></p>
+
         </div>
       </form>
-
-
       
 
-      {/* Logout button for demonstration (could be elsewhere in app) */}
-      {/* <button onClick={handleLogout} style={{ marginTop: '20px' }}>
-        Logout
-      </button> */}
-    </div>
+
+</div>
+   
   );
 };
 

@@ -4,13 +4,20 @@
 html {
     width: 100%;
     height: 100vh;
+    position: relative;
+    overflow: hidden;
+    
 }
   
 .login-container {
     display: grid;
     grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    height: 100%;
+    width: 100%;
     height: 100vh;
+    
     background-color: white;
+    overflow: hidden;
   }
 
   .right-grid {
@@ -18,12 +25,13 @@ html {
     flex-direction: column; /* Stack form elements vertically */
     gap: 1rem;
     padding: 2rem;
-    max-width: 400px;
+    /* max-width: 400px; */
     width: 100%;
+    height: 100%;
     max-height: 100%;
     justify-content: center;
-    margin-left: 15%;
-    margin-top: 15%;
+    /* margin-left: 15%; */
+    /* margin-top: 15%; */
     background-color: white;
   }
 
@@ -102,43 +110,57 @@ html {
   }
 
   .side-content {
-    background-color: #faefe0; 
-    padding: 2rem;
+    padding: 3rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-size: cover; 
-    background-position: center; 
-    height: auto; 
-    width: 80%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* height: 100%; */
+    width: 100%;
   }
+
+  .side-content img {
+    max-width: 100%;  /* Ensure image scales with the container */
+    height: auto;     /* Keep the aspect ratio intact */
+    object-fit: contain; /* Prevent stretching but allow the image to scale */
+  }
+
+
 
   @media (max-width: 480px) {
     .login-container {
         display: grid;
-        grid-template-columns: 1fr; /* Single column layout */
+        grid-template-columns: 1fr; 
         grid-template-rows: auto 1fr;
-        width: 100%; /* Ensure it spans the full width */
+        width: 100%; 
         height: 100vh;
         justify-items: center;
-        padding: 0; /* Remove extra padding */
+        padding: 0; 
       }
       
   
     .left-grid {
       width: 100%;
-      max-width: 480px; /* Limit width for small mobile screens */
-      margin-bottom: 1rem; /* Space below the image */
+      max-width: 480px; 
+      margin-bottom: 1rem; 
       justify-content: center;
       align-items: center;
       display: flex;
     }
   
     .side-content {
-      width: 100%;
-      height: auto;
-      object-fit: cover; /* Ensure image fits without distortion */
-    }
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Image will scale with container without distortion */
+      }
+
+      .side-content img {
+        width: 100%;   /* Make the image responsive on mobile */
+        height: auto;  /* Keep aspect ratio */
+        object-fit: cover; /* Ensure image fills the container without stretching */
+      }
   
     .right-grid {
       width: 100%;
@@ -147,16 +169,16 @@ html {
     }
   
     .form-input {
-      gap: 0.5rem; /* Less gap between inputs */
+      gap: 0.5rem; 
     }
   
     label {
-      font-size: 0.9rem; /* Smaller label font for mobile */
+      font-size: 0.9rem; 
     }
   
     input, button {
-      font-size: 1rem; /* Keep font size appropriate for small screens */
-      padding: 0.75rem; /* Consistent input/button padding */
+      font-size: 1rem; 
+      padding: 0.75rem; 
     }
   
     button {
@@ -168,22 +190,22 @@ html {
   @media (min-width: 481px) and (max-width: 768px) {
     .login-container {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Side-by-side layout */
-        grid-template-rows: auto; /* Single row layout */
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: auto; 
         width: 100%;
         height: 100vh;
     }
     
     .left-grid {
-        width: 100%; /* Ensures the image section uses full width of its column */
-        height: auto; /* Adjust height to fit content */
+        width: 100%; 
+        height: auto; 
         display: flex;
         justify-content: center;
         align-items: center;
     }
   
     .side-content {
-        width: 100%; /* Ensure the image stretches to fill its column */
+        width: 100%; 
         height: auto;
         object-fit: cover;
     }
@@ -197,21 +219,30 @@ html {
         width: 100%;
     }
     .form-input {
-        gap: 0.5rem; /* Less gap between inputs */
+        gap: 0.5rem;
+        margin-right: 10%;
       }
     
       label {
-        font-size: 0.9rem; /* Smaller label font for mobile */
+        font-size: 0.9rem; 
       }
     
       input, button {
-        font-size: 1rem; /* Keep font size appropriate for small screens */
-        padding: 0.75rem; /* Consistent input/button padding */
+        font-size: 1rem; 
+        padding: 0.75rem; 
+        margin-right: 10%;
       }
     
       button {
         font-size: 1rem;
         padding: 0.75rem;
+        margin-right: 15%;
+      }
+      p {
+        margin-right: 10%;
+      }
+      h1, h2 {
+        margin-right: 10%;
       }
   }
   

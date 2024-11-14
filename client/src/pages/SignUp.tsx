@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom'; 
+import './css/Signup.css'
 const SIGNUP_MUTATION = gql`
   mutation SignUp($username: String!, $password: String!) {
     signUp(username: $username, password: $password) {
@@ -12,10 +13,41 @@ const SIGNUP_MUTATION = gql`
     }
   }
 `;
+interface Props {
+  text: string;
+  speed?: number;
+}
+
+const TypingText: React.FC<Props> = ({ text, speed = 75 }) => {
+  const [displayedText, setDisplayedText] = useState<string>("");
+  
+
+  useEffect(() => {
+    let index = 0;
+    setDisplayedText(text.charAt(index));
+    const intervalId = setInterval(() => {
+      if (index < text.length) {
+        setDisplayedText((prevText) => {
+          const newText = prevText + text.charAt(index);
+          return newText;
+        });
+        index++;
+      } else {
+        clearInterval(intervalId);
+      }
+    }, speed);
+  
+    return () => clearInterval(intervalId);
+  }, [text, speed]);
+
+  return (
+    <h1>{displayedText}</h1>
+  );
+};
 
 interface SignUpFormProps {}
 
-const SignUp: React.FC<SignUpFormProps> = () => {
+const SignupForm: React.FC<SignUpFormProps> = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
@@ -39,10 +71,12 @@ const SignUp: React.FC<SignUpFormProps> = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSignUp}>
-        <div>
+    <div className="form-container">
+<TypingText text="Wander In, Bookworm – Glad You're Here!" speed={75} />
+    <div className="form">
+
+      <div className="form-border" onSubmit={handleSignUp}>
+        <div id='username-input'>
           <label htmlFor="username">Username:</label>
           <input
             type="text"
@@ -52,7 +86,7 @@ const SignUp: React.FC<SignUpFormProps> = () => {
             required
           />
         </div>
-
+  
         <div>
           <label htmlFor="password">Password:</label>
           <input
@@ -63,19 +97,22 @@ const SignUp: React.FC<SignUpFormProps> = () => {
             required
           />
         </div>
-
-        <button type="submit" disabled={loading}>
+  
+        <button id="signup-btn" type="submit" disabled={loading}>
           {loading ? 'Signing up...' : 'Sign Up'}
         </button>
-
-        {error && <p style={{ color: 'red' }}>Sign up failed: {error.message}</p>}
-      </form>
-
-      <div>
-        <p>Already have an account? <a href="/login">Login here</a></p>
+  
+        {error && <p>Sign up failed: {error.message}</p>}
+        <div>
+        <p>
+          Already have an account? <a href="/login">Login here</a>
+        </p>
       </div>
+      </div>
+  </div>
+    
     </div>
   );
-};
+}  
 
-export default SignUp;
+export default SignupForm;
