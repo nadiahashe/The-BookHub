@@ -4,9 +4,10 @@ import { Schema, model, Document, ObjectId } from "mongoose";
 
 export interface IBook extends Document {
     title: string,
-    author: string,
+    authors: string[],
     image: string,
     reviews: ObjectId[]
+    bookId: string
 }
 
 const bookSchema = new Schema<IBook>(
@@ -15,8 +16,8 @@ const bookSchema = new Schema<IBook>(
             type: String,
             required: true
         },
-        author: {
-            type: String,
+        authors: {
+            type: [String],
             required: true
         },
         image: {
@@ -26,7 +27,12 @@ const bookSchema = new Schema<IBook>(
         reviews: [{
             type: Schema.Types.ObjectId,
             ref: 'Review'
-        }]
+        }],
+        bookId: {
+            type: String,
+            required: true,
+            unique: true
+        }
     }
 )
 
