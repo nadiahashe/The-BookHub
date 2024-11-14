@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom'; 
 import './css/Signup.css'
+import VideoFile from '../assets/bookvideo.mov';
+
+
 const SIGNUP_MUTATION = gql`
   mutation SignUp($username: String!, $password: String!) {
     signUp(username: $username, password: $password) {
@@ -70,9 +73,19 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
     }
   };
 
+  
+
   return (
+    
     <div className="form-container">
+      <div className='video-container'>
+ <video className="foreground-video" autoPlay loop muted>
+        <source src={VideoFile} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
 <TypingText text="Wander In, Bookworm – Glad You're Here!" speed={75} />
+</div>
     <div className="form">
 
       <div className="form-border" onSubmit={handleSignUp}>
