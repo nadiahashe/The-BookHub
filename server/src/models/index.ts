@@ -1,7 +1,6 @@
-import { Book } from "./book";
-import { Group } from "./group";
-import { User } from "./user";
-import { Review } from "./review";
-import { Discussion } from "./discussion";
+import { Book } from "./book.js";
+import { Group } from "./group.js";
+import { User } from "./user.js";
+import { Discussion } from "./discussion.js";
 
-export { Book, Group, User, Review, Discussion }
+export { Book, Group, User, Discussion }

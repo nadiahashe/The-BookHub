@@ -1,13 +1,12 @@
 // A review is a contains content and userID
 
-import { Schema, model, Document, ObjectId } from "mongoose";
+import { Schema, Document } from "mongoose";
 
 interface IReview extends Document {
-    content: string,
-    book: ObjectId
-    user: ObjectId,
-    progress: string,
-    shared: boolean
+    content: string;
+    username: string;
+    progress: string;
+    shared: boolean;
 }
 
 const reviewSchema = new Schema<IReview>(
@@ -15,13 +14,8 @@ const reviewSchema = new Schema<IReview>(
         content: {
             type: String,
         },
-        book: {
-            type: Schema.Types.ObjectId,
-            ref: 'Book'
-        },
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
+        username: {
+            type: String,
         },
         progress: {
             type: String
@@ -32,4 +26,4 @@ const reviewSchema = new Schema<IReview>(
     }  
 )
 
-export const Review = model('Review', reviewSchema)
+export default reviewSchema

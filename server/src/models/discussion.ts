@@ -4,19 +4,19 @@
 import { Schema, model, Document, Types, ObjectId } from "mongoose";
 
 interface IComment extends Document {
-    commentID: Schema.Types.ObjectId,
-    content: String,
-    username: String
+    commentId: Schema.Types.ObjectId;
+    content: String;
+    username: String;
 }
 
 interface IDiscussion extends Document {
-    book: ObjectId,
-    comments: Schema.Types.ObjectId[]
+    book: ObjectId;
+    comments: Schema.Types.ObjectId[];
 }
 
 const commentSchema =  new Schema<IComment>(
     {
-        commentID: {
+        commentId: {
             type: Schema.Types.ObjectId,
             default: ()=> new Types.ObjectId()
         },

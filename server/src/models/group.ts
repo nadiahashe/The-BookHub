@@ -3,10 +3,9 @@
 import { Schema, model, Document, ObjectId } from "mongoose";
 
 interface IGroup extends Document {
-    groupname: string,
-    leader: ObjectId
-    users: ObjectId[],
-    discussions: ObjectId[]
+    groupname: string;
+    users: ObjectId[];
+    discussions: ObjectId[];
 }
 
 const groupSchema = new Schema<IGroup>(
@@ -15,10 +14,6 @@ const groupSchema = new Schema<IGroup>(
             type: String,
             required: true,
             unique: true
-        },
-        leader: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
         },
         users: [{
             type: Schema.Types.ObjectId,

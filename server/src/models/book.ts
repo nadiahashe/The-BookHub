@@ -1,13 +1,14 @@
 // A book will contain a title, an author, an image, and an array of reviews.
 
-import { Schema, model, Document, ObjectId } from "mongoose";
+import { Schema, model, Document } from "mongoose";
+import Review from "./review.js";
 
 export interface IBook extends Document {
-    title: string,
-    authors: string[],
-    image: string,
-    reviews: ObjectId[]
-    bookId: string
+    title: string;
+    authors: string[];
+    image: string;
+    review: typeof Review;
+    bookId: string;
 }
 
 const bookSchema = new Schema<IBook>(
@@ -18,16 +19,13 @@ const bookSchema = new Schema<IBook>(
         },
         authors: {
             type: [String],
-            required: true
         },
         image: {
             type: String,
-            required: false
         },
-        reviews: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }],
+        review: {
+            type: Review
+        },
         bookId: {
             type: String,
             required: true,
