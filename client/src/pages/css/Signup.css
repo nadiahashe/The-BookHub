@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css?family=montserrat");
+
+
+.form {
+    background-color: #faefe0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    
+}
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #faefe0;
+    padding: 2rem;
+    
+  }
+  
+  /* Center heading above form */
+  .form-container h1 {
+    font-size: 2.2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    margin-top: 10%;
+    font-family: 'montserrat';
+    font-weight: bold;
+
+  }
+.form h1 {
+    font-size: 1.8rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem; /* Space between heading and form */
+  }
+  .form-border {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: #fff;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20%;
+  }
+
+#signup-btn {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#username-input {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.foreground-video {
+  width: 30%; /* Responsive width */
+  height: auto; /* Maintain aspect ratio */
+  max-width: 600px; /* Optional: limit max size for larger screens */
+  opacity: 0.1;
+  z-index: 1;
+  object-fit: cover;
+}
+
+.video-container {
+  display: flex; 
+  align-items: center; 
+  width: 100%;
+  padding: 20px; 
+  box-sizing: border-box; 
+}
+
+@media (max-width: 768px) {
+  .video-container {
+    flex-direction: row; /* Keep the layout row even on smaller screens */
+    justify-content: center; /* Center both items on small screens */
+    align-items: center;
+    padding: 10px; /* Reduce padding on small screens */
+  }
+
+  .foreground-video {
+    width: 50%; /* Keep the video at 40% of the width, do not shrink */
+    /* max-width: 400px;  */
+  }
+
+  .form-container h1 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-container {
+    flex-direction: column; /* Keep the layout row even on smaller screens */
+    justify-content: center; /* Center both items on small screens */
+    align-items: center;
+    padding: 10px; 
+    justify-content: space-between;
+  }
+
+  .foreground-video {
+    width: 70%; /* Keep the video at 40% of the width, do not shrink */
+    /* max-width: 400px;  */
+  }
+  .form-container h1 {
+    font-size: 1.3rem;
+  }
+}

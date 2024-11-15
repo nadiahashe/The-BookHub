@@ -1,0 +1,70 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
+
+
+#hero {
+    background-image: url('../../assets/bookhub.png'); 
+    background-size: cover; 
+    background-position: center; 
+    height: 100vh; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+  }
+
+  header {
+    display: flex;
+    background-color: #faefe0; 
+    padding-bottom: 2%;
+    border-bottom: 5px solid black;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-text {
+    font-size: 30px;  
+    /* font-weight: bold;   */
+    margin-left: 10px;  
+    font-family: 'Open Sauce Sans', 'Arial', sans-serif;
+    margin-top: 20px;
+  }
+  
+  .logo {
+    width: 30px;  
+    height: 30px;
+    margin-top: 20px;
+  }
+  
+
+  .cta-button {
+    padding: 0.8rem 2rem;
+    background-color: #d0ba9e; 
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    margin-right: 10px;
+    border-color: black;
+  }
+  
+  
+  .cta-button:hover {
+    background-color: rgb(131, 114, 92); 
+  }
+
+  .hero-text h1 {
+    font-family: 'Open Sauce Sans', 'Arial', sans-serif;
+    font-size: 80px;
+    margin-top: 20%;
+    margin-left: 10%;
+
+  }
+
+  .hero-image {
+    width: 100%; /* Make the image take up 100% of the width of the hero section */
+    height: auto; /* Maintain the aspect ratio */
+    max-width: 800px; /* Limit the width of the image */
+    object-fit: cover; /* Make sure the image covers the area without distortion */
+    margin-top: 30px;
+  }
