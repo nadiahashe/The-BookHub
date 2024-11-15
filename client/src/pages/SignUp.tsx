@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom'; 
 import './css/Signup.css'
 import VideoFile from '../assets/bookvideo.mov';
+import { SIGNUP } from '../utils/mutations.ts'
+import { checkPassword, validateEmail } from '../utils/helper.ts';
 
 
-const SIGNUP_MUTATION = gql`
-  mutation SignUp($username: String!, $password: String!) {
-    signUp(username: $username, password: $password) {
-      token
-      user {
-        id
-        username
-      }
-    }
-  }
-`;
 interface Props {
   text: string;
   speed?: number;
@@ -53,14 +44,30 @@ interface SignUpFormProps {}
 const SignupForm: React.FC<SignUpFormProps> = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [signUp, { loading, error }] = useMutation(SIGNUP_MUTATION);
+  const [email, setEmail] = useState('');
+  const [formError, setFormError] = useState('');
+
+  const [signUp, { loading }] = useMutation(SIGNUP);
   const navigate = useNavigate(); 
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
 
+    setFormError('');
+
+    if (!validateEmail(email)) {
+      setFormError('Invalid email format.');
+      return;
+    }
+  
+    if (!checkPassword(password)) {
+      setFormError('Password must be at least 8 characters long and contain letters and numbers.');
+      return;
+    }
+
     try {
-      const { data } = await signUp({ variables: { username, password } });
+      const { data } = await signUp({ variables: { username, password, email } });
+      console.log("Sign-up data:", data);
 
       if (data?.signUp?.token) {
         localStorage.setItem('token', data.signUp.token);
@@ -70,6 +77,7 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
       }
     } catch (err) {
       console.error('Sign up failed:', err);
+      setFormError('Sign up failed. Please try again.');
     }
   };
 
@@ -88,7 +96,7 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
 </div>
     <div className="form">
 
-      <div className="form-border" onSubmit={handleSignUp}>
+      <form className="form-border" onSubmit={handleSignUp}>
         <div id='username-input'>
           <label htmlFor="username">Username:</label>
           <input
@@ -96,6 +104,16 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+        </div>
+        <div >
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -115,13 +133,13 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
           {loading ? 'Signing up...' : 'Sign Up'}
         </button>
   
-        {error && <p>Sign up failed: {error.message}</p>}
+        {formError && <p style={{ color: 'red' }}> {formError}</p>}
         <div>
         <p>
           Already have an account? <a href="/login">Login here</a>
         </p>
       </div>
-      </div>
+      </form>
   </div>
     
     </div>

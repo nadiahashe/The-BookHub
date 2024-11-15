@@ -1,42 +1,42 @@
 import React, { useState } from 'react';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
 import './css/Login.css';
 import LoginPic from '../assets/loginpic.png'
 import { Link } from 'react-router-dom'; // Import Link for navigation
+import { LOGIN } from '../utils/mutations.ts'
+import { checkPassword, validateEmail } from '../utils/helper.ts';
 
-
-
-
-// Define the login mutation
-const LOGIN_MUTATION = gql`
-  mutation Login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      token
-      user {
-        id
-        username
-      }
-    }
-  }
-`;
 
 interface LoginFormProps {}
 
 const Login: React.FC<LoginFormProps> = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION);
-  const navigate = useNavigate();
+  const [formError, setFormError] = useState('');
 
-  
+  const [login, { loading }] = useMutation(LOGIN);
+  const navigate = useNavigate();
 
   // Handle login form submission
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
 
+  setFormError('');
+
+  if (!validateEmail(email)) {
+    setFormError('Invalid email format.');
+    return;
+  }
+
+  if (!checkPassword(password)) {
+    setFormError('Password must be at least 8 characters long and contain letters and numbers.');
+    return;
+  }
+
+
     try {
-      const { data } = await login({ variables: { username, password } });
+      const { data } = await login({ variables: { email, password } });
 
       if (data?.login?.token) {
         // Store token in local storage
@@ -51,13 +51,6 @@ const Login: React.FC<LoginFormProps> = () => {
   };
 
 
-
-  // Optional logout function to clear the token and redirect to landing page
-  // const handleLogout = () => {
-  //   localStorage.removeItem('token'); 
-  //   navigate('/');               
-  // };
-
   return (
     <div className='login-container'>
       
@@ -69,12 +62,12 @@ const Login: React.FC<LoginFormProps> = () => {
         <h1>The Book Hub</h1>
         <h2 >Connect. Share. Discover.</h2>
         <div className='form-input'>
-          <label htmlFor="username">Username or Email</label>
+          <label htmlFor="email">Email</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
@@ -95,9 +88,9 @@ const Login: React.FC<LoginFormProps> = () => {
         </button>
 
         {/* Display error message if login fails */}
-        {error && (
+        {formError && (
           <p style={{ color: 'red' }}>
-            Login failed: {error.message || "Invalid credentials. Please try again."}
+            Login failed: {formError || "Invalid credentials. Please try again."}
           </p>
         )}
 
