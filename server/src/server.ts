@@ -4,6 +4,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 
 import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
+import { authenticateToken } from './services/auth.js';
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -18,7 +19,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   
-  app.use('/graphql', expressMiddleware(server));
+  app.use('/graphql', expressMiddleware(server, {context: authenticateToken}));
 
   // if we're in production, serve client/dist as static assets
   if (process.env.NODE_ENV === 'production') {
