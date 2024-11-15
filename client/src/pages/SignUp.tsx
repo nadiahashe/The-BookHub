@@ -69,8 +69,8 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
       const { data } = await signUp({ variables: { username, password, email } });
       console.log("Sign-up data:", data);
 
-      if (data?.signUp?.token) {
-        localStorage.setItem('token', data.signUp.token);
+      if (data?.signup?.token) {
+        localStorage.setItem('token', data.signup.token);
 
         // Redirect to the login page after successful sign-up
         navigate('/login');
