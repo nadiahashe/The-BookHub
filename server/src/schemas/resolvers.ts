@@ -65,7 +65,7 @@ const resolvers = {
         },
         // read single group: arg name, return group object
         getClub: async (_parent: any, { id }: any) => {
-            return await Group.findById(id).populate('users').populate('discussions', 'users');
+            return await Group.findById(id).populate('users').populate(['discussions', 'users']);
         },
         // read single discussion: arg discussion id, return discussion object
         getDiscussion: async (_parent: any, { clubId }: any) => {
