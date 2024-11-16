@@ -60,20 +60,16 @@ const resolvers = {
             return books;
         },
         // Get user profile data by ID
-         getUser: async (_parent: any, { id }: any, _context: any) => {
+        getUser: async (_parent: any, { id }: any, _context: any) => {
                 return await User.findById(id).populate(['books', 'groups']);
         },
         // read single group: arg name, return group object
         getClub: async (_parent: any, { id }: any) => {
-            return await Group.findById(id).populate('users').populate('discussions');
+            return await Group.findById(id).populate('users').populate('discussions', 'users');
         },
         // read single discussion: arg discussion id, return discussion object
-        getDiscussions: async (_parent: any, { clubId }: any) => {
+        getDiscussion: async (_parent: any, { clubId }: any) => {
             return await Discussion.find({ clubId }).populate('comments');
-        },
-        // read book progress by bookId
-        getBookProgress: async (_parent: any, { bookId }: any) => {
-            return await Book.findById(bookId).select('progress');
         }
     },
 
@@ -118,10 +114,10 @@ const resolvers = {
             return newBook;
         },
         // create/update review: arg content, progress, public, _id of book, _id of user (from context), return review object; updates book's review
-        updateReview: async (_parent: any, { content, progress, shared, _id }: any, context: any) => {
+        updateReview: async (_parent: any, { content, shared, _id }: any, context: any) => {
             const updatedBook = await Book.findOneAndUpdate(
                 { _id },
-                { $set: { "review.content": content, "review.progress": progress, "review.shared": shared, "review.username": context.user.username } },
+                { $set: { "review.content": content, "review.shared": shared, "review.username": context.user.username } },
                 { new: true }
             );
             if (!updatedBook) {
@@ -129,29 +125,29 @@ const resolvers = {
             }
             return updatedBook;
         },
-        // create group: arg groupname, leader, return group object; updates group array of "leader"
-        createGroup: async (_parent: any, { groupname, leader }: any) => {
-            const newGroup = await Group.create({ groupname, users: [leader] });
+        // create group: arg groupname, leader, description, return group object; updates group array of "leader"
+        createGroup: async (_parent: any, { groupname, leader, description }: any) => {
+            const newGroup = await Group.create({ groupname, users: [leader], description });
             await User.findByIdAndUpdate(leader, { $addToSet: { groups: newGroup._id } });
             return newGroup;
         },
         // create discussion: arg book, return discussion object; updates group's discussion array
-        createDiscussion: async (_parent: any, { book, groupId }: any) => {
-            const newDiscussion = await Discussion.create({ book });
+        createDiscussion: async (_parent: any, { groupId, title, authors, image }: any) => {
+            const newDiscussion = await Discussion.create({ title, authors, image });
             await Group.findByIdAndUpdate(groupId, { $addToSet: { discussions: newDiscussion._id } });
             return newDiscussion;
         },
         // create comment: arg book, return discussion object; updates discussion's comment array
         createComment: async (_parent: any, { discussionId, content, username }: any) => {
             const newComment = { commentId: new Date().toISOString(), content, username };
-            await Discussion.findByIdAndUpdate(discussionId, { $push: { comments: newComment } });
-            return await Discussion.findById(discussionId);
+            const discussion = await Discussion.findByIdAndUpdate(discussionId, { $push: { comments: newComment } }, {new: true});
+            return discussion;
         },
         // update group (add member): arg groupname, username, return group object; updates user's group array
         addUserToGroup: async (_parent: any, { userId, groupId }: any) => {
-            await Group.findByIdAndUpdate(groupId, { $addToSet: { users: userId } });
+            const group = await Group.findByIdAndUpdate(groupId, { $addToSet: { users: userId } }, {new: true}).populate('users');
             await User.findByIdAndUpdate(userId, { $addToSet: { groups: groupId } });
-            return await Group.findById(groupId).populate('users');
+            return group;
         },
         // update book progress
         addBookProgress: async (_parent: any, { bookId, progress }: any) => {

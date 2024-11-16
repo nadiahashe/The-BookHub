@@ -9,6 +9,7 @@ export interface IBook extends Document {
     image: string;
     review: typeof Review;
     bookId: string;
+    progress: number
 }
 
 const bookSchema = new Schema<IBook>(
@@ -30,6 +31,9 @@ const bookSchema = new Schema<IBook>(
             type: String,
             required: true,
             unique: true
+        },
+        progress: {
+            type: Number
         }
     }
 )

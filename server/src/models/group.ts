@@ -6,6 +6,7 @@ interface IGroup extends Document {
     groupname: string;
     users: ObjectId[];
     discussions: ObjectId[];
+    description: String;
 }
 
 const groupSchema = new Schema<IGroup>(
@@ -22,7 +23,10 @@ const groupSchema = new Schema<IGroup>(
         discussions:[{
             type: Schema.Types.ObjectId,
             ref: 'Discussion'
-        }]
+        }],
+        description: {
+            type: String
+        }
     }
 )
 

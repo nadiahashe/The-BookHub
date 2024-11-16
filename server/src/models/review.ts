@@ -5,7 +5,6 @@ import { Schema, Document } from "mongoose";
 interface IReview extends Document {
     content: string;
     username: string;
-    progress: string;
     shared: boolean;
 }
 
@@ -16,9 +15,6 @@ const reviewSchema = new Schema<IReview>(
         },
         username: {
             type: String,
-        },
-        progress: {
-            type: String
         },
         shared: {
             type: Boolean

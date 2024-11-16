@@ -29,10 +29,10 @@ export const ADD_BOOK=gql`
         title
         review {
           content
-          progress
           shared
           username
         }
+        progress
       }
     }
 `
@@ -48,10 +48,92 @@ export const UPDATE_REVIEW=gql`
         title
         review {
           content
-          progress
           shared
           username
         }
+        progress
       }
     }
+`
+
+// Adds a new user to the database.
+export const ADD_USER = gql`
+  mutation AddUser($name: String!, $email: String!, $password: String!) {
+    addUser(name: $name, email: $email, password: $password) {
+      _id
+      name
+      email
+    }
+  }
+`;
+
+// Adds a new message to a club's discussion.
+export const CREATE_DISCUSSION = gql`
+  mutation CreateDiscussion($groupId: ID!, $title: String!, $image: String, $authors: [String]) {
+    createDiscussion(groupId: $groupId, title: $title, image: $image, authors: $authors) {
+      _id
+      title
+      image
+      authors
+      comments {
+        commentId
+        content
+        username
+      }
+    }
+  }
+`;
+
+// Updates progress on a specific book.
+export const UPDATE_BOOK_PROGRESS = gql`
+  mutation AddBookProgress($bookId: ID!) {
+    addBookProgress(bookId: $bookId) {
+      _id
+      progress
+      image
+      bookId
+      authors
+      title
+    }
+  }
+`;
+
+// Creates group, adds creator to users array
+export const CREATE_GROUP = gql`
+  mutation CreateGroup($groupname: String!, $leader: ID!, $description: String) {
+    createGroup(groupname: $groupname, leader: $leader, description: $description) {
+      _id
+      description
+      groupname
+    }
+  }
+`
+
+// Creates comments, adds to discussion array
+export const CREATE_COMMENT = gql`
+  mutation CreateComment($disussionId: ID!, $content: String, $username: String) {
+    createComment(disussionId: $disussionId, content: $content, username: $username) {
+      comments {
+        commentId
+        content
+        username
+      }
+      _id
+    }
+  }
+`
+
+// Adds user to group, updates group user array
+export const ADD_USER_TO_GROUP = gql`
+  mutation AddUserToGroup($userId: ID!) {
+    addUserToGroup(userId: $userId) {
+      _id
+      groupname
+      description
+      users {
+        _id
+        username
+      }
+    }
+  }
 `
