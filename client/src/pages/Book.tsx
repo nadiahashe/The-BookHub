@@ -80,7 +80,7 @@ return (
             </div>) : 
             (<div>
                 <form className="progressForm" onSubmit={ProgressSubmit}>
-                    <input onChange={handleProgressChange} name="progress" type='text' value={newProgress}/>
+                    <input onChange={handleProgressChange} name="progress" type="number" value={newProgress}/>
                     <button type="submit">Update my progress</button>
                 </form>
             </div>)}
