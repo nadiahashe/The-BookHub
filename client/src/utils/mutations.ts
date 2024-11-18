@@ -69,12 +69,13 @@ export const ADD_USER = gql`
 
 // Adds a new message to a club's discussion.
 export const CREATE_DISCUSSION = gql`
-  mutation CreateDiscussion($groupId: ID!, $title: String!, $image: String, $authors: [String]) {
-    createDiscussion(groupId: $groupId, title: $title, image: $image, authors: $authors) {
+  mutation CreateDiscussion($groupId: ID!, $title: String!, $image: String, $authors: [String], $bookId: String!) {
+    createDiscussion(groupId: $groupId, title: $title, image: $image, authors: $authors, bookId: $bookId) {
       _id
       title
       image
       authors
+      bookId
       comments {
         commentId
         content

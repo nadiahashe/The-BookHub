@@ -26,7 +26,7 @@ const ClubPage: React.FC = () => {
         {data.getClub.discussions.map((discussion: any)=>(
           <li key={discussion._id}>
             <Link to={`/discussion/${discussion._id}`}>
-              {discussion.title}
+              {discussion.title} by {discussion.authors.join(", ") || "unknown"}
             </Link>
           </li>
         ))}

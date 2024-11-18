@@ -71,7 +71,7 @@ return (
         <div className='bookData'>
             <img src={data.getBook.image} alt={`Cover for ${data.getBook.title}`}/>
             <h2>{data.getBook.title}</h2>
-            <h3>By: {data.getBook.authors.join(", ")}</h3>
+            <h3>By: {data.getBook.authors.join(", ") || "unknown"}</h3>
         </div>
         {!progressUpdate? (
             <div>

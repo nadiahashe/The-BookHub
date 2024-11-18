@@ -38,6 +38,7 @@ type Discussion {
     authors: [String]
     image: String
     comments: [Comment]
+    bookId: String!
 }
 
 type Comment {
@@ -65,7 +66,7 @@ type Mutation {
     addBook(title: String!, authors: [String], image: String, bookId: String): Book
     updateReview(content: String, shared: Boolean, _id: ID!): Book
     createGroup(groupname: String!, leader: ID!, description: String): Group
-    createDiscussion(groupId: ID!, title: String!, authors: [String], image: String): Discussion
+    createDiscussion(groupId: ID!, title: String!, authors: [String], image: String, bookId: String): Discussion
     createComment(disussionId: ID!, content: String, username: String): Discussion
     updateProgress(bookId: ID!, progress: Int!): Book
     addUserToGroup(userId: ID!, groupId: ID!): Group

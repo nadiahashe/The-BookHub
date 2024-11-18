@@ -19,9 +19,10 @@ const ProfilePage: React.FC = () => {
       <section>
         <h2>My Books</h2>
         <ul>
-          {user?.books.map((book: { _id: string; title: string; authors: string[]; progress?: number }) => (
+          {user?.books.map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
             <li key={book._id}>
-              <p>{book.title} by {book.authors.join(', ')}</p>
+              <p>{book.title} by {book.authors.join(', ') || "unknown"}</p>
+              <img src={book.image} alt={`Cover for ${book.title}`}/>
               <p>Progress: {book.progress || 0}%</p>
             </li>
           ))}

@@ -12,6 +12,7 @@ import ClubPage from './pages/ClubPage.js'
 import BookPage from './pages/Book.js'
 import BookThoughtsPage from './pages/BookThoughts.js'
 import ProfilePage from './pages/ProfilePage.js'
+import CreateDiscussionPage from './pages/CreateDiscussionPage.js'
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "thoughts/:bookId",
         element: <BookThoughtsPage />
+      },
+      {
+        path: "createDiscussion/:id",
+        element: <CreateDiscussionPage />
       }
     ],
   },

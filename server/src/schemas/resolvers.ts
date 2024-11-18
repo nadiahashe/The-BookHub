@@ -117,8 +117,8 @@ const resolvers = {
             return newGroup;
         },
         // create discussion: arg book, return discussion object; updates group's discussion array
-        createDiscussion: async (_parent: any, { groupId, title, authors, image }: any) => {
-            const newDiscussion = await Discussion.create({ title, authors, image });
+        createDiscussion: async (_parent: any, { groupId, title, authors, image, bookId }: any) => {
+            const newDiscussion = await Discussion.create({ title, authors, image, bookId });
             await Group.findByIdAndUpdate(groupId, { $addToSet: { discussions: newDiscussion._id } });
             return newDiscussion;
         },

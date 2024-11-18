@@ -94,6 +94,7 @@ export const GET_CLUB = gql`
         _id
         image
         authors
+        bookId
       }
     }
   }
@@ -107,6 +108,7 @@ export const GET_DISCUSSION = gql`
       title
       image
       authors
+      bookId
       comments {
         commentId
         content
