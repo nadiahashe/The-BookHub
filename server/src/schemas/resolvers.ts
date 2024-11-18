@@ -44,21 +44,6 @@ const resolvers = {
             }
             return reviews;
         },
-        // read google book search: arg search string, return array of book objects
-        bookSearch: async (_parent: any, { string }: any, _context: any) => {
-            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${string}`);
-            if (!response.ok) {
-                throw new Error("Failed to fetch");
-            }
-            const { items } = await response.json();
-            const books = items.map((book: any) => ({
-                title: book.volumeInfo.title,
-                authors: book.volumeInfo.authors || ["Unknown"],
-                image: book.volumeInfo.imageLinks?.thumbnail || '',
-                bookId: book.id,
-            }));
-            return books;
-        },
         // Get user profile data by ID
         getUser: async (_parent: any, { id }: any, _context: any) => {
                 return await User.findById(id).populate(['books', 'groups']);
@@ -156,6 +141,21 @@ const resolvers = {
                 throw new Error("Failed to update book progress");
             }
             return book;
+        },
+        // read google book search: arg search string, return array of book objects
+        bookSearch: async (_parent: any, { string }: any, _context: any) => {
+            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${string}`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch");
+            }
+            const { items } = await response.json();
+            const books = items.map((book: any) => ({
+                title: book.volumeInfo.title,
+                authors: book.volumeInfo.authors || ["Unknown"],
+                image: book.volumeInfo.imageLinks?.thumbnail || '',
+                bookId: book.id,
+            }));
+            return books;
         }
     }
 };

@@ -1,9 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './css/Landing.css'
 import logo from "../assets/logo.png"
 import hero from "../assets/bookhub.png"
+import { useEffect } from "react";
+import Auth from "../utils/auth.js"
 
 export default function Landing() {
+
+const navigate = useNavigate()
+
+useEffect(()=>{
+  if (Auth.loggedIn()) {
+    navigate('/profile')
+  }
+},[])
+
   return (
     <>
       <header >

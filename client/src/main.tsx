@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import App from './App.js'
-import Home from './pages/Home.js'
+// import Home from './pages/Home.js'
 import Error from './pages/Error.js'
 import Landing from './pages/Landing.js'
 import Login from './pages/Login.js'
@@ -10,6 +10,7 @@ import SignUp from './pages/SignUp.js'
 import DiscussionPage from './pages/DiscussionPage.js'
 import ClubPage from './pages/ClubPage.js'
 import BookPage from './pages/Book.js'
+import BookThoughtsPage from './pages/BookThoughts.js'
 
 const router = createBrowserRouter([
   {
@@ -29,10 +30,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp />,
       },
-      {
-        index: true,
-        element: <Home />,
-      },
+      // {
+      //   index: true,
+      //   element: <Home />,
+      // },
       // {
       //   path: "/profile",
       //   element: <Profile />,
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/book/:id",
         element: <BookPage />
+      },
+      {
+        path: "thoughts/:bookId",
+        element: <BookThoughtsPage />
       }
     ],
   },

@@ -137,3 +137,14 @@ export const ADD_USER_TO_GROUP = gql`
     }
   }
 `
+// Get an array of book objects from google book search. Requires search string as argument.
+export const GOOGLE_BOOK_SEARCH=gql`
+    mutation BookSearch($string: String!) {
+      bookSearch(string: $string) {
+        authors
+        bookId
+        image
+        title
+      }
+    }
+`
