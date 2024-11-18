@@ -13,6 +13,8 @@ import BookPage from './pages/Book.js'
 import BookThoughtsPage from './pages/BookThoughts.js'
 import ProfilePage from './pages/ProfilePage.js'
 import CreateDiscussionPage from './pages/CreateDiscussionPage.js'
+import BookSearchPage from './pages/BookSearch.js'
+import CreateClubPage from './pages/CreateClub.js'
 
 const router = createBrowserRouter([
   {
@@ -49,12 +51,20 @@ const router = createBrowserRouter([
         element: <BookPage />
       },
       {
-        path: "thoughts/:bookId",
+        path: "/thoughts/:bookId",
         element: <BookThoughtsPage />
       },
       {
-        path: "createDiscussion/:id",
+        path: "/createDiscussion/:id",
         element: <CreateDiscussionPage />
+      },
+      {
+        path: "/bookSearch",
+        element: <BookSearchPage />
+      },
+      {
+        path: "/createClub",
+        element: <CreateClubPage />
       }
     ],
   },
