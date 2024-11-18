@@ -63,6 +63,7 @@ const ThoughtsSubmit = async (event: FormEvent)=> {
     if (newThoughts != '') {
         await updateReview({variables: {shared: sharedBoolean, content: newThoughts, _id: id}})
     }
+    setThoughtsUpdate(false)
 }
 
 return (
