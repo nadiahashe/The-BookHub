@@ -126,8 +126,8 @@ export const CREATE_COMMENT = gql`
 
 // Adds user to group, updates group user array
 export const ADD_USER_TO_GROUP = gql`
-  mutation AddUserToGroup($userId: ID!) {
-    addUserToGroup(userId: $userId) {
+  mutation AddUserToGroup($username: String!, $groupId: ID!) {
+    addUserToGroup(username: $username, groupId: $groupId) {
       _id
       groupname
       description

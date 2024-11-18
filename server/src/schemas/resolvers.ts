@@ -128,11 +128,15 @@ const resolvers = {
             const discussion = await Discussion.findByIdAndUpdate(discussionId, { $push: { comments: newComment } }, {new: true});
             return discussion;
         },
-        // update group (add member): arg groupname, username, return group object; updates user's group array
-        addUserToGroup: async (_parent: any, { userId, groupId }: any) => {
-            const group = await Group.findByIdAndUpdate(groupId, { $addToSet: { users: userId } }, {new: true}).populate('users');
-            await User.findByIdAndUpdate(userId, { $addToSet: { groups: groupId } });
-            return group;
+        // update group (add member): arg group _id, username, return group object; updates user's group array
+        addUserToGroup: async (_parent: any, { username, groupId }: any) => {
+            const user = await User.findOne({username})
+            if (user) {
+                const group = await Group.findByIdAndUpdate(groupId, { $addToSet: { users: user._id } }, {new: true}).populate('users');
+                await User.findByIdAndUpdate(user._id, { $addToSet: { groups: groupId } });
+                return group
+            }
+            else {throw new Error("User not found")}
         },
         // update book progress
         updateProgress: async (_parent: any, { bookId, progress }: any) => {

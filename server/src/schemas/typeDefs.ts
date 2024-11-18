@@ -69,7 +69,7 @@ type Mutation {
     createDiscussion(groupId: ID!, title: String!, authors: [String], image: String, bookId: String): Discussion
     createComment(disussionId: ID!, content: String, username: String): Discussion
     updateProgress(bookId: ID!, progress: Int!): Book
-    addUserToGroup(userId: ID!, groupId: ID!): Group
+    addUserToGroup(username: String!, groupId: ID!): Group
     bookSearch(string: String!): [Book]
 }
 
