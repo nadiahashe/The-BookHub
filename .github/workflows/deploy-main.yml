@@ -1,0 +1,31 @@
+# github action for deploying main branch on pull request
+
+name: deploy-main
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  CI:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+      - uses: actions/checkout@v4
+
+# uncomment once we have tests to run
+      # - name: install and test
+      # - run: |
+      #     npm install
+      #     npm run test
+
+
+      - name: deploy
+        if: github.ref == 'refs/heads/main'
+        env:
+          DEPLOY_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL}}
+        run: curl "$DEPLOY_URL"
