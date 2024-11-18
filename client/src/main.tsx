@@ -11,6 +11,7 @@ import DiscussionPage from './pages/DiscussionPage.js'
 import ClubPage from './pages/ClubPage.js'
 import BookPage from './pages/Book.js'
 import BookThoughtsPage from './pages/BookThoughts.js'
+import ProfilePage from './pages/ProfilePage.js'
 
 const router = createBrowserRouter([
   {
@@ -30,14 +31,10 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp />,
       },
-      // {
-      //   index: true,
-      //   element: <Home />,
-      // },
-      // {
-      //   path: "/profile",
-      //   element: <Profile />,
-      // },
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
       {
         path: "/discussion/:id",
         element: <DiscussionPage />
