@@ -39,8 +39,8 @@ export const ADD_BOOK=gql`
 
 // Creates or updates review on a book. Requires book _id, shared boolean, progress string, content string. Returns updated book object.
 export const UPDATE_REVIEW=gql`
-    mutation UpdateReview($id: ID!, $shared: Boolean, $progress: String, $content: String) {
-      updateReview(_id: $id, shared: $shared, progress: $progress, content: $content) {
+    mutation UpdateReview($id: ID!, $shared: Boolean, $content: String) {
+      updateReview(_id: $id, shared: $shared, content: $content) {
         _id
         authors
         bookId
@@ -86,8 +86,8 @@ export const CREATE_DISCUSSION = gql`
 
 // Updates progress on a specific book.
 export const UPDATE_BOOK_PROGRESS = gql`
-  mutation AddBookProgress($bookId: ID!) {
-    addBookProgress(bookId: $bookId) {
+  mutation UpdateProgress($bookId: ID!, $progress: Int!) {
+    updateProgress(bookId: $bookId, progress: $progress) {
       _id
       progress
       image

@@ -22,7 +22,7 @@ export const GET_MY_BOOKS=gql`
 `
 
 // Get one book by _id, including the nested review. Requires book's _id as argument.
-export const GET_ONE_BOOK=gql`
+export const GET_BOOK=gql`
     query GetBook($id: ID!) {
       getBook(_id: $id) {
         _id
@@ -90,8 +90,8 @@ export const GET_USER = gql`
 
 // Gets club details by club ID. Used for Club page.
 export const GET_CLUB = gql`
-  query getClub($getClubId: ID!) {
-    getClub(id: $getClubId) {
+  query getClub($clubId: ID!) {
+    getClub(id: $clubId) {
       _id
       groupname
       description
@@ -111,9 +111,9 @@ export const GET_CLUB = gql`
 `;
 
 // Gets all discussions for a club. Used for Club Discussion component.
-export const GET_DISCUSSIONS = gql`
-  query getDiscussions($clubId: ID!) {
-    getDiscussions(clubId: $clubId) {
+export const GET_DISCUSSION = gql`
+  query getDiscussion($discussionId: ID!) {
+    getDiscussion(discussionId: $discussionId) {
       _id
       title
       image

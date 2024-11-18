@@ -56,7 +56,7 @@ type Query {
     bookReviews(bookId: String!): [Book]
     bookSearch(string: String!): [Book]
     getClub(id: ID!): Group
-    getDiscussion(clubId: ID!): [Discussion]
+    getDiscussion(discussionId: ID!): [Discussion]
 }
 
 type Mutation {
@@ -67,7 +67,7 @@ type Mutation {
     createGroup(groupname: String!, leader: ID!, description: String): Group
     createDiscussion(groupId: ID!, title: String!, authors: [String], image: String): Discussion
     createComment(disussionId: ID!, content: String, username: String): Discussion
-    addBookProgress(bookId: ID!, progress: Int!): Book
+    updateProgress(bookId: ID!, progress: Int!): Book
     addUserToGroup(userId: ID!, groupId: ID!): Group
 }
 

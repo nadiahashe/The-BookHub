@@ -68,8 +68,8 @@ const resolvers = {
             return await Group.findById(id).populate('users').populate(['discussions', 'users']);
         },
         // read single discussion: arg discussion id, return discussion object
-        getDiscussion: async (_parent: any, { clubId }: any) => {
-            return await Discussion.find({ clubId }).populate('comments');
+        getDiscussion: async (_parent: any, { discussionId }: any) => {
+            return await Discussion.find({ discussionId }).populate('comments');
         }
     },
 
@@ -139,7 +139,7 @@ const resolvers = {
         },
         // create comment: arg book, return discussion object; updates discussion's comment array
         createComment: async (_parent: any, { discussionId, content, username }: any) => {
-            const newComment = { commentId: new Date().toISOString(), content, username };
+            const newComment = { commentId: Date.now(), content, username };
             const discussion = await Discussion.findByIdAndUpdate(discussionId, { $push: { comments: newComment } }, {new: true});
             return discussion;
         },
@@ -150,7 +150,7 @@ const resolvers = {
             return group;
         },
         // update book progress
-        addBookProgress: async (_parent: any, { bookId, progress }: any) => {
+        updateProgress: async (_parent: any, { bookId, progress }: any) => {
             const book = await Book.findByIdAndUpdate(bookId, { progress }, { new: true });
             if (!book) {
                 throw new Error("Failed to update book progress");

@@ -1,9 +1,13 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CLUB } from '../utils/queries';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ClubPage: React.FC = () => {
-  const { data, loading } = useQuery(GET_CLUB, { variables: { clubId: 'some-club-id' } });
+
+  const {id}=useParams()
+  const { data, loading } = useQuery(GET_CLUB, { variables: { clubId: id } });
 
   if (loading) return <p>Loading...</p>;
 
@@ -13,8 +17,18 @@ const ClubPage: React.FC = () => {
       <p>{data.getClub.description}</p>
       <h3>Members</h3>
       <ul>
-        {data.getClub.members.map((member: any) => (
-          <li key={member._id}>{member.name}</li>
+        {data.getClub.users.map((user: any) => (
+          <li key={user._id}>{user.name}</li>
+        ))}
+      </ul>
+      <h3>Discussions</h3>
+      <ul>
+        {data.getClub.discussions.map((discussion: any)=>(
+          <li key={discussion._id}>
+            <Link to={`/discussion/${discussion._id}`}>
+              {discussion.title}
+            </Link>
+          </li>
         ))}
       </ul>
     </div>
