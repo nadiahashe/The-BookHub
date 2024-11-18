@@ -44,21 +44,6 @@ const resolvers = {
             }
             return reviews;
         },
-        // read google book search: arg search string, return array of book objects
-        bookSearch: async (_parent: any, { string }: any, _context: any) => {
-            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${string}`);
-            if (!response.ok) {
-                throw new Error("Failed to fetch");
-            }
-            const { items } = await response.json();
-            const books = items.map((book: any) => ({
-                title: book.volumeInfo.title,
-                authors: book.volumeInfo.authors || ["Unknown"],
-                image: book.volumeInfo.imageLinks?.thumbnail || '',
-                bookId: book.id,
-            }));
-            return books;
-        },
         // Get user profile data by ID
         getUser: async (_parent: any, { id }: any, _context: any) => {
                 return await User.findById(id).populate(['books', 'groups']);
@@ -68,8 +53,8 @@ const resolvers = {
             return await Group.findById(id).populate('users').populate(['discussions', 'users']);
         },
         // read single discussion: arg discussion id, return discussion object
-        getDiscussion: async (_parent: any, { clubId }: any) => {
-            return await Discussion.find({ clubId }).populate('comments');
+        getDiscussion: async (_parent: any, { discussionId }: any) => {
+            return await Discussion.find({ discussionId }).populate('comments');
         }
     },
 
@@ -132,30 +117,49 @@ const resolvers = {
             return newGroup;
         },
         // create discussion: arg book, return discussion object; updates group's discussion array
-        createDiscussion: async (_parent: any, { groupId, title, authors, image }: any) => {
-            const newDiscussion = await Discussion.create({ title, authors, image });
+        createDiscussion: async (_parent: any, { groupId, title, authors, image, bookId }: any) => {
+            const newDiscussion = await Discussion.create({ title, authors, image, bookId });
             await Group.findByIdAndUpdate(groupId, { $addToSet: { discussions: newDiscussion._id } });
             return newDiscussion;
         },
         // create comment: arg book, return discussion object; updates discussion's comment array
         createComment: async (_parent: any, { discussionId, content, username }: any) => {
-            const newComment = { commentId: new Date().toISOString(), content, username };
+            const newComment = { commentId: Date.now(), content, username };
             const discussion = await Discussion.findByIdAndUpdate(discussionId, { $push: { comments: newComment } }, {new: true});
             return discussion;
         },
-        // update group (add member): arg groupname, username, return group object; updates user's group array
-        addUserToGroup: async (_parent: any, { userId, groupId }: any) => {
-            const group = await Group.findByIdAndUpdate(groupId, { $addToSet: { users: userId } }, {new: true}).populate('users');
-            await User.findByIdAndUpdate(userId, { $addToSet: { groups: groupId } });
-            return group;
+        // update group (add member): arg group _id, username, return group object; updates user's group array
+        addUserToGroup: async (_parent: any, { username, groupId }: any) => {
+            const user = await User.findOne({username})
+            if (user) {
+                const group = await Group.findByIdAndUpdate(groupId, { $addToSet: { users: user._id } }, {new: true}).populate('users');
+                await User.findByIdAndUpdate(user._id, { $addToSet: { groups: groupId } });
+                return group
+            }
+            else {throw new Error("User not found")}
         },
         // update book progress
-        addBookProgress: async (_parent: any, { bookId, progress }: any) => {
+        updateProgress: async (_parent: any, { bookId, progress }: any) => {
             const book = await Book.findByIdAndUpdate(bookId, { progress }, { new: true });
             if (!book) {
                 throw new Error("Failed to update book progress");
             }
             return book;
+        },
+        // read google book search: arg search string, return array of book objects
+        bookSearch: async (_parent: any, { string }: any, _context: any) => {
+            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${string}`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch");
+            }
+            const { items } = await response.json();
+            const books = items.map((book: any) => ({
+                title: book.volumeInfo.title,
+                authors: book.volumeInfo.authors || ["Unknown"],
+                image: book.volumeInfo.imageLinks?.thumbnail || '',
+                bookId: book.id,
+            }));
+            return books;
         }
     }
 };

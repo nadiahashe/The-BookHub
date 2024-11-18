@@ -14,6 +14,7 @@ interface IDiscussion extends Document {
     authors: string[];
     image: string;
     comments: Schema.Types.ObjectId[];
+    bookId: string
 }
 
 const commentSchema =  new Schema<IComment>(
@@ -47,6 +48,10 @@ const discussionSchema = new Schema<IDiscussion>(
         },
         comments: {
             type: [commentSchema]
+        },
+        bookId: {
+            type: String,
+            required: true
         }
     }
 )

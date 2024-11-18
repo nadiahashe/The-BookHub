@@ -21,6 +21,7 @@ type Review {
     content: String
     username: String
     shared: Boolean
+    reviewId: String!
 }
 
 type Group {
@@ -37,6 +38,7 @@ type Discussion {
     authors: [String]
     image: String
     comments: [Comment]
+    bookId: String!
 }
 
 type Comment {
@@ -54,9 +56,8 @@ type Query {
     getUser(id: ID!): User
     getBook(_id: ID!): Book
     bookReviews(bookId: String!): [Book]
-    bookSearch(string: String!): [Book]
     getClub(id: ID!): Group
-    getDiscussion(clubId: ID!): [Discussion]
+    getDiscussion(discussionId: ID!): [Discussion]
 }
 
 type Mutation {
@@ -65,10 +66,11 @@ type Mutation {
     addBook(title: String!, authors: [String], image: String, bookId: String): Book
     updateReview(content: String, shared: Boolean, _id: ID!): Book
     createGroup(groupname: String!, leader: ID!, description: String): Group
-    createDiscussion(groupId: ID!, title: String!, authors: [String], image: String): Discussion
+    createDiscussion(groupId: ID!, title: String!, authors: [String], image: String, bookId: String): Discussion
     createComment(disussionId: ID!, content: String, username: String): Discussion
-    addBookProgress(bookId: ID!, progress: Int!): Book
-    addUserToGroup(userId: ID!, groupId: ID!): Group
+    updateProgress(bookId: ID!, progress: Int!): Book
+    addUserToGroup(username: String!, groupId: ID!): Group
+    bookSearch(string: String!): [Book]
 }
 
 

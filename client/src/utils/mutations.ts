@@ -39,8 +39,8 @@ export const ADD_BOOK=gql`
 
 // Creates or updates review on a book. Requires book _id, shared boolean, progress string, content string. Returns updated book object.
 export const UPDATE_REVIEW=gql`
-    mutation UpdateReview($id: ID!, $shared: Boolean, $progress: String, $content: String) {
-      updateReview(_id: $id, shared: $shared, progress: $progress, content: $content) {
+    mutation UpdateReview($id: ID!, $shared: Boolean, $content: String) {
+      updateReview(_id: $id, shared: $shared, content: $content) {
         _id
         authors
         bookId
@@ -69,12 +69,13 @@ export const ADD_USER = gql`
 
 // Adds a new message to a club's discussion.
 export const CREATE_DISCUSSION = gql`
-  mutation CreateDiscussion($groupId: ID!, $title: String!, $image: String, $authors: [String]) {
-    createDiscussion(groupId: $groupId, title: $title, image: $image, authors: $authors) {
+  mutation CreateDiscussion($groupId: ID!, $title: String!, $image: String, $authors: [String], $bookId: String!) {
+    createDiscussion(groupId: $groupId, title: $title, image: $image, authors: $authors, bookId: $bookId) {
       _id
       title
       image
       authors
+      bookId
       comments {
         commentId
         content
@@ -86,8 +87,8 @@ export const CREATE_DISCUSSION = gql`
 
 // Updates progress on a specific book.
 export const UPDATE_BOOK_PROGRESS = gql`
-  mutation AddBookProgress($bookId: ID!) {
-    addBookProgress(bookId: $bookId) {
+  mutation UpdateProgress($bookId: ID!, $progress: Int!) {
+    updateProgress(bookId: $bookId, progress: $progress) {
       _id
       progress
       image
@@ -125,8 +126,8 @@ export const CREATE_COMMENT = gql`
 
 // Adds user to group, updates group user array
 export const ADD_USER_TO_GROUP = gql`
-  mutation AddUserToGroup($userId: ID!) {
-    addUserToGroup(userId: $userId) {
+  mutation AddUserToGroup($username: String!, $groupId: ID!) {
+    addUserToGroup(username: $username, groupId: $groupId) {
       _id
       groupname
       description
@@ -136,4 +137,15 @@ export const ADD_USER_TO_GROUP = gql`
       }
     }
   }
+`
+// Get an array of book objects from google book search. Requires search string as argument.
+export const GOOGLE_BOOK_SEARCH=gql`
+    mutation BookSearch($string: String!) {
+      bookSearch(string: $string) {
+        authors
+        bookId
+        image
+        title
+      }
+    }
 `
