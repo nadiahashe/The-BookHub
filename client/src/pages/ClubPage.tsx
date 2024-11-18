@@ -12,7 +12,7 @@ const ClubPage: React.FC = () => {
   const navigate = useNavigate()
   const [newMemberSwitch, setNewMemberSwitch] = useState(false)
   const [newMember, setNewMember] = useState('')
-  const [addUserToGroup]= useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
+  const [addUserToGroup, {error}]= useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
 
   const newDiscussionHandler = ()=> {
     navigate(`/createDiscussion/${id}`)
@@ -55,6 +55,7 @@ const ClubPage: React.FC = () => {
             <p>Enter username of new member</p>
             <input type='text' name="newMember" value={newMember} onChange={handleChange}/>
             <button type='submit'>Add member</button>
+            {error? (<p>User not found</p>) : (<></>)}
           </form>
           )}
       </section>
