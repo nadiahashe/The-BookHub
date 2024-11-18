@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
       <section>
         <h2>My Clubs</h2>
         <ul>
-          {user?.groups.map((group) => (
+          {user?.groups.map((group: any) => (
             <li key={group._id}>
               <p>{group.groupname}</p>
               <p>{group.description}</p>
@@ -39,7 +39,7 @@ const ProfilePage: React.FC = () => {
         </ul>
       </section>
 
-      <button onClick={() => /* handle logout */ }>Logout</button>
+      <button onClick={() => {}/* handle logout */ }>Logout</button>
     </div>
   );
 };

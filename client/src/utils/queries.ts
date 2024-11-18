@@ -11,11 +11,11 @@ export const GET_MY_BOOKS=gql`
           image
           review {
             content
-            progress
             shared
             username
           }
           title
+          progress
         }
       }
     }
@@ -32,10 +32,10 @@ export const GET_ONE_BOOK=gql`
         title
         review {
           content
-          progress
           shared
           username
         }
+        progress
       }
     }
 `
@@ -66,21 +66,23 @@ export const GET_BOOK_REVIEWS=gql`
 `
 // Gets user information by ID. Used for Profile page.
 export const GET_USER = gql`
-  query getUser($id: ID!) {
-    getUser(id: $id) {
+  query getUser($getUserId: ID!) {
+    getUser(id: $getUserId) {
       _id
-      name
+      username
       email
-      favoriteBooks {
+      groups {
+        _id
+        groupname
+        description
+      }
+      books {
         _id
         title
-        author
+        authors
+        image
         progress
-      }
-      clubMemberships {
-        _id
-        name
-        description
+        bookId
       }
     }
   }
@@ -88,15 +90,21 @@ export const GET_USER = gql`
 
 // Gets club details by club ID. Used for Club page.
 export const GET_CLUB = gql`
-  query getClub($clubId: ID!) {
-    getClub(id: $clubId) {
+  query getClub($getClubId: ID!) {
+    getClub(id: $getClubId) {
       _id
-      name
+      groupname
       description
-      members {
-        _id
-        name
+      users {
+        username
         email
+        _id
+      }
+      discussions {
+        title
+        _id
+        image
+        authors
       }
     }
   }
@@ -107,73 +115,28 @@ export const GET_DISCUSSIONS = gql`
   query getDiscussions($clubId: ID!) {
     getDiscussions(clubId: $clubId) {
       _id
-      clubId
-      bookId
-      userId
-      message
-      timestamp
+      title
+      image
+      authors
+      comments {
+        commentId
+        content
+        username
+      }
     }
   }
 `;
 
 // Gets progress of a specific book by its ID. Used for Book Progress page.
 export const GET_BOOK_PROGRESS = gql`
-  query getBookProgress($bookId: ID!) {
-    getBookProgress(bookId: $bookId) {
+  query getBookProgress($id: ID!) {
+    getBook(_id: $id) {
       _id
       title
-      author
-      progress
-    }
-  }
-`;
-
-// Adds a new user to the database.
-export const ADD_USER = gql`
-  mutation addUser($name: String!, $email: String!, $password: String!) {
-    addUser(name: $name, email: $email, password: $password) {
-      _id
-      name
-      email
-    }
-  }
-`;
-
-// Adds a new message to a club's discussion.
-export const ADD_DISCUSSION = gql`
-  mutation addDiscussion($clubId: ID!, $bookId: ID!, $userId: ID!, $message: String!) {
-    addDiscussion(clubId: $clubId, bookId: $bookId, userId: $userId, message: $message) {
-      _id
-      clubId
+      authors
+      image
       bookId
-      userId
-      message
-      timestamp
-    }
-  }
-`;
-
-// Updates progress on a specific book.
-export const UPDATE_BOOK_PROGRESS = gql`
-  mutation addBookProgress($bookId: ID!, $progress: Int!) {
-    addBookProgress(bookId: $bookId, progress: $progress) {
-      _id
-      title
       progress
     }
   }
 `;
-
-export default {
-  GET_MY_BOOKS,
-  GET_ONE_BOOK,
-  GOOGLE_BOOK_SEARCH,
-  GET_BOOK_REVIEWS,
-  GET_USER,
-  GET_CLUB,
-  GET_DISCUSSIONS,
-  GET_BOOK_PROGRESS,
-  ADD_USER,
-  ADD_DISCUSSION,
-  UPDATE_BOOK_PROGRESS,
-};

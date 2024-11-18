@@ -1,12 +1,12 @@
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import App from './App.tsx'
-import Home from './pages/Home.tsx'
-import Error from './pages/Error.tsx'
-import Landing from './pages/Landing.tsx'
-import Login from './pages/Login.tsx'
-import SignUp from './pages/Signup.tsx'
+import App from './App.js'
+import Home from './pages/Home.js'
+import Error from './pages/Error.js'
+import Landing from './pages/Landing.js'
+import Login from './pages/Login.js'
+import SignUp from './pages/SignUp.js'
 
 const router = createBrowserRouter([
   {

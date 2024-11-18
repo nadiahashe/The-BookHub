@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_BOOK_PROGRESS, UPDATE_BOOK_PROGRESS } from '../utils/queries';
+import { GET_BOOK_PROGRESS } from '../utils/queries';
+import { UPDATE_BOOK_PROGRESS } from '../utils/mutations';
 
 const BookProgress: React.FC = () => {
   const { data, loading } = useQuery(GET_BOOK_PROGRESS, { variables: { bookId: 'some-book-id' } });
