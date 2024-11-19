@@ -111,9 +111,15 @@ const resolvers = {
             return updatedBook;
         },
         // create group: arg groupname, leader, description, return group object; updates group array of "leader"
-        createGroup: async (_parent: any, { groupname, leader, description }: any) => {
-            const newGroup = await Group.create({ groupname, users: [leader], description });
-            await User.findByIdAndUpdate(leader, { $addToSet: { groups: newGroup._id } });
+        createGroup: async (_parent: any, { groupname, description }: any, context: any) => {
+            const newGroup = await Group.create({
+                groupname,
+                users: [context.user._id], 
+                description,
+            });
+            await User.findByIdAndUpdate(context.user._id, {
+                $addToSet: { groups: newGroup._id }, // 
+            });
             return newGroup;
         },
         // create discussion: arg book, return discussion object; updates group's discussion array
