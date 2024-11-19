@@ -54,7 +54,7 @@ type Auth {
 type Query {
     me: User
     getUser(id: ID!): User
-    getBook(_id: ID!): Book
+    getBook(getBookId: ID!): Book
     bookReviews(bookId: String!): [Book]
     getClub(id: ID!): Group
     getDiscussion(discussionId: ID!): [Discussion]

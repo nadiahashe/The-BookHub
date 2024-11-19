@@ -1,19 +1,19 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GET_BOOK } from "../utils/queries";
 import { UPDATE_BOOK_PROGRESS, UPDATE_REVIEW } from "../utils/mutations";
 
-const BookPage: React.FC = ()=>{
+const BookPage = ()=>{
 
 const {id} = useParams()
-const {data, loading} = useQuery(GET_BOOK, {variables: {_id: id}})
+const {data, loading} = useQuery(GET_BOOK, {variables: {getBookId: id}})
 const [updateProgress] = useMutation(UPDATE_BOOK_PROGRESS, {refetchQueries: [GET_BOOK]})
 const [updateReview] = useMutation(UPDATE_REVIEW, { refetchQueries: [GET_BOOK]})
 const [progressUpdate, setProgressUpdate] = useState(false)
 const [newProgress, setNewProgress] = useState(0)
 const [thoughtsUpdate, setThoughtsUpdate] = useState(false)
-const [newThoughts, setNewThoughts] = useState(data.getBook.review.content || '')
+const [newThoughts, setNewThoughts] = useState('')
 const [shared, setShared] = useState('')
 
 if (loading) {return <p>Loading...</p>}
@@ -69,13 +69,13 @@ const ThoughtsSubmit = async (event: FormEvent)=> {
 return (
     <>
         <div className='bookData'>
-            <img src={data.getBook.image} alt={`Cover for ${data.getBook.title}`}/>
-            <h2>{data.getBook.title}</h2>
-            <h3>By: {data.getBook.authors.join(", ") || "unknown"}</h3>
+            <img src={data?.getBook.image} alt={`Cover for ${data?.getBook.title}`}/>
+            <h2>{data?.getBook.title}</h2>
+            <h3>By: {data?.getBook.authors.join(", ") || "unknown"}</h3>
         </div>
         {!progressUpdate? (
             <div>
-                <p>Current Progress: {data.getBook.progress || 0}%</p>
+                <p>Current Progress: {data?.getBook.progress || 0}%</p>
                 <button onClick={switchProgress}>Update Progress?</button>
             </div>) : 
             (<div>
@@ -85,10 +85,10 @@ return (
                 </form>
             </div>)}
         <div>
-        {data.getBook.review.shared? (<h3>My thoughts (shared)</h3>) : (<h3>My thoughts (private)</h3>)}
+        {data?.getBook?.review.shared? (<h3>My thoughts (shared)</h3>) : (<h3>My thoughts (private)</h3>)}
         {!thoughtsUpdate? (
             <div>
-                <p>{data.getBook.review.content || 'Nothing yet...'}</p>
+                <p>{data?.getBook?.review?.content || 'Nothing yet...'}</p>
                 <button onClick={switchThoughts}>Update thoughts?</button>
             </div>) : (
             <div>

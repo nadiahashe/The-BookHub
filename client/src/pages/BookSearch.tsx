@@ -2,14 +2,14 @@ import React, { ChangeEvent, FormEvent, useState } from "react"
 import { useMutation, useQuery } from "@apollo/client"
 import { GET_ME } from "../utils/queries"
 import { GOOGLE_BOOK_SEARCH, ADD_BOOK } from "../utils/mutations"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link } from "react-router-dom"
 
 const BookSearchPage: React.FC = ()=> {
 
     const user = useQuery(GET_ME)
     const [bookSearch, {data}] = useMutation(GOOGLE_BOOK_SEARCH)
     const [searchString, setSearchString]= useState('')
-    const [addBook, newbook] = useMutation(ADD_BOOK, {refetchQueries: [GET_ME]})
+    const [addBook] = useMutation(ADD_BOOK, {refetchQueries: [GET_ME], onCompleted: (newbook)=>{navigate(`/book/${newbook.addBook._id}`)}})
     const navigate = useNavigate()
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>)=>{
@@ -24,7 +24,6 @@ const BookSearchPage: React.FC = ()=> {
 
     const handleAdd = async (title:string, authors:string[], image:string, bookId: string)=> {
         await addBook({variables:{title, authors, image, bookId}})
-        navigate(`/book/${newbook.data.addBook._id}`)
     }
 
 
@@ -45,9 +44,8 @@ const BookSearchPage: React.FC = ()=> {
                                     <button onClick={()=>{handleAdd(book.title, book.authors, book.image, book.bookId)}}>Add to collection</button>
                                 ):(
                                     <button disabled>Already in collection</button>
-                                )
-
-                                }
+                                )}
+                                <button><Link to={`/thoughts/${book.bookId}`}>See reviews</Link></button>
                             </li>
                         ))}
                     </ul>

@@ -29,8 +29,8 @@ const resolvers = {
             }
         },
         // read single book: arg _id of book, return book object
-        getBook: async (_parent: any, { _id }: any, _context: any) => {
-            const book = await Book.findOne({ _id });
+        getBook: async (_parent: any, { getBookId }: any, _context: any) => {
+            const book = await Book.findOne({ _id:getBookId });
             if (!book) {
                 throw new Error("Book not found");
             }
