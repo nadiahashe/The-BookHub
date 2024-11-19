@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom'; 
+// import { useNavigate } from 'react-router-dom'; 
 import './css/Signup.css'
 import VideoFile from '../assets/bookvideo.mov';
-import { SIGNUP } from '../utils/mutations.ts'
-import { checkPassword, validateEmail } from '../utils/helper.ts';
-
+import { SIGNUP } from '../utils/mutations.js'
+import { checkPassword, validateEmail } from '../utils/helper.js';
+import Auth from '../utils/auth.js'
 
 interface Props {
   text: string;
@@ -48,7 +48,7 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
   const [formError, setFormError] = useState('');
 
   const [signUp, { loading }] = useMutation(SIGNUP);
-  const navigate = useNavigate(); 
+  // const navigate = useNavigate(); 
 
   const handleSignUp = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -70,10 +70,11 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
       console.log("Sign-up data:", data);
 
       if (data?.signup?.token) {
-        localStorage.setItem('token', data.signup.token);
+        Auth.login(data.signup.token)
+        // localStorage.setItem('token', data.signup.token);
 
-        // Redirect to the login page after successful sign-up
-        navigate('/profile');
+        // // Redirect to the login page after successful sign-up
+        // navigate('/profile');
       }
     } catch (err) {
       console.error('Sign up failed:', err);

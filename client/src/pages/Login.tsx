@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import './css/Login.css';
 import LoginPic from '../assets/loginpic.png'
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import { LOGIN } from '../utils/mutations.ts'
 import { checkPassword, validateEmail } from '../utils/helper.ts';
-
+import Auth from '../utils/auth.js'
 
 interface LoginFormProps {}
 
@@ -16,7 +16,7 @@ const Login: React.FC<LoginFormProps> = () => {
   const [formError, setFormError] = useState('');
 
   const [login, { loading }] = useMutation(LOGIN);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // Handle login form submission
   const handleLogin = async (event: React.FormEvent) => {
@@ -39,11 +39,12 @@ const Login: React.FC<LoginFormProps> = () => {
       const { data } = await login({ variables: { email, password } });
 
       if (data?.login?.token) {
+        Auth.login(data.login.token)
         // Store token in local storage
-        localStorage.setItem('token', data.login.token);
+        // localStorage.setItem('token', data.login.token);
 
-        // Redirect to a protected route (e.g., dashboard)
-        navigate('/profile');
+        // // Redirect to a protected route (e.g., dashboard)
+        // navigate('/profile');
       }
     } catch (err) {
       console.error("Login failed:", err);
