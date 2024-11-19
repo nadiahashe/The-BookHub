@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { CREATE_GROUP } from "../utils/mutations";
+import { useNavigate } from "react-router-dom";
 
 const CreateClubPage: React.FC = () => {
+    const navigate = useNavigate()
     const [groupname, setGroupname] = useState<string>("");
     const [description, setDescription] = useState<string>("");
-    const [createGroup, { loading, error }] = useMutation(CREATE_GROUP);
+    const [createGroup, { loading, error }] = useMutation(CREATE_GROUP, {onCompleted: (newClub)=>{navigate(`/club/${newClub.createGroup._id}`)}});
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -13,11 +15,9 @@ const CreateClubPage: React.FC = () => {
             await createGroup({
                 variables: {
                     groupname: groupname,
-                    leader: "YOUR_LEADER_ID", // Replace with a dynamic leader ID
                     description: description,
                 },
             });
-            alert("Club created successfully!");
         } catch (err) {
             console.error(err);
             alert("Error creating club.");

@@ -101,8 +101,8 @@ export const UPDATE_BOOK_PROGRESS = gql`
 
 // Creates group, adds creator to users array
 export const CREATE_GROUP = gql`
-  mutation CreateGroup($groupname: String!, $leader: ID!, $description: String) {
-    createGroup(groupname: $groupname, leader: $leader, description: $description) {
+  mutation CreateGroup($groupname: String!, $description: String) {
+    createGroup(groupname: $groupname, description: $description) {
       _id
       description
       groupname
@@ -112,8 +112,8 @@ export const CREATE_GROUP = gql`
 
 // Creates comments, adds to discussion array
 export const CREATE_COMMENT = gql`
-  mutation CreateComment($disussionId: ID!, $content: String, $username: String) {
-    createComment(disussionId: $disussionId, content: $content, username: $username) {
+  mutation CreateComment($discussionId: ID!, $content: String, $username: String) {
+    createComment(discussionId: $discussionId, content: $content, username: $username) {
       comments {
         commentId
         content

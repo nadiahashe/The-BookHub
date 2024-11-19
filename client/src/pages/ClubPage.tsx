@@ -31,7 +31,7 @@ const ClubPage: React.FC = () => {
 
   const handleMemberSubmit = async (event: FormEvent)=> {
     event.preventDefault()
-    if (!data.getClub.users.map((user: any)=>(user.username)).includes(newMember)) {
+    if (!data?.getClub?.users.map((user: any)=>(user.username)).includes(newMember)) {
       await addUserToGroup({variables: { username: newMember, groupId: id}})
       setNewMemberSwitch(false)
     }
