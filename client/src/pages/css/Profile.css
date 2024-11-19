@@ -83,6 +83,17 @@ html, body {
     background-color: #958671; /* Darker shade on hover */
   }
 
+  .icon-styles {
+    font-size: 20px; 
+    color: rgb(131, 114, 92);  
+    transition: color 0.3s ease; 
+  }
+  
+  .icon-style:hover {
+    color: rgba(165, 42, 42, 0.213); 
+    cursor: pointer; 
+  }
+
 @media (max-width: 768px) {
     .profile-container {
         width: 95%;

@@ -5,6 +5,8 @@ import Auth from '../utils/auth.js'
 import { Link } from 'react-router-dom';
 import './css/Profile.css';
 import placeholder from '../assets/placeholderpic.png'
+import { CiCirclePlus } from "react-icons/ci";
+
 
 
 const ProfilePage: React.FC = () => {
@@ -39,7 +41,9 @@ const ProfilePage: React.FC = () => {
     <div className="col-lg-6 col-md-12">
       <div className="card h-100 shadow-sm custom-card w-100">
         <div className="card-body d-flex flex-column">
-          <h2 className="card-title">My Books</h2>
+          <h2 className="card-title">My Books | <span style={{fontSize:'13px'}}>View all Books <Link to="/library">
+                      <CiCirclePlus className='icon-styles' />
+                    </Link></span></h2>
           <ul>
             {user?.books.slice(0,5).map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
               <li key={book._id}>
@@ -53,10 +57,10 @@ const ProfilePage: React.FC = () => {
               </li>
             ))}
           </ul>
-          <div className="mt-auto">
+          {/* <div className="mt-auto">
             <span style={{ marginRight: '2%', marginLeft: '3%' }}>For new books, search</span>
             <Link to="/bookSearch" className='btn here-button'>Here</Link>
-          </div>
+          </div> */}
         </div>
       </div>
 </div>
@@ -74,10 +78,10 @@ const ProfilePage: React.FC = () => {
               </li>
             ))}
           </ul>
-          <div className="mt-auto">
+          {/* <div className="mt-auto">
         <span style={{marginRight:'2%', marginLeft:'3%'}}>For new clubs, search</span>
         <Link to="/clubSearch" className='btn here-button'>Here</Link>
-      </div>
+      </div> */}
         </div>
       </div>
     </div>
