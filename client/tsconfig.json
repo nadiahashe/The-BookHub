@@ -1,8 +1,14 @@
 {
+  "compilerOptions": {
+    "composite": true
+  },
   "files": [],
   "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
-  "compilerOptions": {"typeRoots": ["node_modules/@types", "./src/declarations.d.ts"]},
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
