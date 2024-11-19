@@ -49,7 +49,6 @@ export const GET_BOOK_REVIEWS=gql`
       review {
         content
         username
-        reviewId
       }
     }
   }
@@ -57,7 +56,7 @@ export const GET_BOOK_REVIEWS=gql`
 // Gets user information by ID. Used for Profile page.
 export const GET_USER = gql`
   query getUser($getUserId: ID!) {
-    getUser(id: $getUserId) {
+    getUser(getUserid: $getUserId) {
       _id
       username
       email
@@ -81,7 +80,7 @@ export const GET_USER = gql`
 // Gets club details by club ID. Used for Club page.
 export const GET_CLUB = gql`
   query getClub($clubId: ID!) {
-    getClub(id: $clubId) {
+    getClub(clubId: $clubId) {
       _id
       groupname
       description

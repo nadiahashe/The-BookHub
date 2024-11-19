@@ -9,14 +9,14 @@ const CreateDiscussionPage: React.FC = ()=>{
     const navigate = useNavigate()
     const {id} = useParams()
     const user = useQuery(GET_ME)
-    const club = useQuery(GET_CLUB, {variables: {id:id}})
+    const club = useQuery(GET_CLUB, {variables: {clubId:id}})
     const [createDiscussion] = useMutation(CREATE_DISCUSSION, { onCompleted: (newDiscussion)=>{navigate(`/discussion/${newDiscussion.createDiscussion._id}`)}})
 
     const handleSubmit = async (title: string, authors: string[], image: string, bookId: string) =>{
         await createDiscussion({variables: {title, authors, image, bookId, groupId:id}})
     }
      
-
+    console.log(club)
 
 
     if (user.loading || club.loading) {return <p>Loading...</p>}

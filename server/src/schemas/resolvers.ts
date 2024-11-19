@@ -45,16 +45,16 @@ const resolvers = {
             return reviews;
         },
         // Get user profile data by ID
-        getUser: async (_parent: any, { id }: any, _context: any) => {
-                return await User.findById(id).populate(['books', 'groups']);
+        getUser: async (_parent: any, { getUserId }: any, _context: any) => {
+                return await User.findById(getUserId).populate(['books', 'groups']);
         },
         // read single group: arg name, return group object
-        getClub: async (_parent: any, { id }: any) => {
-            return await Group.findById(id).populate('users').populate(['discussions', 'users']);
+        getClub: async (_parent: any, { clubId }: any) => {
+            return await Group.findById(clubId).populate(['discussions', 'users']);
         },
         // read single discussion: arg discussion id, return discussion object
         getDiscussion: async (_parent: any, { discussionId }: any) => {
-            return await Discussion.find({ discussionId }).populate('comments');
+            return await Discussion.findById(discussionId);
         }
     },
 
@@ -111,9 +111,9 @@ const resolvers = {
             return updatedBook;
         },
         // create group: arg groupname, leader, description, return group object; updates group array of "leader"
-        createGroup: async (_parent: any, { groupname, leader, description }: any) => {
-            const newGroup = await Group.create({ groupname, users: [leader], description });
-            await User.findByIdAndUpdate(leader, { $addToSet: { groups: newGroup._id } });
+        createGroup: async (_parent: any, { groupname, description }: any, context: any) => {
+            const newGroup = await Group.create({ groupname, users: [context.user._id], description });
+            await User.findByIdAndUpdate(context.user._id, { $addToSet: { groups: newGroup._id } });
             return newGroup;
         },
         // create discussion: arg book, return discussion object; updates group's discussion array
