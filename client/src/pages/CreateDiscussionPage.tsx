@@ -15,8 +15,6 @@ const CreateDiscussionPage: React.FC = ()=>{
     const handleSubmit = async (title: string, authors: string[], image: string, bookId: string) =>{
         await createDiscussion({variables: {title, authors, image, bookId, groupId:id}})
     }
-     
-    console.log(club)
 
 
     if (user.loading || club.loading) {return <p>Loading...</p>}
