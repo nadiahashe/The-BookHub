@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 const ProfilePage: React.FC = () => {
   // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
   const { data, loading, error } = useQuery(GET_ME);
-
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p>Error loading profile: {error.message}</p>;
 
@@ -36,7 +35,7 @@ const ProfilePage: React.FC = () => {
         <ul>
           {user?.groups.map((group: {_id: string, description: string, groupname: string}) => (
             <li key={group._id}>
-              <p>{group.groupname}</p>
+              <Link to={`/club/${group._id}`}><p>{group.groupname}</p></Link>
               <p>{group.description}</p>
             </li>
           ))}

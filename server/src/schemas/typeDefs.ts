@@ -64,7 +64,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     signup(email: String!, password: String!, username: String!): Auth
     addBook(title: String!, authors: [String], image: String, bookId: String): Book
-    updateReview(content: String, shared: Boolean, _id: ID!): Book
+    updateReview(content: String, shared: Boolean, id: ID!): Book
     createGroup(groupname: String!, leader: ID!, description: String): Group
     createDiscussion(groupId: ID!, title: String!, authors: [String], image: String, bookId: String): Discussion
     createComment(disussionId: ID!, content: String, username: String): Discussion

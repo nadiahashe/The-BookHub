@@ -31,7 +31,7 @@ const BookSearchPage: React.FC = ()=> {
         <div>
             <form onSubmit={handleSearch}>
                 <input type="text" onChange={handleChange} value={searchString}></input>
-                <button type="submit"></button>
+                <button type="submit">Search for books</button>
             </form>
             <section>
                 {data?.bookSearch && data?.bookSearch.length<1? (<p>No results found</p>):(
