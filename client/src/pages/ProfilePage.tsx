@@ -36,7 +36,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="profile-page">
-      <button className="logout-button" onClick={() => { Auth.logout() }}>Logout</button>
+      {/* <button className="logout-button" onClick={() => { Auth.logout() }}>Logout</button> */}
 
       <div className="profile-container">
 
