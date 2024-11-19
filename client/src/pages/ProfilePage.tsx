@@ -33,12 +33,12 @@ const ProfilePage: React.FC = () => {
           <h1>Welcome, {user?.username}</h1>
         </div>
 
-        <section className="container my-4">
+        <section className="container">
   <div className="row">
     {/* Left Column */}
-    <div className="col-lg-6">
-      <div className="card h-100 shadow-sm custom-card">
-        <div className="card-body">
+    <div className="col-lg-6 col-md-12">
+      <div className="card h-100 shadow-sm custom-card w-100">
+        <div className="card-body d-flex flex-column">
           <h2 className="card-title">My Books</h2>
           <ul>
             {user?.books.map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
@@ -53,18 +53,18 @@ const ProfilePage: React.FC = () => {
               </li>
             ))}
           </ul>
+          <div className="mt-auto">
+            <span style={{ marginRight: '2%', marginLeft: '3%' }}>For new books, search</span>
+            <Link to="/bookSearch" className='btn here-button'>Here</Link>
+          </div>
         </div>
       </div>
-      <div >
-    <span style={{marginRight:'2%', marginLeft:'3%'}}>For new books, search</span>
-    <Link to="/bookSearch" className='btn here-button'>Here</Link>
-  </div>
 </div>
 
     {/* Right Column */}
-    <div className="col-lg-6">
-      <div className="card h-100 shadow-sm">
-        <div className="card-body">
+    <div className="col-lg-6 col-md-12">
+      <div className="card h-100 shadow-sm custom-card w-100">
+        <div className="card-body d-flex flex-column">
           <h2 className="card-title">My Clubs</h2>
           <ul>
             {user?.groups.map((group: { _id: string; description: string; groupname: string }) => (
@@ -74,11 +74,11 @@ const ProfilePage: React.FC = () => {
               </li>
             ))}
           </ul>
-        </div>
-      </div>
-      <div >
+          <div className="mt-auto">
         <span style={{marginRight:'2%', marginLeft:'3%'}}>For new clubs, search</span>
         <Link to="/clubSearch" className='btn here-button'>Here</Link>
+      </div>
+        </div>
       </div>
     </div>
   </div>

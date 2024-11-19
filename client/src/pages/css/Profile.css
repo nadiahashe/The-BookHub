@@ -83,29 +83,16 @@ html, body {
     background-color: #958671; /* Darker shade on hover */
   }
 
-  /* .grid-containers {
-display: flex;
-flex-direction: row;
-  }
-
-  .profile-column-left {
-   flex: 50%;
-   padding: 20px;
-   margin: auto;
-  }
-
-  .profile-column-left h2 {
-    display: flex;
-    justify-self: center;
-  }
-
-    .profile-column-right {
-        flex: 50%;
-        padding: 20px;
-        margin: auto;
+@media (max-width: 768px) {
+    .profile-container {
+        width: 95%;
     }
-
-    .profile-column-right h2 {
-        display: flex;
-        justify-self: center;
-    } */
+    .welcome-header h1 {
+        font-size: 2rem;
+    }
+    .background-img {
+        width: 20%;
+        height: 20%;
+    }
+    
+}
