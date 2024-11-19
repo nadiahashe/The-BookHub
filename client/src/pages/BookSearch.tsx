@@ -32,11 +32,12 @@ const BookSearchPage: React.FC = ()=> {
         <div>
             <form onSubmit={handleSearch}>
                 <input type="text" onChange={handleChange} value={searchString}></input>
+                <button type="submit"></button>
             </form>
             <section>
-                {data.bookSearch && data.bookSearch.length<1? (<p>No results found</p>):(
+                {data?.bookSearch && data?.bookSearch.length<1? (<p>No results found</p>):(
                     <ul>
-                        {data.bookSearch.map((book:any)=>(
+                        {data?.bookSearch.map((book:any)=>(
                             <li key={book.bookId}>
                                 <p>{book.title} by {book.authors.join(', ') || "unknown"}</p>
                                 <img src={book.image} alt={`Cover for ${book.title}`}/>
