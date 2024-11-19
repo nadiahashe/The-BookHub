@@ -6,7 +6,7 @@ html, body {
 
 
 .profile-page {
-    background-color: slategray;
+    background-color: #B7B7A4;
     min-height: 100vh;
     width: 100%;
     position: relative;
@@ -20,9 +20,9 @@ html, body {
     top: 10px; 
     right: 10px; 
     padding: 10px 15px;
-    background-color: #ff4d4d; 
+    background-color: #bda98e; 
     color: white; 
-    border: none; 
+    border: 2px solid #786b5a; 
     border-radius: 5px; 
     cursor: pointer; 
     font-size: 16px; 
@@ -31,8 +31,9 @@ html, body {
 }
 
 .logout-button:hover {
-    background-color: #ff1a1a; 
+    background-color: #958671; 
 }
+
 
 .profile-container {
     width: 90%; 
@@ -72,6 +73,15 @@ html, body {
     min-height: 400px; /* Adjust height as needed */
   }
   
+  .here-button {
+    background-color: #bda98e; /* Custom color */
+    color: white;
+    border: none;
+  }
+  
+  .here-button:hover {
+    background-color: #958671; /* Darker shade on hover */
+  }
 
   /* .grid-containers {
 display: flex;

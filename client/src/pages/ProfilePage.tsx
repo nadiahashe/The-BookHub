@@ -57,7 +57,7 @@ const ProfilePage: React.FC = () => {
       </div>
       <div >
     <span style={{marginRight:'2%', marginLeft:'3%'}}>For new books, search</span>
-    <Link to="/bookSearch" className="btn btn-primary">Here</Link>
+    <Link to="/bookSearch" className='btn here-button'>Here</Link>
   </div>
 </div>
 
@@ -78,7 +78,7 @@ const ProfilePage: React.FC = () => {
       </div>
       <div >
         <span style={{marginRight:'2%', marginLeft:'3%'}}>For new clubs, search</span>
-        <Link to="/clubSearch" className="btn btn-primary">Here</Link>
+        <Link to="/clubSearch" className='btn here-button'>Here</Link>
       </div>
     </div>
   </div>
