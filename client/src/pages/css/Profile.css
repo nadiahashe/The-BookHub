@@ -52,6 +52,7 @@ html, body {
     display: flex;
     margin-bottom: 5%;
     align-items: center;
+    flex-direction: row;
   }
 
   .welcome-header h1 {
@@ -67,6 +68,8 @@ html, body {
     width: 15%;
     height: 15%;
     border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 20px;
   }
 
   .custom-card {
@@ -93,6 +96,28 @@ html, body {
     color: rgba(165, 42, 42, 0.213); 
     cursor: pointer; 
   }
+
+
+  .edit-button {
+    background-color: #bda98e;
+    color: white;
+    border: none;
+    border-radius: 50%;  /* Makes the button circular */
+    cursor: pointer;
+    font-size: 20px;  /* Adjust icon size if needed */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;  /* Centers the icon horizontally */
+    align-items: center;      /* Centers the icon vertically */
+  }
+  
+  
+  
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+  
 
 @media (max-width: 768px) {
     .profile-container {

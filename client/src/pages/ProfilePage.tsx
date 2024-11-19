@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
 import Auth from '../utils/auth.js'
@@ -6,34 +6,67 @@ import { Link } from 'react-router-dom';
 import './css/Profile.css';
 import placeholder from '../assets/placeholderpic.png'
 import { CiCirclePlus } from "react-icons/ci";
-
+import ProfilePicEditor from './ProfilePicEditor.js';
+import { CiCamera } from "react-icons/ci";
+import { Modal } from 'react-bootstrap';
 
 
 const ProfilePage: React.FC = () => {
   // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
   const { data, loading, error } = useQuery(GET_ME);
 
+  const [profilePic, setProfilePic] = useState<string>(placeholder); // Add state for profile picture
+  const [isEditing, setIsEditing] = useState<boolean>(false);
+
   if (loading) return <p>Loading profile...</p>;
   if (error) return <p>Error loading profile: {error.message}</p>;
 
   const user = data?.me;
   
-  
+  const handleSave = (newImage: string) => {
+    setProfilePic(newImage); 
+    setIsEditing(false); 
+  };
+
+  const handleCancel = () => {
+    setIsEditing(false); 
+  };
+
+
 
   return (
     <div className="profile-page">
-        <button className="logout-button" onClick={() => { Auth.logout() }}>Logout</button>
+      <button className="logout-button" onClick={() => { Auth.logout() }}>Logout</button>
 
       <div className="profile-container">
 
-      <div className="welcome-header">
-          <img 
-            src={placeholder} 
-            alt="Welcome background" 
-            className="background-img" 
+        <div className="welcome-header">
+          <img
+            src={profilePic}
+            alt="Profile"
+            className="background-img"
           />
+          <button
+            className="edit-button"
+            onClick={() => setIsEditing(true)} 
+          >
+            <CiCamera />
+          </button>
           <h1>Welcome, {user?.username}</h1>
         </div>
+
+        <Modal show={isEditing} onHide={handleCancel} centered>
+          <Modal.Header closeButton>
+            <Modal.Title>Profile Picture Editor</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <ProfilePicEditor
+              onSave={handleSave}  
+              onCancel={handleCancel} 
+            />
+          </Modal.Body>
+        </Modal>
+
 
         <section className="container">
   <div className="row">
@@ -96,4 +129,3 @@ const ProfilePage: React.FC = () => {
 
 export default ProfilePage;
 
-{/* <Link to="/createClub" className="btn btn-primary mt-3">Create new club</Link> */}
