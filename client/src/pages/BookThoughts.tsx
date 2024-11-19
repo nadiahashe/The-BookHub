@@ -13,11 +13,11 @@ const BookThoughtsPage: React.FC = ()=>{
 
     return (
         <>
-        {data.getReviews.length>1? (
+        {data && data?.bookReviews?.length>0? (
             <>
                 <h2>Here's what people thought</h2>
                 <ul>
-                    {data.getReviews.map((book: any)=>(
+                    {data?.bookReviews.map((book: any)=>(
                         <li key={book.review.reviewId}>
                             <p>{book.review.username}</p>
                             <p>{book.review.content}</p>

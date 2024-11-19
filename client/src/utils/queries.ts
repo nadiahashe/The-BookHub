@@ -4,6 +4,7 @@ import { gql } from "@apollo/client";
 export const GET_ME=gql`
   query Me {
     me {
+      username
       books {
         _id
         authors
@@ -23,8 +24,8 @@ export const GET_ME=gql`
 
 // Get one book by _id, including the nested review. Requires book's _id as argument.
 export const GET_BOOK=gql`
-  query GetBook($id: ID!) {
-    getBook(_id: $id) {
+  query GetBook($getBookId: ID!) {
+    getBook(getBookId: $getBookId) {
       _id
       authors
       bookId

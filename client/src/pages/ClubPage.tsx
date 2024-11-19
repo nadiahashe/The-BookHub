@@ -8,11 +8,13 @@ import { ADD_USER_TO_GROUP } from '../utils/mutations';
 const ClubPage: React.FC = () => {
 
   const {id}=useParams()
-  const { data, loading } = useQuery(GET_CLUB, { variables: { clubId: id } });
+  const { data, loading, error } = useQuery(GET_CLUB, { variables: { clubId: id } });
   const navigate = useNavigate()
   const [newMemberSwitch, setNewMemberSwitch] = useState(false)
   const [newMember, setNewMember] = useState('')
-  const [addUserToGroup, {error}]= useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
+  const [addUserToGroup, addUser]= useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
+
+  
 
   const newDiscussionHandler = ()=> {
     navigate(`/createDiscussion/${id}`)
@@ -35,17 +37,18 @@ const ClubPage: React.FC = () => {
     }
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) {return <p>Loading...</p>}
+  if (error) {return <p>Error loading club: {error.message}</p>};
 
   return (
     <div>
-      <h1>{data.getClub.name}</h1>
-      <p>{data.getClub.description}</p>
+      <h1>{data?.getClub.groupname}</h1>
+      <p>{data?.getClub.description}</p>
       <section>  
         <h3>Members</h3>
         <ul>
-          {data.getClub.users.map((user: any) => (
-            <li key={user._id}>{user.name}</li>
+          {data?.getClub.users.map((user: any) => (
+            <li key={user._id}>{user.username}</li>
           ))}
         </ul>
         {!newMemberSwitch? (
@@ -55,14 +58,14 @@ const ClubPage: React.FC = () => {
             <p>Enter username of new member</p>
             <input type='text' name="newMember" value={newMember} onChange={handleChange}/>
             <button type='submit'>Add member</button>
-            {error? (<p>User not found</p>) : (<></>)}
+            {addUser.error? (<p>User not found</p>) : (<></>)}
           </form>
           )}
       </section>
       <section>
         <h3>Discussions</h3>
         <ul>
-          {data.getClub.discussions.map((discussion: any)=>(
+          {data?.getClub.discussions.map((discussion: any)=>(
             <li key={discussion._id}>
               <Link to={`/discussion/${discussion._id}`}>
                 {discussion.title} by {discussion.authors.join(", ") || "unknown"}

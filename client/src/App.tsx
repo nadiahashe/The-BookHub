@@ -1,11 +1,11 @@
-// import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client';
 import { Outlet } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context'
+import Navbar from './components/navigation.js'
 
 const httpLink = createHttpLink({
-  uri: 'graphql'
+  uri: '/graphql'
 })
 
 const authLink = setContext((_, {headers})=>{
@@ -13,7 +13,7 @@ const authLink = setContext((_, {headers})=>{
   return {
     headers: {
       ...headers,
-      authorization: token ? `Beaer ${token}` : ''
+      authorization: token ? `Bearer ${token}` : ''
     }
   }
 })
@@ -27,6 +27,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
         <div>
+          <Navbar />
           <Outlet />
         </div>
     </ApolloProvider>
