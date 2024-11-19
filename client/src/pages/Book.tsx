@@ -16,8 +16,7 @@ const BookPage: React.FC = ()=>{
     const [progressUpdate, setProgressUpdate] = useState(false)
     const [newProgress, setNewProgress] = useState(0)
     const [thoughtsUpdate, setThoughtsUpdate] = useState(false)
-    const [newThoughts, setNewThoughts] = useState('')
-    const [shared, setShared] = useState('')
+    const [newThoughts, setNewThoughts] = useState(data?.getBook?.review?.content)
     const [checked, setChecked] = useState(false)
 
     if (loading) {return <p>Loading...</p>}
@@ -48,16 +47,8 @@ const BookPage: React.FC = ()=>{
         setNewThoughts(value)
     }
 
-    const handleSharedChange = (event: ChangeEvent<HTMLInputElement>)=> {
-        const {value} = event.target
-        if (value == 'shared') {
-            setShared('')
-            setChecked(false)
-        }
-        else {
-            setShared('shared')
-            setChecked(true)
-        }
+    const handleSharedChange = ()=> {
+        setChecked(!checked)
     }
 
     const ProgressSubmit = async (event: FormEvent)=> {
@@ -70,9 +61,8 @@ const BookPage: React.FC = ()=>{
 
     const ThoughtsSubmit = async (event: FormEvent)=> {
         event.preventDefault()
-        const sharedBoolean = (!!shared)
         if (newThoughts != '') {
-            await updateReview({variables: {shared: sharedBoolean, content: newThoughts, id: id}})
+            await updateReview({variables: {shared: checked, content: newThoughts, id: id}})
         }
         setThoughtsUpdate(false)
     }
@@ -106,7 +96,7 @@ const BookPage: React.FC = ()=>{
                     <form className="thoughtsForm" onSubmit={ThoughtsSubmit}>
                         <textarea value={newThoughts} name="thoughts" onChange={handleThoughtsChange}/>
                         <label>Make this thought shared?</label>
-                        <input type="checkbox" checked={checked} value={shared} name="shared" onChange={handleSharedChange}/>
+                        <input type="checkbox" checked={checked} name="shared" onChange={handleSharedChange}/>
                         <button type="submit">Update my thoughts</button>
                     </form>
                 </div>    
