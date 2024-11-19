@@ -73,7 +73,7 @@ const SignupForm: React.FC<SignUpFormProps> = () => {
         localStorage.setItem('token', data.signup.token);
 
         // Redirect to the login page after successful sign-up
-        navigate('/home');
+        navigate('/profile');
       }
     } catch (err) {
       console.error('Sign up failed:', err);

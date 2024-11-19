@@ -43,7 +43,7 @@ const Login: React.FC<LoginFormProps> = () => {
         localStorage.setItem('token', data.login.token);
 
         // Redirect to a protected route (e.g., dashboard)
-        navigate('/home');
+        navigate('/profile');
       }
     } catch (err) {
       console.error("Login failed:", err);
