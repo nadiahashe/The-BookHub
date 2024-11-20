@@ -117,6 +117,24 @@ html, body {
   .edit-button:hover {
     background-color: #0056b3;
   }
+
+  #club-hover::after {
+    content: "";
+    width: 0px;
+    transition: 0.4s;
+    display: block;
+  }
+
+  #club-hover:hover::after {
+    width: 100%;
+    border: solid 0.5px;
+  }
+
+  #club-hover {
+    color: black;
+  }
+
+  
   
 
 @media (max-width: 768px) {
