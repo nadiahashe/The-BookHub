@@ -9,6 +9,8 @@ import { CiCirclePlus } from "react-icons/ci";
 import ProfilePicEditor from './ProfilePicEditor.js';
 import { CiCamera } from "react-icons/ci";
 import { Modal } from 'react-bootstrap';
+import { GoBookmark } from "react-icons/go";
+
 
 
 const ProfilePage: React.FC = () => {
@@ -90,10 +92,7 @@ const ProfilePage: React.FC = () => {
               </li>
             ))}
           </ul>
-          {/* <div className="mt-auto">
-            <span style={{ marginRight: '2%', marginLeft: '3%' }}>For new books, search</span>
-            <Link to="/bookSearch" className='btn here-button'>Here</Link>
-          </div> */}
+          
         </div>
       </div>
 </div>
@@ -102,19 +101,19 @@ const ProfilePage: React.FC = () => {
     <div className="col-lg-6 col-md-12">
       <div className="card h-100 shadow-sm custom-card w-100">
         <div className="card-body d-flex flex-column">
-          <h2 className="card-title">My Clubs</h2>
-          <ul>
+          <h2 className="card-title">My Clubs | <span style={{fontSize:'13px'}}>Add a new Club <Link to="/createClub"><CiCirclePlus className='icon-styles' />
+          </Link></span></h2>
+          <ul style={{listStyle:'none'}}>
             {user?.groups.map((group: { _id: string; description: string; groupname: string }) => (
-              <li key={group._id}>
-                <Link to={`/club/${group._id}`}><p>{group.groupname}</p></Link>
-                <p>{group.description}</p>
-              </li>
+       <li key={group._id} className="d-flex align-items-center mb-2">
+       
+       <GoBookmark className="me-2" />
+       <Link to={`/club/${group._id}`} className="text-decoration-none" id='club-hover'>
+         {group.groupname}
+       </Link>
+     </li>
             ))}
           </ul>
-          <div className="mt-auto">
-        <span >Add a club </span>
-        <Link to="/createClub" className='btn here-button'>Here</Link>
-      </div>
         </div>
       </div>
     </div>
