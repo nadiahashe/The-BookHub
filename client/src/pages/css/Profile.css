@@ -41,7 +41,6 @@ html, body {
     min-height: 95vh; 
     background-color: #f6f1eb; 
     border-radius: 15px; 
-    /* box-shadow: 0 4px 10px white;  */
     padding: 20px; 
     overflow-y: auto; 
 }
