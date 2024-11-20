@@ -1,13 +1,14 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_CLUB } from '../utils/queries';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import { ADD_USER_TO_GROUP, REMOVE_USER_FROM_GROUP } from '../utils/mutations';
 import './css/ClubPage.css';
 import BookPic from '../assets/background-book.png'
 import { Button, Card, Collapse } from 'react-bootstrap';
 import Memberpic from '../assets/members.png'
 import NewMember from '../assets/new-member.png'
+import Discussions from '../assets/discussions.png'
 
 
 
@@ -26,8 +27,9 @@ const ClubPage: React.FC = () => {
     refetchQueries: [GET_CLUB],
   })
 
-  
-  
+  const handleNavigation = (discussionId: string) => {
+    navigate(`/discussion/${discussionId}`); // Navigate programmatically
+  };
 
   const newDiscussionHandler = ()=> {
     navigate(`/createDiscussion/${id}`)
@@ -73,14 +75,14 @@ const ClubPage: React.FC = () => {
     <div className='club-container'>
       <h1 style={{fontFamily:'Open Sauce Sans', display:'flex', justifyContent:'center'}}>Welcome to your Club: {data?.getClub.groupname}</h1>
       <p>{data?.getClub.description}</p>
-           <div>
+           <div className='club-body'>
           <div className="row">
             <div className="col-md-4">
               <Card>
                 <Card.Img variant="top" src={Memberpic} alt={'members'} />
                 <Card.Body>
                   {/* Button to toggle members */}
-                  <Button onClick={() => setOpen(!open)} aria-expanded={open ? 'true' : 'false'} variant="primary">
+                  <Button onClick={() => setOpen(!open)} aria-expanded={open ? 'true' : 'false'} className='card-btn'>
                     {open ? 'Hide Members' : 'Show Members'}
                   </Button>
 
@@ -97,19 +99,15 @@ const ClubPage: React.FC = () => {
                 </Card.Body>
               </Card>
             </div>
-          </div>
-            
-        
-      </div>
-      <div>
-          <div className="row">
+          
+          
             <div className="col-md-4">
       <Card>
         <Card.Img variant='top' src={NewMember} alt={'new member'} />
           <Card.Body>
             {/* Button to toggle form visibility */}
             {!newMemberSwitch ? (
-              <Button onClick={handleMemberSwitch}>Add new member</Button>
+              <Button className='card-btn' onClick={handleMemberSwitch}>Add new member</Button>
             ) : (
               <form onSubmit={handleMemberSubmit}>
                 <p>Enter username of new member</p>
@@ -120,33 +118,45 @@ const ClubPage: React.FC = () => {
                   onChange={handleChange} 
                   required 
                 />
-                <Button type='submit' variant="primary">Add member</Button>
+                <Button type='submit' className='card-btn'>Add member</Button>
                 {addUser.error && <p style={{ color: 'red' }}>User not found</p>}
               </form>
             )}
           </Card.Body>
         </Card>
         </div>
-        </div>
+      
+      
+      <div className="col-md-4">
         
-      <section>
-        
-        <ul>
+        <Card>
+          <Card.Img variant='top' src={Discussions} alt={'discussions'} />
+          <Card.Body>
           {data?.getClub.discussions.map((discussion: any)=>(
             <li key={discussion._id}>
-              <Link to={`/discussion/${discussion._id}`}>
+               <Button 
+                onClick={() => handleNavigation(discussion._id)} 
+                className='card-btn' 
+              >
                 {discussion.title} by {discussion.authors.join(", ") || "unknown"}
-              </Link>
+              </Button>
             </li>
           ))}
-        </ul>
-        <button onClick={newDiscussionHandler}>Create new discussion</button>
-      </section>
-      <button onClick={handleLeaveClub} disabled={removing}>
+        
+        <Button className='card-btn' onClick={newDiscussionHandler}>Create new discussion</Button>
+        </Card.Body>
+        </Card>
+        </div>
+        </div>
+        
+        
+      
+      <button className='leave-btn' onClick={handleLeaveClub} disabled={removing}>
             {removing ? 'Leaving...' : 'Leave Club'}</button>
             {removeError && <p className="error-message">Error: {removeError.message}</p>}
     </div>
     </div>
+    
     </div>
   );
 };

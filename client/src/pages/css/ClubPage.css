@@ -4,27 +4,29 @@
 
 
 
-.club-container {
-    width: 60%; 
-    max-width: 1600px; 
-    min-height: 95vh; 
-    background-color: #f6f1eb; 
-    border-radius: 15px; 
-    padding: 20px; 
-    overflow-y: auto; 
-    position: relative;
-}
-
-
 .club-page {
     position: relative;
     width: 100%;
-    height: 100vh; /* Make the height fill the entire viewport */
+    height: 100vh; /* Full viewport height */
     display: flex;
     justify-content: center; /* Horizontally center the container */
-    align-items: center; /* Vertically center the container */
-    overflow: hidden; /* Prevent scrollbars if the image overflows */
+    align-items: flex-start; /* Align content to the top */
+    overflow-y: auto; /* Allow scrolling in case of content overflow */
   }
+  
+  .club-container {
+    width: 60%;
+    max-width: 1600px;
+    height: 85%; /* Fixed height based on the viewport height */
+    background-color: #f6f1eb;
+    border-radius: 15px;
+    padding: 20px;
+    overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
+    position: relative;
+    margin-top: 20px;
+  }
+  
+  
   
   .club-background {
     position: absolute;
@@ -32,6 +34,42 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    object-fit: cover; /* Ensures the image covers the entire container */
-    opacity: 0.8; /* Make the image slightly transparent */
+    object-fit: cover; 
+    opacity: 0.8; 
   }
+
+  .card-btn {
+    padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #d0ba9e;
+  color: black;
+  border: none;
+  /* border-radius: 50px; */
+  cursor: pointer;
+  width: 100%;
+  font-family: 'Open Sauce Sans', 'Arial', sans-serif; 
+  }
+  
+  .card-btn:hover {
+    background-color: #0056b3;       
+    border-color: #0056b3;            
+  }
+  
+  .card-btn:focus {
+    outline: none;                   
+  }
+
+  .club-body {
+    margin-top: 10%;
+  }
+
+  .leave-btn {
+    position: absolute;  /* Position the button absolutely inside the container */
+    bottom: 0;           /* Place the button at the bottom */
+    left: 50%;           /* Center the button horizontally */
+    transform: translateX(-50%); /* Offset by 50% to achieve exact centering */
+    border-radius: none;
+  }
+
+
+ 
