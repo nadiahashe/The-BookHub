@@ -138,6 +138,27 @@ const resolvers = {
             }
             else {throw new Error("User not found")}
         },
+        // Remove a user from a group: arg username, groupId, return updated group object
+        removeUserFromGroup: async (_parent: any, { groupId }: any, context: any) => {
+            if (!context.user) {
+                throw new Error("You need to be logged in!");
+            }
+
+        // Ensure the group exists
+        const group = await Group.findById(groupId);
+            if (!group) {
+                throw new Error("Group not found!");
+    }
+
+         // Remove the user from the group's user list
+        group.users = group.users.filter(user => String(user) !== String(context.user._id));
+            await group.save();
+
+         // Remove the group from the user's groups list
+            await User.findByIdAndUpdate(context.user._id, { $pull: { groups: groupId } });
+
+            return group;
+        },
         // update book progress
         updateProgress: async (_parent: any, { bookId, progress }: any) => {
             const book = await Book.findByIdAndUpdate(bookId, { progress }, { new: true });

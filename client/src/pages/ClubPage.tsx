@@ -1,19 +1,23 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_CLUB } from '../utils/queries';
+import { GET_CLUB, GET_ME } from '../utils/queries';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { ADD_USER_TO_GROUP } from '../utils/mutations';
+import { ADD_USER_TO_GROUP, REMOVE_USER_FROM_GROUP } from '../utils/mutations';
+
 
 
 const ClubPage: React.FC = () => {
 
   const {id}=useParams()
   const { data, loading, error } = useQuery(GET_CLUB, { variables: { clubId: id } });
+  const { data: userData } = useQuery(GET_ME);
   const navigate = useNavigate()
   const [newMemberSwitch, setNewMemberSwitch] = useState(false)
   const [newMember, setNewMember] = useState('')
   const [addUserToGroup, addUser]= useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
-
+  const [removeUserFromGroup, { loading: removing, error: removeError }] = useMutation(REMOVE_USER_FROM_GROUP, {
+    refetchQueries: [GET_CLUB],
+  })
   
 
   const newDiscussionHandler = ()=> {
@@ -36,6 +40,19 @@ const ClubPage: React.FC = () => {
       setNewMemberSwitch(false)
     }
   }
+
+  const handleLeaveClub = async () => {
+    try {
+        await removeUserFromGroup({
+            variables: { groupId: id },
+        });
+        alert('You have successfully left the club!');
+        navigate('/profile'); // Redirect to home after leaving
+    } catch (err) {
+        console.error(err);
+        alert('Failed to leave the club. Please try again.');
+    }
+};
 
   if (loading) {return <p>Loading...</p>}
   if (error) {return <p>Error loading club: {error.message}</p>};
@@ -61,6 +78,9 @@ const ClubPage: React.FC = () => {
             {addUser.error? (<p>User not found</p>) : (<></>)}
           </form>
           )}
+            <button onClick={handleLeaveClub} disabled={removing}>
+            {removing ? 'Leaving...' : 'Leave Club'}</button>
+            {removeError && <p className="error-message">Error: {removeError.message}</p>}
       </section>
       <section>
         <h3>Discussions</h3>

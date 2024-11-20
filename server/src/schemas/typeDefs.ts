@@ -70,6 +70,7 @@ type Mutation {
     updateProgress(bookId: ID!, progress: Int!): Book
     addUserToGroup(username: String!, groupId: ID!): Group
     bookSearch(string: String!): [Book]
+    removeUserFromGroup(groupId: ID!): Group
 }
 
 

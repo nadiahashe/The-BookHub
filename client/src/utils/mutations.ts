@@ -149,3 +149,17 @@ export const GOOGLE_BOOK_SEARCH=gql`
       }
     }
 `
+// Removes a user from a group. Requires username and groupId. Returns updated group object.
+export const REMOVE_USER_FROM_GROUP = gql`
+  mutation RemoveUserFromGroup($groupId: ID!) {
+    removeUserFromGroup(groupId: $groupId) {
+      _id
+      groupname
+      description
+      users {
+        _id
+        username
+      }
+    }
+  }
+`;
