@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
-import Auth from '../utils/auth.js'
+// import Auth from '../utils/auth.js'
 import { Link } from 'react-router-dom';
 import './css/Profile.css';
 import placeholder from '../assets/placeholderpic.png'
@@ -36,7 +36,7 @@ const ProfilePage: React.FC = () => {
 
   return (
     <div className="profile-page">
-      <button className="logout-button" onClick={() => { Auth.logout() }}>Logout</button>
+      {/* <button className="logout-button" onClick={() => { Auth.logout() }}>Logout</button> */}
 
       <div className="profile-container">
 
@@ -80,7 +80,7 @@ const ProfilePage: React.FC = () => {
           <ul>
             {user?.books.slice(0,5).map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
               <li key={book._id}>
-                <p>{book.title} by {book.authors.join(', ') || "unknown"}</p>
+                <Link to={`/book/${book._id}`}><p>{book.title} by {book.authors.join(', ') || "unknown"}</p></Link>
                 <img 
                   src={book.image} 
                   alt={`Cover for ${book.title}`} 
@@ -106,15 +106,15 @@ const ProfilePage: React.FC = () => {
           <ul>
             {user?.groups.map((group: { _id: string; description: string; groupname: string }) => (
               <li key={group._id}>
-                <p>{group.groupname}</p>
+                <Link to={`/club/${group._id}`}><p>{group.groupname}</p></Link>
                 <p>{group.description}</p>
               </li>
             ))}
           </ul>
-          {/* <div className="mt-auto">
-        <span style={{marginRight:'2%', marginLeft:'3%'}}>For new clubs, search</span>
-        <Link to="/clubSearch" className='btn here-button'>Here</Link>
-      </div> */}
+          <div className="mt-auto">
+        <span >Add a club </span>
+        <Link to="/createClub" className='btn here-button'>Here</Link>
+      </div>
         </div>
       </div>
     </div>
