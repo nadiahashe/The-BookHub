@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import { GET_CLUB, GET_ME } from '../utils/queries';
+import { GET_CLUB } from '../utils/queries';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { ADD_USER_TO_GROUP, REMOVE_USER_FROM_GROUP } from '../utils/mutations';
 
@@ -10,7 +10,6 @@ const ClubPage: React.FC = () => {
 
   const {id}=useParams()
   const { data, loading, error } = useQuery(GET_CLUB, { variables: { clubId: id } });
-  const { data: userData } = useQuery(GET_ME);
   const navigate = useNavigate()
   const [newMemberSwitch, setNewMemberSwitch] = useState(false)
   const [newMember, setNewMember] = useState('')
