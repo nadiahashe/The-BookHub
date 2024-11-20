@@ -2,7 +2,7 @@
 
 import { Schema, Document, Types } from "mongoose";
 
-interface IReview extends Document {
+export interface IReview extends Document {
     content: string;
     username: string;
     shared: boolean;

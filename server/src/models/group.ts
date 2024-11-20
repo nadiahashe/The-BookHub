@@ -2,7 +2,7 @@
 
 import { Schema, model, Document, ObjectId } from "mongoose";
 
-interface IGroup extends Document {
+export interface IGroup extends Document {
     groupname: string;
     users: ObjectId[];
     discussions: ObjectId[];

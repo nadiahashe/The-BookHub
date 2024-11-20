@@ -14,6 +14,8 @@ export default defineConfig({
       framework: "react",
       bundler: "vite",
     },
-    specPattern: "cypress/component/**/*.{ts,tsx}"
+    specPattern: "cypress/component/**/*.cy.{ts,tsx}",
   },
+  viewportWidth: 1280, // Set the desired viewport width
+  viewportHeight: 720, // Set the desired viewport height
 });
