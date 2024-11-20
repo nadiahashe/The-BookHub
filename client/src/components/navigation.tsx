@@ -19,21 +19,27 @@ const Navbar: React.FC = () => {
     },[])
 
 
-        return (<>
-            {loginCheck? (
-                <header className="header-navbar">
-                    <div className="container d-flex justify-content-start">
-                        <img src={logo} alt="Logo" className="logo" />
-                        <h1 className="header-text">The Book Hub</h1>
-                    </div>
-                    <ul className="navbar">
-                        <NavLink to="/profile" className="cta-button btn btn-primary">My Profile</NavLink>
-                        <NavLink to="/bookSearch" className="cta-button btn btn-primary">Search Books</NavLink>
-                        <NavLink to="" onClick={()=>{Auth.logout()}} className="cta-button btn btn-primary btn-logout">Logout</NavLink>
-                    </ul>
-                </header>) : (<></>)
-            }
-        </>)
+    return (
+        <>
+          {loginCheck ? (
+            <header id='nav-header' className="header-navbar">
+              <div className="container-nav">
+                <img src={logo} alt="Logo" className="logo" />
+                <h1 className="header-text">The Book Hub</h1>
+              </div>
+              <ul className="navbar">
+                <li><NavLink to="/profile">Profile</NavLink></li>
+                <li><NavLink to="/library">Library</NavLink></li>
+                <li><NavLink to="/bookSearch">Search Books</NavLink></li>
+                <li><NavLink to="" onClick={() => { Auth.logout() }}>Logout</NavLink></li>
+              </ul>
+            </header>
+          ) : (
+            <></>
+          )}
+        </>
+      );
+      
 }
 
 export default Navbar

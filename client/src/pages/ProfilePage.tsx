@@ -7,7 +7,7 @@ import './css/Profile.css';
 import placeholder from '../assets/placeholderpic.png'
 import { CiCirclePlus } from "react-icons/ci";
 import ProfilePicEditor from './ProfilePicEditor.js';
-import { CiCamera } from "react-icons/ci";
+// import { CiCamera } from "react-icons/ci";
 import { Modal } from 'react-bootstrap';
 import { GoBookmark } from "react-icons/go";
 
@@ -15,7 +15,9 @@ import { GoBookmark } from "react-icons/go";
 
 const ProfilePage: React.FC = () => {
   // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
-  const { data, loading, error } = useQuery(GET_ME);
+  const { data, loading, error } = useQuery(GET_ME, {fetchPolicy:'cache-and-network'});
+
+  console.log(data);
 
   const [profilePic, setProfilePic] = useState<string>(placeholder); // Add state for profile picture
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -43,17 +45,23 @@ const ProfilePage: React.FC = () => {
       <div className="profile-container">
 
         <div className="welcome-header">
+        {/* <button
+            className="edit-button"
+            onClick={() => setIsEditing(true)} 
+          >
+            <CiCamera />
+          </button> */}
           <img
             src={profilePic}
             alt="Profile"
             className="background-img"
           />
-          <button
+          {/* <button
             className="edit-button"
             onClick={() => setIsEditing(true)} 
           >
             <CiCamera />
-          </button>
+          </button> */}
           <h1>Welcome, {user?.username}</h1>
         </div>
 
