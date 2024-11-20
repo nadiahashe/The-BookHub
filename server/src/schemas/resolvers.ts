@@ -112,6 +112,9 @@ const resolvers = {
         },
         // create group: arg groupname, leader, description, return group object; updates group array of "leader"
         createGroup: async (_parent: any, { groupname, description }: any, context: any) => {
+            if (await Group.findOne({ groupname })) {
+                throw new Error("A group with this name already exists.");
+            }
             const newGroup = await Group.create({ groupname, users: [context.user._id], description });
             await User.findByIdAndUpdate(context.user._id, { $addToSet: { groups: newGroup._id } });
             return newGroup;
@@ -138,25 +141,30 @@ const resolvers = {
             }
             else {throw new Error("User not found")}
         },
-        // Remove a user from a group: arg username, groupId, return updated group object
         removeUserFromGroup: async (_parent: any, { groupId }: any, context: any) => {
             if (!context.user) {
                 throw new Error("You need to be logged in!");
             }
-
-        // Ensure the group exists
-        const group = await Group.findById(groupId);
+        
+            // Ensure the group exists
+            const group = await Group.findById(groupId);
             if (!group) {
                 throw new Error("Group not found!");
-    }
-
-         // Remove the user from the group's user list
-        group.users = group.users.filter(user => String(user) !== String(context.user._id));
+            }
+        
+            // Remove the user from the group's user list
+            group.users = group.users.filter(user => String(user) !== String(context.user._id));
             await group.save();
-
-         // Remove the group from the user's groups list
+        
+            // Remove the group from the user's groups list
             await User.findByIdAndUpdate(context.user._id, { $pull: { groups: groupId } });
-
+        
+            // Check if the group has no remaining users
+            if (group.users.length === 0) {
+                await Group.findByIdAndDelete(groupId);
+                console.log(`Group ${group.groupname} has been deleted as it has no users.`);
+            }
+        
             return group;
         },
         // update book progress
