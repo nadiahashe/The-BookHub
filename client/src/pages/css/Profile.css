@@ -41,7 +41,7 @@ html, body {
     min-height: 95vh; 
     background-color: #f6f1eb; 
     border-radius: 15px; 
-    box-shadow: 0 4px 10px white; 
+    /* box-shadow: 0 4px 10px white;  */
     padding: 20px; 
     overflow-y: auto; 
 }
@@ -98,25 +98,26 @@ html, body {
   }
 
 
-  .edit-button {
+  /* .edit-button {
     background-color: #bda98e;
     color: white;
     border: none;
-    border-radius: 50%;  /* Makes the button circular */
+    border-radius: 50%;  
     cursor: pointer;
-    font-size: 20px;  /* Adjust icon size if needed */
+    font-size: 20px;  
     width: 40px;
     height: 40px;
     display: flex;
-    justify-content: center;  /* Centers the icon horizontally */
-    align-items: center;      /* Centers the icon vertically */
-  }
+    justify-content: center;  
+    align-items: center;      
+    margin-top: 75px;
+  } */
   
   
   
-  .edit-button:hover {
+  /* .edit-button:hover {
     background-color: #0056b3;
-  }
+  } */
 
   #club-hover::after {
     content: "";
