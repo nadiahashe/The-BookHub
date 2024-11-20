@@ -4,6 +4,7 @@ import { gql } from "@apollo/client";
 export const GET_ME=gql`
   query Me {
     me {
+      username
       books {
         _id
         authors
@@ -23,8 +24,8 @@ export const GET_ME=gql`
 
 // Get one book by _id, including the nested review. Requires book's _id as argument.
 export const GET_BOOK=gql`
-  query GetBook($id: ID!) {
-    getBook(_id: $id) {
+  query GetBook($getBookId: ID!) {
+    getBook(getBookId: $getBookId) {
       _id
       authors
       bookId
@@ -48,7 +49,6 @@ export const GET_BOOK_REVIEWS=gql`
       review {
         content
         username
-        reviewId
       }
     }
   }
@@ -56,7 +56,7 @@ export const GET_BOOK_REVIEWS=gql`
 // Gets user information by ID. Used for Profile page.
 export const GET_USER = gql`
   query getUser($getUserId: ID!) {
-    getUser(id: $getUserId) {
+    getUser(getUserid: $getUserId) {
       _id
       username
       email
@@ -80,7 +80,7 @@ export const GET_USER = gql`
 // Gets club details by club ID. Used for Club page.
 export const GET_CLUB = gql`
   query getClub($clubId: ID!) {
-    getClub(id: $clubId) {
+    getClub(clubId: $clubId) {
       _id
       groupname
       description

@@ -1,7 +1,7 @@
 // discussions will contains a book and an array of comments
 // comments will be a subdocument that contains an id, content, and a username string
 
-import { Schema, model, Document, Types } from "mongoose";
+import { Schema, model, Document } from "mongoose";
 
 export interface IComment extends Document {
     commentId: Schema.Types.ObjectId;
@@ -20,8 +20,7 @@ export interface IDiscussion extends Document {
 const commentSchema =  new Schema<IComment>(
     {
         commentId: {
-            type: Schema.Types.ObjectId,
-            default: ()=> new Types.ObjectId()
+            type: Date,
         },
         content: {
             type: String,

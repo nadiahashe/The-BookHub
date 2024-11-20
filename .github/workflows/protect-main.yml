@@ -15,5 +15,5 @@ jobs:
       - name: branch check
         if: github.head_ref != 'develop'
         run: |
-          echo: "Only develop can merge into main"
+          echo "Only develop can merge into main"
           exit 1

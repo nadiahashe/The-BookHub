@@ -1,0 +1,134 @@
+html, body {
+    height: 100%; /* Ensure the parent elements have full height */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+}
+
+
+.profile-page {
+    background-color: #B7B7A4;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logout-button {
+    position: fixed; 
+    top: 10px; 
+    right: 10px; 
+    padding: 10px 15px;
+    background-color: #bda98e; 
+    color: white; 
+    border: 2px solid #786b5a; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    z-index: 1000;
+    width: 90px;
+}
+
+.logout-button:hover {
+    background-color: #958671; 
+}
+
+
+.profile-container {
+    width: 90%; 
+    max-width: 1600px; 
+    min-height: 95vh; 
+    background-color: #f6f1eb; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 10px white; 
+    padding: 20px; 
+    overflow-y: auto; 
+}
+
+.welcome-header {
+    position: relative;
+    height: 20%; 
+    display: flex;
+    margin-bottom: 5%;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .welcome-header h1 {
+    font-size: 3rem;
+    z-index: 1; 
+    margin: 0;
+    position: relative;
+    margin-left: 5%;
+  }
+
+.background-img {
+    position: relative;
+    width: 15%;
+    height: 15%;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+
+  .custom-card {
+    min-height: 400px; /* Adjust height as needed */
+  }
+  
+  .here-button {
+    background-color: #bda98e; /* Custom color */
+    color: white;
+    border: none;
+  }
+  
+  .here-button:hover {
+    background-color: #958671; /* Darker shade on hover */
+  }
+
+  .icon-styles {
+    font-size: 20px; 
+    color: rgb(131, 114, 92);  
+    transition: color 0.3s ease; 
+  }
+  
+  .icon-style:hover {
+    color: rgba(165, 42, 42, 0.213); 
+    cursor: pointer; 
+  }
+
+
+  .edit-button {
+    background-color: #bda98e;
+    color: white;
+    border: none;
+    border-radius: 50%;  /* Makes the button circular */
+    cursor: pointer;
+    font-size: 20px;  /* Adjust icon size if needed */
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;  /* Centers the icon horizontally */
+    align-items: center;      /* Centers the icon vertically */
+  }
+  
+  
+  
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+@media (max-width: 768px) {
+    .profile-container {
+        width: 95%;
+    }
+    .welcome-header h1 {
+        font-size: 2rem;
+    }
+    .background-img {
+        width: 20%;
+        height: 20%;
+    }
+    
+}

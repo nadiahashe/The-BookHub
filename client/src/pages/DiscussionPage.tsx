@@ -10,8 +10,6 @@ const DiscussionPage: React.FC = ()=> {
     const {id} = useParams()
     const {data, loading} = useQuery(GET_DISCUSSION, { variables: {discussionId: id}})
     const [createComment] = useMutation(CREATE_COMMENT, { refetchQueries: [GET_DISCUSSION]})
-
-    if (loading) {return <p>Loading...</p>}
     
     const [newComment, setNewComment] = useState("")
 
@@ -29,16 +27,18 @@ const DiscussionPage: React.FC = ()=> {
 
     }
 
+    if (loading) {return <p>Loading...</p>}
+
     return (
     <>
         <div className='bookData'>
-            <img src={data.getDiscussion.image} alt={`Cover for ${data.getDiscussion.title}`}/>
-            <h2>{data.getDiscussion.title}</h2>
-            <h3>By: {data.getDiscussion.authors.join(", ")}</h3>
+            <img src={data?.getDiscussion.image} alt={`Cover for ${data?.getDiscussion.title}`}/>
+            <h2>{data?.getDiscussion.title}</h2>
+            <h3>By: {data?.getDiscussion?.authors?.join(", ")}</h3>
         </div>
         <ul className="commentsContainer">
-            {data.getDiscussion.comments.sort((a: any,b: any) => a.commentId - b.commentId).map((comment: any)=>(
-            <li>
+            {data?.getDiscussion?.comments?.map((comment: any)=>(
+            <li key={comment.commentId}>
                 <p className="commentUser">{comment.username}</p>
                 <p className="commentContent">{comment.content}</p>
             </li>            

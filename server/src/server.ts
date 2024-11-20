@@ -6,6 +6,8 @@ import { typeDefs, resolvers } from './schemas/index.js';
 import db from './config/connection.js';
 import { authenticateToken } from './services/auth.js';
 
+import path from 'node:path';
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
@@ -23,10 +25,10 @@ const startApolloServer = async () => {
 
   // if we're in production, serve client/dist as static assets
   if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('../client/dist'));
+    app.use(express.static(path.join(process.cwd(), '../client/dist')));
 
     app.get('*', (_req, res) => {
-      res.sendFile('../client/dist/index.html');
+      res.sendFile(path.join(process.cwd(), '../client/dist/index.html'));
     });
   }
   

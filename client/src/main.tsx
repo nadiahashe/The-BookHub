@@ -15,6 +15,7 @@ import ProfilePage from './pages/ProfilePage.js'
 import CreateDiscussionPage from './pages/CreateDiscussionPage.js'
 import BookSearchPage from './pages/BookSearch.js'
 import CreateClubPage from './pages/CreateClub.js'
+import LibraryPage from './pages/Library.js'
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/createClub",
         element: <CreateClubPage />
+      },
+      {
+        path: "/library",
+        element: <LibraryPage />
       }
     ],
   },
