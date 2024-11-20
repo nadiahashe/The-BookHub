@@ -1,4 +1,4 @@
-// cypress/component/BookPage.cy.tsx
+
 import React from 'react';
 import { mount } from 'cypress/react18';
 import { MockedProvider } from '@apollo/client/testing';
