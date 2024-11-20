@@ -1,7 +1,6 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "composite": true,
     /* Modules */
     "rootDir": "src" /* Specify the root folder within your source files. */,
 
