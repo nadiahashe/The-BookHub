@@ -3,13 +3,13 @@
 
 import { Schema, model, Document } from "mongoose";
 
-interface IComment extends Document {
-    commentId: Date;
+export interface IComment extends Document {
+    commentId: Schema.Types.ObjectId;
     content: String;
     username: String;
 }
 
-interface IDiscussion extends Document {
+export interface IDiscussion extends Document {
     title: string;
     authors: string[];
     image: string;
