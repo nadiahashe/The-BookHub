@@ -1,18 +1,3 @@
-// Queries:
-
-// read single group: arg name, return group object
-// read single discussion: arg discussion id, return discussion object
-
-
-// Mutations:
-
-// create group: arg groupname, leader, return group object; updates group array of "leader"
-// create discussion: arg book, return discussion object; updates group's discussion array
-// create comment: arg book, return discussion object; updates discussion's comment array
-
-// update group (add member): arg groupname, username, return group object; updates user's group array
-
-// import { Discussion, Group } from "../models/index.js"
 // Imports
 import { Book, User, Discussion, Group } from "../models/index.js";
 import { signToken } from "../services/auth.js";
@@ -162,7 +147,6 @@ const resolvers = {
             // Check if the group has no remaining users
             if (group.users.length === 0) {
                 await Group.findByIdAndDelete(groupId);
-                console.log(`Group ${group.groupname} has been deleted as it has no users.`);
             }
         
             return group;
