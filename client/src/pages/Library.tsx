@@ -4,7 +4,7 @@ import { GET_ME } from '../utils/queries';
 import { CiCirclePlus } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import './css/Library.css';
-
+import LibraryPic from '../assets/librarypic.png';
 
 
 
@@ -20,8 +20,10 @@ const LibraryPage: React.FC = () => {
     
     return (
       <div className='library-page'>
+        <img src={LibraryPic} alt="book" className="library-background" />
+        <div className='library-container'>
         <div className="container mt-5">
-          <h1 style={{fontFamily: 'Open Sauce Sans'}} className="text-center mb-4">My Library</h1>
+          <h1 style={{fontFamily: 'Open Sauce Sans', fontSize:'50px'}} className="text-center mb-4">My Library</h1>
           <div className="row">
             {user?.books && user.books.length > 0 ? (
               user.books.map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
@@ -71,6 +73,7 @@ const LibraryPage: React.FC = () => {
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     );

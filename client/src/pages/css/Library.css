@@ -15,3 +15,34 @@ html, body {
         cursor: pointer; 
       }
       
+      .library-page {
+        position: relative;
+        width: 100%;
+        height: 100vh; 
+        display: flex;
+        justify-content: center; 
+        align-items: flex-start; 
+        overflow-y: auto; 
+      }
+      
+      .library-container {
+          width: 80%;
+          max-width: 1600px;
+          height: 85%; /* Fixed height based on the viewport height */
+          background-color: #faefe0;
+          border-radius: 15px;
+          padding: 20px;
+          overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
+          position: relative;
+          margin-top: 30px;
+      }
+
+      .library-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        object-fit: cover; 
+        opacity: 0.8; 
+      }
