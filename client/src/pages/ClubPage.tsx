@@ -9,13 +9,18 @@ import { Button, Card, Collapse } from 'react-bootstrap';
 import Memberpic from '../assets/members.png'
 import NewMember from '../assets/new-member.png'
 import Discussions from '../assets/discussions.png'
+import { CiCirclePlus } from "react-icons/ci";
+
 
 
 
 const ClubPage: React.FC = () => {
 
   const [open, setOpen] = useState(false);
+  const [openDiscussions, setOpenDiscussions] = useState(false); // For discussions
 
+  const toggleMembers = () => setOpen(!open);
+  const toggleDiscussions = () => setOpenDiscussions(!openDiscussions);
 
   const {id}=useParams()
   const { data, loading, error } = useQuery(GET_CLUB, { variables: { clubId: id } });
@@ -82,7 +87,7 @@ const ClubPage: React.FC = () => {
                 <Card.Img variant="top" src={Memberpic} alt={'members'} />
                 <Card.Body>
                   {/* Button to toggle members */}
-                  <Button onClick={() => setOpen(!open)} aria-expanded={open ? 'true' : 'false'} className='card-btn'>
+                  <Button onClick={toggleMembers} aria-expanded={open ? 'true' : 'false'} className="card-btn">
                     {open ? 'Hide Members' : 'Show Members'}
                   </Button>
 
@@ -133,32 +138,46 @@ const ClubPage: React.FC = () => {
           <Card.Img variant='top' src={Discussions} alt={'discussions'} />
           <Card.Body>
           {data?.getClub.discussions.map((discussion: any)=>(
-            <li key={discussion._id}>
-               <Button 
-                onClick={() => handleNavigation(discussion._id)} 
-                className='card-btn' 
-              >
-                {discussion.title} by {discussion.authors.join(", ") || "unknown"}
-              </Button>
+            <li style={{listStyle:'none'}} key={discussion._id}>
+               <Button onClick={toggleDiscussions} aria-expanded={openDiscussions ? 'true' : 'false'} className="card-btn">
+                    {openDiscussions ? 'Hide Discussions' : 'Show Discussions'}
+                  </Button>
+                  <Collapse in={openDiscussions}>
+                    <div>
+                      {data?.getClub.discussions.map((discussion: any) => (
+                        <ul className='disc' key={discussion._id}>
+                          <li onClick={() => handleNavigation(discussion._id)} >
+                            {discussion.title} by {discussion.authors.join(', ') || 'unknown'}
+                          </li>
+                        </ul>
+                      ))}
+                    </div>
+                  </Collapse>
             </li>
           ))}
         
-        <Button className='card-btn' onClick={newDiscussionHandler}>Create new discussion</Button>
+        <div className="create-discussion" onClick={newDiscussionHandler}><span><CiCirclePlus />
+        </span>Create new discussion</div>
         </Card.Body>
         </Card>
         </div>
         </div>
         
         
-      
-      <button className='leave-btn' onClick={handleLeaveClub} disabled={removing}>
-            {removing ? 'Leaving...' : 'Leave Club'}</button>
-            {removeError && <p className="error-message">Error: {removeError.message}</p>}
+        
+  <Button className="leave-btn" onClick={handleLeaveClub} disabled={removing}><span>Done Reading? You Can Leave The Club </span>
+    {removing ? 'Leaving...' : 'here'}
+  </Button>
+  {removeError && <p className="error-message">Error: {removeError.message}</p>}
+</div>
+
     </div>
     </div>
     
-    </div>
+    
   );
 };
 
 export default ClubPage;
+
+

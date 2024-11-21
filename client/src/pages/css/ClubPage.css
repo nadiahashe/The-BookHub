@@ -24,6 +24,8 @@
     overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
     position: relative;
     margin-top: 20px;
+    /* display: flex;
+    flex-direction: column; */
   }
   
   
@@ -64,12 +66,61 @@
   }
 
   .leave-btn {
-    position: absolute;  /* Position the button absolutely inside the container */
-    bottom: 0;           /* Place the button at the bottom */
-    left: 50%;           /* Center the button horizontally */
-    transform: translateX(-50%); /* Offset by 50% to achieve exact centering */
+    position: absolute;
+    bottom: 0; 
+    left: 50%;
+    transform: translateX(-50%); 
     border-radius: none;
+    background-color: #d0ba9e;
+    border: none;
+    color: black;
+    width: 40%;
+    font-family: 'Open Sauce Sans'
   }
 
+
+  
+ 
+
+  .create-discussion {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .create-discussion span {
+    margin-right: 8px;
+  }
+  
+  .create-discussion::after {
+    content: "";
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 0%;
+    height: 2px; 
+    background-color: black; 
+    transition: width 0.4s ease-in-out; 
+  }
+  
+  .create-discussion:hover::after {
+    width: 100%; 
+  }
+  
+  .create-discussion:hover {
+    color: #000; 
+  }
+
+  .disc {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  /* .disc:hover {
+    transform: scale(1.1);
+  }
+   */
 
  
