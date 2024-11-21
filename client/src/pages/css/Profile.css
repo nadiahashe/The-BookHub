@@ -2,6 +2,7 @@ html, body {
     height: 100%; /* Ensure the parent elements have full height */
     margin: 0; /* Remove default margin */
     padding: 0; /* Remove default padding */
+    overflow-y: scroll;
 }
 
 
@@ -94,6 +95,11 @@ html, body {
   .icon-style:hover {
     color: rgba(165, 42, 42, 0.213); 
     cursor: pointer; 
+  }
+
+  .book-cover {
+    width: 80px;
+    margin-top: 10px;
   }
 
 

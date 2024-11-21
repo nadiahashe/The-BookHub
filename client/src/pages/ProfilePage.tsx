@@ -87,16 +87,14 @@ const ProfilePage: React.FC = () => {
           <h2 className="card-title">My Books | <span style={{fontSize:'13px'}}>View all Books <Link to="/library">
                       <CiCirclePlus className='icon-styles' />
                     </Link></span></h2>
-          <ul>
-            {user?.books.slice(0,5).map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
-              <li key={book._id}>
-                <Link to={`/book/${book._id}`}><p>{book.title} by {book.authors.join(', ') || "unknown"}</p></Link>
-                <img 
+          <ul style={{listStyle:'none'}} className="d-flex flex-wrap justify-content-between">
+            {user?.books.slice(0,6).map((book: { _id: string; title: string; image: string }) => (
+              <li key={book._id} style={{ flex: '0 0 32%' }}>
+                <Link to={`/book/${book._id}`}><img 
                   src={book.image} 
                   alt={`Cover for ${book.title}`} 
-                  className="img-fluid mb-2"
-                />
-                <p>Progress: {book.progress || 0}%</p>
+                  className="book-cover"
+                /></Link>
               </li>
             ))}
           </ul>
