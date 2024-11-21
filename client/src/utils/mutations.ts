@@ -126,18 +126,20 @@ export const CREATE_COMMENT = gql`
 
 // Adds user to group, updates group user array
 export const ADD_USER_TO_GROUP = gql`
-  mutation AddUserToGroup($username: String!, $groupId: ID!) {
-    addUserToGroup(username: $username, groupId: $groupId) {
+  mutation AddUserToGroup($groupId: ID!, $accepted: Boolean!) {
+    addUserToGroup(groupId: $groupId, accepted: $accepted) {
       _id
-      groupname
-      description
-      users {
-        _id
-        username
-      }
+      username
     }
   }
 `
+
+export const INVITE_USER_TO_GROUP = gql`
+  mutation InviteUserToGroup($username: String!, $groupId: ID!) {
+    inviteUserToGroup(username: $username, groupId: $groupId)
+  }
+`
+
 // Get an array of book objects from google book search. Requires search string as argument.
 export const GOOGLE_BOOK_SEARCH=gql`
     mutation BookSearch($string: String!) {

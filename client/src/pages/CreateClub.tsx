@@ -53,7 +53,7 @@ const CreateClubPage: React.FC = () => {
 
                                 <div className="form-group mb-3">
                                     <label htmlFor="groupname" className="form-label fw-bold">
-                                        Group Name:
+                                        Club Name:
                                     </label>
                                     <input
                                         id="groupname"

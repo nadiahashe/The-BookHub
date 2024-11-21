@@ -8,6 +8,7 @@ export interface IUser extends Document {
     password: string;
     books: ObjectId[];
     groups: ObjectId[];
+    invitations: ObjectId[];
 }
 
 const userSchema = new Schema<IUser>(
@@ -33,6 +34,12 @@ const userSchema = new Schema<IUser>(
             }
         ],
         groups: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Group'
+            }
+        ],
+        invitations: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Group'

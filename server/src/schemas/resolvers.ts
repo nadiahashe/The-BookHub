@@ -8,7 +8,7 @@ const resolvers = {
         // read logged-in user's books: arg (or context) username, return book array
         me: async (_parent: any, _arg: any, context: any) => {
             if (context.user) {
-                return await User.findOne({ _id: context.user._id }).populate(['books', 'groups']);
+                return await User.findOne({ _id: context.user._id }).populate(['books', 'groups', 'invitations']);
             } else {
                 throw new Error("Could not find user");
             }
@@ -117,36 +117,53 @@ const resolvers = {
             return discussion;
         },
         // update group (add member): arg group _id, username, return group object; updates user's group array
-        addUserToGroup: async (_parent: any, { username, groupId }: any) => {
-            const user = await User.findOne({username})
-            if (user) {
-                const group = await Group.findByIdAndUpdate(groupId, { $addToSet: { users: user._id } }, {new: true}).populate('users');
-                await User.findByIdAndUpdate(user._id, { $addToSet: { groups: groupId } });
-                return group
+        addUserToGroup: async (_parent: any, { groupId, accepted }: any, context: any) => {
+            if (!accepted) {
+                const user = await User.findByIdAndUpdate(context.user._id, {$pull: { invitations: groupId}}, {new:true})
+                if (!user) {throw new Error("User not found")}
+                return user
             }
-            else {throw new Error("User not found")}
+            else {}
+                const user = await User.findByIdAndUpdate(context.user._id, {$pull: { invitations: groupId}, $addToSet: { groups: groupId}}, {new:true})
+                if (!user) {throw new Error("User not found")}
+                await Group.findByIdAndUpdate(groupId, { $addToSet: { users: user._id } }, {new: true})
+                return user
+        },
+        // invite user to group. Arg username and _id of group, updates user's invitations array to include group _id if it's not there already.
+        inviteUserToGroup: async (_parent: any, { username, groupId }: any) => {
+            const user = await User.findOne({username})
+            if (!user) {throw new Error("User not found")}
+            else if (user?.groups.includes(groupId)) {throw new Error ("User is already in club")}
+            else if (user?.invitations.includes(groupId)) {throw new Error("User already invited")}
+            else {
+                await User.findByIdAndUpdate(user._id, {$addToSet: { invitations: groupId}}, {new: true})
+                return "Invitation sent"
+            }
         },
         removeUserFromGroup: async (_parent: any, { groupId }: any, context: any) => {
             if (!context.user) {
                 throw new Error("You need to be logged in!");
             }
-        
-            // Ensure the group exists
-            const group = await Group.findById(groupId);
+
+            const group = await Group.findByIdAndUpdate(groupId, { $pull: {users: context.user._id}}, {new: true})
+
             if (!group) {
                 throw new Error("Group not found!");
             }
-        
-            // Remove the user from the group's user list
-            group.users = group.users.filter(user => String(user) !== String(context.user._id));
-            await group.save();
-        
+
             // Remove the group from the user's groups list
             await User.findByIdAndUpdate(context.user._id, { $pull: { groups: groupId } });
         
             // Check if the group has no remaining users
             if (group.users.length === 0) {
                 await Group.findByIdAndDelete(groupId);
+
+                const invitees = await User.find({invitations: groupId})
+                if (invitees) {
+                    for (const invitee of invitees) {
+                        await User.findByIdAndUpdate(invitee._id, { $pull: { invitations: groupId}})
+                    }
+                }
             }
         
             return group;
