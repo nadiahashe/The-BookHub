@@ -96,6 +96,11 @@ html, body {
     cursor: pointer; 
   }
 
+  .book-cover {
+    width: 80px;
+    margin-top: 10px;
+  }
+
 
   /* .edit-button {
     background-color: #bda98e;
