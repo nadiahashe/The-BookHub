@@ -30,7 +30,7 @@ const LibraryPage: React.FC = () => {
                 <div className="col-12 col-sm-6 col-md-4 col-lg-2 mb-4" key={book._id}>
                   <div className="card h-100 shadow-sm">
                     {/* Book Cover Image */}
-                    <img
+                    <Link to={`/book/${book._id}`}><img
                       src={book.image}
                       alt={`Cover for ${book.title}`}
                       className="card-img-top"
@@ -39,7 +39,7 @@ const LibraryPage: React.FC = () => {
                         objectFit: 'contain',
                         width: '100%',
                       }}
-                    />
+                    /></Link>
     
                     {/* Content Below the Image */}
                     <div className="card-body d-flex flex-column justify-content text-center">

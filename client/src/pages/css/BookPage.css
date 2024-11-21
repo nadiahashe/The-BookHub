@@ -1,0 +1,111 @@
+/* .book-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
+
+
+/* Book Image Styling */
+.book-image {
+    max-width: 100%;
+    height: auto;
+    border: 3px solid black; 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease; /* Smooth zoom-in effect */
+  }
+
+  .bookData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+  }
+
+  #title-border {
+    border-left: 2px solid black;
+   
+  }
+  
+  .book-image:hover {
+    transform: scale(1.05); /* Slight zoom-in on hover */
+  }
+  
+  /* Typography Styling */
+  .book-title {
+    font-size: 50px;
+    font-weight: bold;
+    color: #333;
+    font-family: 'Open Sauce Sans'
+  }
+  
+  .book-author {
+    font-size: 15px;
+    color: #555;
+  }
+  
+  /* Section Backgrounds */
+
+
+  .thoughts-section {
+    padding: 1rem;
+    background-color: #f9f9f9; /* Light grey background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20%;
+    
+  }
+  
+  /* Form and Button Styling */
+  .form-control {
+    border-radius: 4px;
+  }
+  
+   #btn {
+    border-radius: 4px;
+    width: 50%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+  
+  .progress-btn {
+    background-color: #d0ba9e;
+    border-color: #d0ba9e;
+  }
+
+  
+  
+  /* .btn-success {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+  } */
+  
+  .thoughts-btn {
+    background-color: #d0ba9e;
+    border-color: #d0ba9e;
+    margin-top: 10px;
+  } 
+  
+  @media (max-width: 768px) {
+  #title-border {
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    border-left: none;
+  }
+
+  .btn-primary {
+    margin-bottom: 10px;
+  }
+  }
