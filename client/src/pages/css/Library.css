@@ -26,10 +26,10 @@ html, body {
       }
       
       .library-container {
-          width: 80%;
+          width: 90%;
           max-width: 1600px;
           height: 85%; /* Fixed height based on the viewport height */
-          background-color: #faefe0;
+          background-color: transparent;
           border-radius: 15px;
           padding: 20px;
           overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
