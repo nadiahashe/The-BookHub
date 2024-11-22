@@ -39,7 +39,7 @@ const LibraryPage: React.FC = () => {
             {user?.books && user.books.length > 0 ? (
               user.books.map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
                 <div className="col-12 col-sm-6 col-md-4 col-lg-2 mb-4" key={book._id}>
-                  <div className="card h-100 shadow-sm">
+                  <div className="card h-100 shadow-sm" style={{ border: '1px solid black' }}>
                     {/* Book Cover Image */}
                     <Link to={`/book/${book._id}`}><img
                       src={book.image}
