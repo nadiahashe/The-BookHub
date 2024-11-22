@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
 
 html, body {
     background-color: #faefe0;
@@ -45,4 +46,19 @@ html, body {
         height: 100vh;
         object-fit: cover; 
         opacity: 0.8; 
+      }
+
+      .remove-btn {
+        padding: 0.75rem;
+        font-size: 1rem;
+        background-color: #d0ba9e;
+        color: black;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        width: 50%;
+        font-family: 'Open Sauce Sans', 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }

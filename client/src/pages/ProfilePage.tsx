@@ -103,7 +103,7 @@ const ProfilePage: React.FC = () => {
           <h2 className="card-title">My Books | <span style={{fontSize:'13px'}}>View all Books <Link to="/library">
                       <CiCirclePlus className='icon-styles' />
                     </Link></span></h2>
-          <ul style={{listStyle:'none'}} className="d-flex flex-wrap justify-content-between">
+          <ul style={{listStyle:'none'}} className="d-flex flex-wrap ">
             {user?.books.slice(0,6).map((book: { _id: string; title: string; image: string }) => (
               <li key={book._id} style={{ flex: '0 0 32%' }}>
                 <Link to={`/book/${book._id}`}><img 

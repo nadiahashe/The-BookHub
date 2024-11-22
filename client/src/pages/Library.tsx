@@ -6,6 +6,8 @@ import { CiCirclePlus } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import './css/Library.css';
 import LibraryPic from '../assets/library2.png';
+import { CiCircleMinus } from "react-icons/ci";
+
 
 const LibraryPage: React.FC = () => {
     // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
@@ -60,12 +62,12 @@ const LibraryPage: React.FC = () => {
                         <strong>Progress:</strong> {book.progress || 0}%
                       </p>
                     </div>
-                    <button
-                        className="btn btn-danger mt-2"
+                    <div
+                        
                         onClick={() => handleRemoveBook(book._id)}
                       >
-                        Remove
-                      </button>
+                        Remove Book <CiCircleMinus className='icon-style' />
+                      </div>
                   </div>
                 </div>
               ))
@@ -74,7 +76,7 @@ const LibraryPage: React.FC = () => {
                 <p>No books found. Add some books to your library 
                   <span>
                     <Link to="/bookSearch">
-                      <CiCirclePlus className='icon-style' />
+                      <CiCirclePlus style={{fontWeight:'strong'}} className='icon-style' />
                     </Link>
                   </span>
                 </p>
