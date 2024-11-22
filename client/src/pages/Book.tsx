@@ -77,7 +77,7 @@ const BookPage: React.FC = ()=>{
     }
 
     return (
-        <div className="book-container">
+        
           <div className="container py-4">
             <div className="row align-items-center">
               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -172,7 +172,7 @@ const BookPage: React.FC = ()=>{
               </div>
             </div>
           </div>
-        </div>
+        
       );
     }      
     
