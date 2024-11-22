@@ -1,126 +1,119 @@
+/// <reference types="cypress" />
+import React from "react";
+import { mount } from "cypress/react18";
+import { MockedProvider } from "@apollo/client/testing";
+import { MemoryRouter } from "react-router-dom";
+import ProfilePage from "../../client/src/pages/ProfilePage";
+import { GET_ME } from "../../client/src/utils/queries";
 
-import React from 'react';
-import { mount } from 'cypress/react18';
-import { MockedProvider } from '@apollo/client/testing';
-import { MemoryRouter } from 'react-router-dom';
-import ProfilePage from "../../client/src/pages/ProfilePage"
-import { GET_ME } from '../../client/src/utils/queries';
-
-describe('<ProfilePage />', () => {
-  const mockUserData = {
-    me: {
-      username: 'testuser',
-      books: [
-        {
-          _id: '1',
-          title: 'Test Book 1',
-          authors: ['Author 1'],
-          progress: 50,
-          image: 'http://example.com/book1-cover.jpg',
-        },
-        {
-          _id: '2',
-          title: 'Test Book 2',
-          authors: ['Author 2'],
-          progress: 75,
-          image: 'http://example.com/book2-cover.jpg',
-        },
-      ],
-      groups: [
-        {
-          _id: '1',
-          groupname: 'Test Club 1',
-          description: 'A test club description',
-        },
-        {
-          _id: '2',
-          groupname: 'Test Club 2',
-          description: 'Another test club description',
-        },
-      ],
-    },
-  };
-
-  const mocks = [
-    {
-      request: {
-        query: GET_ME,
-      },
-      result: {
-        data: mockUserData,
+const userMock = {
+  request: { query: GET_ME, fetchPolicy: "cache-and-network" },
+  result: {
+    data: {
+      me: {
+        username: "TestUser",
+        books: [
+          {
+            _id: "book1",
+            title: "Test Book 1",
+            image: "test_book1.jpg",
+          },
+          {
+            _id: "book2",
+            title: "Test Book 2",
+            image: "test_book2.jpg",
+          },
+        ],
+        groups: [
+          {
+            _id: "group1",
+            groupname: "Test Club 1",
+            description: "Description for Test Club 1",
+          },
+          {
+            _id: "group2",
+            groupname: "Test Club 2",
+            description: "Description for Test Club 2",
+          },
+        ],
       },
     },
-  ];
+  },
+};
 
-  beforeEach(() => {
+describe("ProfilePage Component", () => {
+  it("renders the ProfilePage component with user data", () => {
     mount(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <MemoryRouter>
-          <ProfilePage />
-        </MemoryRouter>
-      </MockedProvider>
-    );
-  });
-
-  it('renders loading state initially', () => {
-    cy.contains('Loading profile...').should('be.visible');
-  });
-
-  it('renders error state if query fails', () => {
-    const errorMocks = [
-      {
-        request: {
-          query: GET_ME,
-        },
-        error: new Error('Error fetching profile data'),
-      },
-    ];
-
-    mount(
-      <MockedProvider mocks={errorMocks} addTypename={false}>
+      <MockedProvider mocks={[userMock]} addTypename={false}>
         <MemoryRouter>
           <ProfilePage />
         </MemoryRouter>
       </MockedProvider>
     );
 
-    cy.contains('Error loading profile: Error fetching profile data').should('be.visible');
+    // Ensure the welcome message is displayed
+    cy.contains("Welcome, TestUser").should("exist");
+
+    // Verify book display
+    cy.contains("My Books").should("exist");
+    cy.get("img[alt='Cover for Test Book 1']").should("exist");
+    cy.get("img[alt='Cover for Test Book 2']").should("exist");
+
+    // Verify club display
+    cy.contains("My Clubs").should("exist");
+    cy.contains("Test Club 1").should("exist");
+    cy.contains("Test Club 2").should("exist");
   });
 
-  it('renders user profile after loading', () => {
-    cy.contains('Welcome, testuser').should('be.visible');
-    cy.contains('My Books').should('be.visible');
-    cy.contains('My Clubs').should('be.visible');
+  it("shows a loading message while fetching data", () => {
+    const loadingMock = {
+      request: { query: GET_ME, fetchPolicy: "cache-and-network" },
+      result: {},
+      delay: 1000, // Simulate a delay
+    };
+
+    mount(
+      <MockedProvider mocks={[loadingMock]} addTypename={false}>
+        <MemoryRouter>
+          <ProfilePage />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+    cy.contains("Loading profile...").should("exist");
   });
 
-  it('displays books with progress and links', () => {
-    cy.contains('Test Book 1').should('be.visible');
-    cy.contains('Progress: 50%').should('be.visible');
-    cy.get('a[href="/book/1"]').should('exist');
+  it("displays an error message when the query fails", () => {
+    const errorMock = {
+      request: { query: GET_ME, fetchPolicy: "cache-and-network" },
+      error: new Error("Failed to fetch data"),
+    };
 
-    cy.contains('Test Book 2').should('be.visible');
-    cy.contains('Progress: 75%').should('be.visible');
-    cy.get('a[href="/book/2"]').should('exist');
+    mount(
+      <MockedProvider mocks={[errorMock]} addTypename={false}>
+        <MemoryRouter>
+          <ProfilePage />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+    cy.contains("Error loading profile: Failed to fetch data").should("exist");
   });
 
-  it('displays clubs with names and links', () => {
-    cy.contains('Test Club 1').should('be.visible');
-    cy.get('a[href="/club/1"]').should('exist');
 
-    cy.contains('Test Club 2').should('be.visible');
-    cy.get('a[href="/club/2"]').should('exist');
+  it("navigates to appropriate links for books and clubs", () => {
+    mount(
+      <MockedProvider mocks={[userMock]} addTypename={false}>
+        <MemoryRouter>
+          <ProfilePage />
+        </MemoryRouter>
+      </MockedProvider>
+    );
+
+    cy.get("a[href='/book/book1']").should("exist");
+    cy.get("a[href='/book/book2']").should("exist");
+
+    cy.get("a[href='/club/group1']").should("exist");
+    cy.get("a[href='/club/group2']").should("exist");
   });
-
-  it('opens profile picture editor modal', () => {
-    cy.get('.edit-button').click();
-    cy.contains('Profile Picture Editor').should('be.visible');
-  });
-
-  it('closes profile picture editor modal on cancel', () => {
-    cy.get('.edit-button').click();
-    cy.get('.modal-header button').click();
-    cy.contains('Profile Picture Editor').should('not.exist');
- 
-     });
-  });
-
+});

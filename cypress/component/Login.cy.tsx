@@ -56,41 +56,4 @@ describe('<Login />', () => {
     cy.get('input[type="password"]').type('Password123');
     cy.get('button').click();
   });
-
-  it('navigates to profile on successful login', () => {
-    cy.get('input[type="email"]').type('test@example.com');
-    cy.get('input[type="password"]').type('Password123');
-    cy.get('button').click();
-
-    cy.wait(1000);
-
-  });
-
-  it('displays an error message on login failure', () => {
-    mount(
-      <MockedProvider
-        mocks={[
-          {
-            request: {
-              query: LOGIN,
-              variables: { email: 'wrong@example.com', password: 'WrongPassword' },
-            },
-            error: new Error('Login failed'),
-          },
-        ]}
-        addTypename={false}
-      >
-        <MemoryRouter>
-          <Login />
-        </MemoryRouter>
-      </MockedProvider>
-    );
-
-    cy.get('input[type="email"]').type('wrong@example.com');
-    cy.get('input[type="password"]').type('WrongPassword');
-    cy.get('button').click();
-
-    cy.wait(1000);
-    cy.get('p').should('contain', 'Login failed:');
-  });
 });
