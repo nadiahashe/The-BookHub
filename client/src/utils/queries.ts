@@ -39,6 +39,7 @@ export const GET_BOOK=gql`
         content
         shared
         username
+        _id
       }
       progress
     }
@@ -53,6 +54,7 @@ export const GET_BOOK_REVIEWS=gql`
       review {
         content
         username
+        _id
       }
     }
   }

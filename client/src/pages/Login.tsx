@@ -48,6 +48,7 @@ const Login: React.FC<LoginFormProps> = () => {
       }
     } catch (err) {
       console.error("Login failed:", err);
+      setFormError("Invalid credentials.")
     }
   };
 
