@@ -1,5 +1,4 @@
-// cypress/component/Login.cy.tsx
-import React from 'react';
+
 import { mount } from 'cypress/react18';
 import { MemoryRouter } from 'react-router-dom';
 import { MockedProvider } from "@apollo/client/testing";

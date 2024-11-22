@@ -1,5 +1,4 @@
-/// <reference types="cypress" />
-import React from "react";
+
 import { mount } from "cypress/react18";
 import { MockedProvider } from "@apollo/client/testing";
 import { MemoryRouter } from "react-router-dom";
@@ -69,7 +68,7 @@ describe("ProfilePage Component", () => {
     const loadingMock = {
       request: { query: GET_ME, fetchPolicy: "cache-and-network" },
       result: {},
-      delay: 1000, // Simulate a delay
+      delay: 1000, 
     };
 
     mount(
