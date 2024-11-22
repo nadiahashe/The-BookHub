@@ -64,6 +64,9 @@ html, body {
         justify-content: center;
         align-items: center;
       } */
+.body {
+  overflow: hidden;
+}
 
       .book-list .book-row:nth-child(odd) {
         background-color: #f1eeef; /* Light grey background for odd rows */
@@ -80,6 +83,7 @@ html, body {
         border: none; /* Removes any border */
         outline: none; /* Removes focus outline */
         box-shadow: none; /* Removes shadow if present */
+        /* max-width: 100%; */
       }
 
       .add-book-btn {
