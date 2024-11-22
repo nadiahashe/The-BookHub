@@ -1,5 +1,4 @@
-/// <reference types="cypress" />
-import React from "react";
+
 import { mount } from "cypress/react18";
 import { MockedProvider } from "@apollo/client/testing";
 import { MemoryRouter, Route, Routes } from "react-router-dom";

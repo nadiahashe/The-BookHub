@@ -1,5 +1,4 @@
 
-import React from "react";
 import { mount } from "cypress/react18";
 import { MockedProvider } from "@apollo/client/testing";
 import { MemoryRouter } from "react-router-dom";
