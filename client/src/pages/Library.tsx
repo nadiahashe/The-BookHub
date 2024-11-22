@@ -1,23 +1,32 @@
 import React from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+import { REMOVE_BOOK } from '../utils/mutations';
 import { CiCirclePlus } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import './css/Library.css';
 import LibraryPic from '../assets/library2.png';
 
-
-
-
-
 const LibraryPage: React.FC = () => {
     // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
-    const { data } = useQuery(GET_ME);
-  
+    const { data, refetch } = useQuery(GET_ME);
+    const [removeBook] = useMutation(REMOVE_BOOK);
+
   
     const user = data?.me;
 
-    
+    const handleRemoveBook = async (bookId: string) => {
+      const confirmDelete = window.confirm("Are you sure you want to remove this book?");
+      if (!confirmDelete) return;
+  
+      try {
+        await removeBook({ variables: { bookId } });
+        refetch(); // Refresh the data after deletion
+      } catch (error) {
+        console.error("Error removing book:", error);
+      }
+    };
+
     return (
       <div className='library-page'>
         <img src={LibraryPic} alt="book" className="library-background" />
@@ -51,13 +60,12 @@ const LibraryPage: React.FC = () => {
                         <strong>Progress:</strong> {book.progress || 0}%
                       </p>
                     </div>
-    
-                    {/* Button Section */}
-                    {/* <div className="mt-auto">
-                      <a href={`/books/${book._id}`} className="btn btn-primary">
-                        View Details
-                      </a>
-                    </div> */}
+                    <button
+                        className="btn btn-danger mt-2"
+                        onClick={() => handleRemoveBook(book._id)}
+                      >
+                        Remove
+                      </button>
                   </div>
                 </div>
               ))
