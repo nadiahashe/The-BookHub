@@ -17,25 +17,26 @@ useEffect(()=>{
 
   return (
     <>
-      <header >
-        <div className="container d-flex justify-content-start">
-          <img src={logo} alt="Logo" className="logo" />
-          <h1 className="header-text">The Book Hub</h1>
-        </div>
-        <NavLink to="/login" className="cta-button btn btn-primary">LogIn</NavLink>
-      </header>
+     <header className="header-navbar">
+  <div className="container-nav">
+    <img src={logo} alt="Logo" className="logo" />
+    <h1 className="header-text">The Book Hub</h1>
+  </div>
+  <NavLink to="/login" className="cta-button btn btn-primary">LogIn</NavLink>
+</header>
+
       <section id="hero">
         <div className="hero-content container-fluid" style={{ backgroundColor: "#faefe0", height: "100vh" }}>
           <div className="row h-100">
             {/* Left Column: Text */}
-            <div className="col-md-6 d-flex ">
+            <div className="col-md-5 d-flex ">
               <div className="hero-text">
                 <h1>Where Stories Connect Us All</h1>
               </div>
             </div>
 
             {/* Right Column: Hero Image */}
-            <div className="col-md-6">
+            <div className="col-md-7">
               <img src={hero} alt="Hero" className="hero-image" />
             </div>
           </div>

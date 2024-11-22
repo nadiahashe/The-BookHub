@@ -49,7 +49,7 @@ const LibraryPage: React.FC = () => {
         <div className="library-container ">
           <div className="row">
             {/* Left Column */}
-            <div style={{backgroundColor:'#faefe0', height:'100vh'}} className="col-lg-3">
+            <div style={{backgroundColor:'#faefe0', height:'100vh'}} className="col-12 col-lg-3">
               <div className="welcome-section text-center">
                 <h2 className="mb-4" style={{ fontFamily: 'Open Sauce Sans', fontSize: '24px', marginTop:'15%' }}>
                   Welcome to Your Library, {user?.username?.split(' ')[0]}
@@ -60,9 +60,11 @@ const LibraryPage: React.FC = () => {
               </div>
             </div>
   {/* Right Column */}
-<div style={{padding:'2%', position:'relative'}} className="col-lg-9">
+<div style={{padding:'2%', position:'relative'}} className="col-12 col-lg-9">
+  <div className='add-book-btn-container'>
   <div className='add-book-btn'><Link to={"/bookSearch"}><GoPlusCircle /> Add a Book</Link></div>
-    
+    </div>
+
   <div style={{ marginTop: '5%' }} className="book-list d-flex flex-column">
     {user?.books && user.books.length > 0 ? (
       user.books.map(
