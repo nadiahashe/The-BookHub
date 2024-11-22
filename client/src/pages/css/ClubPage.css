@@ -17,15 +17,12 @@
   .club-container {
     width: 60%;
     max-width: 1600px;
-    height: 85%; /* Fixed height based on the viewport height */
+    height: 100%; /* Fixed height based on the viewport height */
     background-color: #f6f1eb;
-    border-radius: 15px;
     padding: 20px;
     overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
     position: relative;
-    margin-top: 20px;
-    /* display: flex;
-    flex-direction: column; */
+  
   }
   
   
@@ -66,8 +63,8 @@
   }
 
   .leave-btn {
-    position: absolute;
-    bottom: 0; 
+    position: relative;
+    bottom: -150px; 
     left: 50%;
     transform: translateX(-50%); 
     border-radius: none;
@@ -75,7 +72,9 @@
     border: none;
     color: black;
     width: 40%;
-    font-family: 'Open Sauce Sans'
+    font-family: 'Open Sauce Sans';
+    margin-bottom: 10px;
+    
   }
 
 

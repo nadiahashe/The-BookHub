@@ -52,7 +52,7 @@ const LibraryPage: React.FC = () => {
             <div style={{backgroundColor:'#faefe0', height:'100vh'}} className="col-lg-3">
               <div className="welcome-section text-center">
                 <h2 className="mb-4" style={{ fontFamily: 'Open Sauce Sans', fontSize: '24px', marginTop:'15%' }}>
-                  Welcome to Your Library
+                  Welcome to Your Library, {user?.username?.split(' ')[0]}
                 </h2>
                 <p className="book-count">
                   Books in Your Library: <strong>{bookCount}</strong>

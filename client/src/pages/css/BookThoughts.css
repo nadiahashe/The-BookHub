@@ -6,13 +6,13 @@
     text-align: center;       /* Center text inside elements */
     width: 90%;
     max-width: 1600px;
-    height: 85%; /* Fixed height based on the viewport height */
-    background-color: transparent;
-    border-radius: 15px;
+    height: 100%; /* Fixed height based on the viewport height */
+    background-color: white;
+    /* border-radius: 15px; */
     padding: 20px;
     overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
     position: relative;
-    margin-top: 30px;
+    /* margin-top: 30px; */
   }
   
   /* Center the content inside the center div horizontally */
@@ -29,7 +29,7 @@
   /* Styling for the review section */
   .review-section {
     width: 100%;
-    background-color: #f9f9f9;
+    background-color: #f1eeef;
     padding: 1rem;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -66,4 +66,5 @@
     justify-content: center; 
     align-items: flex-start; 
     overflow-y: auto; 
+    background-color: #faefe0;
   }
