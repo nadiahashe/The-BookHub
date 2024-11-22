@@ -73,7 +73,10 @@ type Mutation {
     removeUserFromGroup(groupId: ID!): Group
     addUserToGroup(groupId: ID!, accepted: Boolean!): User
     inviteUserToGroup(username: String!, groupId: ID!): String
+    removeBook(bookId: ID!): User
 }
+
+
 
 
 `

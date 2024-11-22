@@ -164,4 +164,19 @@ export const REMOVE_USER_FROM_GROUP = gql`
       }
     }
   }
+`// Removes a book from the library. Requires bookId. Returns updated user object.
+export const REMOVE_BOOK = gql`
+  mutation RemoveBook($bookId: ID!) {
+    removeBook(bookId: $bookId) {
+      _id
+      books {
+        _id
+        authors
+        bookId
+        image
+        title
+        progress
+      }
+    }
+  }
 `;

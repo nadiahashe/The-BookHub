@@ -190,8 +190,32 @@ const resolvers = {
                 bookId: book.id,
             }));
             return books;
-        }
+        },
+        // Remove book: arg bookId, remove from user's collection and delete from database
+        removeBook: async (_parent: any, { bookId }: any, context: any) => { // <-- Added this resolver
+            if (!context.user) { // Check if the user is logged in
+                throw new Error("You need to be logged in!");
+            }
+
+            // Remove the book from the user's books array
+            const updatedUser = await User.findByIdAndUpdate(
+                context.user._id,
+                { $pull: { books: { _id: bookId } } },
+                { new: true }
+            ).populate('books'); // Populate to return updated books list
+
+            if (!updatedUser) { // If user update failed, throw an error
+                throw new Error("Failed to remove book. User not found.");
+            }
+
+            // Optionally delete the book record from the Book collection
+            await Book.findByIdAndDelete(bookId);
+
+            return updatedUser; // Return the updated user object
+        },
+        // Other existing mutations remain unchanged...
     }
 };
+
 
 export default resolvers;
