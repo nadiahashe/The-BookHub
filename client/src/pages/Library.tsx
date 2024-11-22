@@ -43,7 +43,7 @@ const LibraryPage: React.FC = () => {
     
                     {/* Content Below the Image */}
                     <div className="card-body d-flex flex-column justify-content text-center">
-                      <h5 style={{ fontSize: '13px' }} className="card-title">{book.title}</h5>
+                    <Link to={`/book/${book._id}`}><h5 style={{ fontSize: '13px', color:'black', textDecoration:'none'}} className="card-title">{book.title}</h5></Link>
                       <p style={{ fontSize: '13px' }} className="card-text">
                         {book.authors.join(', ') || 'Unknown'}
                       </p>
