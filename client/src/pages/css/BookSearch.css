@@ -1,0 +1,62 @@
+.search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 60%; /* Full width container */
+   
+    margin: 0 auto; /* Centers it horizontally */
+    padding: 1rem;
+    background-color: #f9f9f9; /* Light background color */
+    border: 1px solid black; /* Optional: Border for visual separation */
+    border-radius: 8px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
+    /* margin-top: 5%; */
+  }
+
+  .search-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; 
+    opacity: 0.5; 
+   
+  }
+  .search-page {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    overflow-y: auto; 
+  }
+
+  .search-container {
+    width: 90%;
+    max-width: 1600px;
+    height: 85%; /* Fixed height based on the viewport height */
+    background-color: transparent;
+    border-radius: 15px;
+    padding: 20px;
+    overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
+    position: relative;
+    margin-top: 30px;
+}
+
+.book-image {
+    border: 3px solid black; 
+    display: block;
+}
+
+.review-btn {
+    margin-top: 1rem;
+    text-align: center;
+    display: block;
+}
+.review-btn a {
+    color: black;
+    
+}

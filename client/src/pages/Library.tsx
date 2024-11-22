@@ -5,7 +5,7 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { CiCirclePlus } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import './css/Library.css';
-import LibraryPic from '../assets/library2.png';
+import LibraryPic from '../assets/linenpic2.png';
 import { CiCircleMinus } from "react-icons/ci";
 
 
