@@ -47,9 +47,8 @@
         border: 1px solid #ccc; /* Optional: Border for visual separation */
         border-radius: 8px; /* Optional: Rounded corners */
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow */
-
-        
       }
+      
       .commentForm {
         display: flex;
         flex-direction: column;

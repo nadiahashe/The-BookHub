@@ -5,7 +5,9 @@ import { REMOVE_BOOK } from '../utils/mutations';
 import { CiCirclePlus } from "react-icons/ci";
 import { Link } from 'react-router-dom';
 import './css/Library.css';
-import LibraryPic from '../assets/library2.png';
+import LibraryPic from '../assets/linenpic2.png';
+import { CiCircleMinus } from "react-icons/ci";
+
 
 const LibraryPage: React.FC = () => {
     // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
@@ -37,7 +39,7 @@ const LibraryPage: React.FC = () => {
             {user?.books && user.books.length > 0 ? (
               user.books.map((book: { _id: string; title: string; authors: string[]; progress?: number, image: string }) => (
                 <div className="col-12 col-sm-6 col-md-4 col-lg-2 mb-4" key={book._id}>
-                  <div className="card h-100 shadow-sm">
+                  <div className="card h-100 shadow-sm" style={{ border: '1px solid black' }}>
                     {/* Book Cover Image */}
                     <Link to={`/book/${book._id}`}><img
                       src={book.image}
@@ -60,12 +62,12 @@ const LibraryPage: React.FC = () => {
                         <strong>Progress:</strong> {book.progress || 0}%
                       </p>
                     </div>
-                    <button
-                        className="btn btn-danger mt-2"
+                    <div
+                        
                         onClick={() => handleRemoveBook(book._id)}
                       >
-                        Remove
-                      </button>
+                        Remove Book <CiCircleMinus className='icon-style' />
+                      </div>
                   </div>
                 </div>
               ))
@@ -74,7 +76,7 @@ const LibraryPage: React.FC = () => {
                 <p>No books found. Add some books to your library 
                   <span>
                     <Link to="/bookSearch">
-                      <CiCirclePlus className='icon-style' />
+                      <CiCirclePlus style={{fontWeight:'strong'}} className='icon-style' />
                     </Link>
                   </span>
                 </p>

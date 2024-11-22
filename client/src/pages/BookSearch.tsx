@@ -3,6 +3,9 @@ import { useMutation, useQuery } from "@apollo/client"
 import { GET_ME } from "../utils/queries"
 import { GOOGLE_BOOK_SEARCH, ADD_BOOK } from "../utils/mutations"
 import { useNavigate, Link } from "react-router-dom"
+import './css/BookSearch.css'
+import BookSearchPic from '../assets/linenpic2.png';
+
 
 const BookSearchPage: React.FC = ()=> {
 
@@ -28,29 +31,42 @@ const BookSearchPage: React.FC = ()=> {
 
 
     return (
-        <div>
+        <div className="search-page">
+            <img src={BookSearchPic} alt="book" className="search-background" />
+            <div className="search-container">
+            <div className="search-form">
+
             <form onSubmit={handleSearch}>
-                <input type="text" onChange={handleChange} value={searchString}></input>
+                <input style={{marginBottom:'10px'}} type="text" onChange={handleChange} value={searchString}></input>
                 <button type="submit">Search for books</button>
             </form>
             <section>
                 {data?.bookSearch && data?.bookSearch.length<1? (<p>No results found</p>):(
-                    <ul>
+                    <ul style={{listStyleType:'none'}}>
                         {data?.bookSearch.map((book:any)=>(
                             <li key={book.bookId}>
+                                <div className="row">
+                                <div style={{marginTop:'10px'}} className="col-lg-6 col-md-6 col-sm-12">
+                                 <img className="book-image" src={book.image} alt={`Cover for ${book.title}`}/>
+                                </div>
+                                <div style={{marginTop:'10px'}}className="col-lg-6 col-md-6 col-sm-12">
+
                                 <p>{book.title} by {book.authors.join(', ') || "unknown"}</p>
-                                <img src={book.image} alt={`Cover for ${book.title}`}/>
                                 {!user.data.me.books.map((book:any)=>(book.bookId)).includes(book.bookId)? (
-                                    <button onClick={()=>{handleAdd(book.title, book.authors, book.image, book.bookId)}}>Add to collection</button>
+                                    <button className="review-btn" onClick={()=>{handleAdd(book.title, book.authors, book.image, book.bookId)}}>Add to collection</button>
                                 ):(
-                                    <button disabled>Already in collection</button>
+                                    <button className="review-btn" disabled>Already in collection</button>
                                 )}
-                                <button><Link to={`/thoughts/${book.bookId}`}>See reviews</Link></button>
+                                <button className="review-btn"><Link to={`/thoughts/${book.bookId}`}>See reviews</Link></button>
+                            </div>
+                            </div>
                             </li>
                         ))}
                     </ul>
                 )}
             </section>
+        </div>
+        </div>
         </div>
     )
 }
