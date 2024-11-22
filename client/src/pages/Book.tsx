@@ -10,7 +10,7 @@ import { AiOutlineCloseSquare } from "react-icons/ai";
 const BookPage: React.FC = ()=>{
 
     const {id} = useParams()
-    const {data, loading, error} = useQuery(GET_BOOK, {variables: {getBookId: id}})
+    const {data, loading, error} = useQuery(GET_BOOK, {variables: {getBookId: id}, onCompleted: (bookData)=>{setNewThoughts(bookData?.getBook?.review?.content || '')}})
 
     const [updateProgress] = useMutation(UPDATE_BOOK_PROGRESS, {refetchQueries: [GET_BOOK]})
 
