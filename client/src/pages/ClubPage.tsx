@@ -2,7 +2,7 @@ import React, {ChangeEvent, FormEvent, useState} from 'react';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_CLUB } from '../utils/queries';
 import {  useNavigate, useParams } from 'react-router-dom';
-import { ADD_USER_TO_GROUP, REMOVE_USER_FROM_GROUP } from '../utils/mutations';
+import { REMOVE_USER_FROM_GROUP, INVITE_USER_TO_GROUP } from '../utils/mutations';
 import './css/ClubPage.css';
 import BookPic from '../assets/background-book.png'
 import { Button, Card, Collapse } from 'react-bootstrap';
@@ -27,9 +27,9 @@ const ClubPage: React.FC = () => {
   const navigate = useNavigate()
   const [newMemberSwitch, setNewMemberSwitch] = useState(false)
   const [newMember, setNewMember] = useState('')
-  const [addUserToGroup, addUser]= useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
+  const [inviteUserToGroup, inviteUser]= useMutation(INVITE_USER_TO_GROUP, {refetchQueries: [GET_CLUB]})
   const [removeUserFromGroup, { loading: removing, error: removeError }] = useMutation(REMOVE_USER_FROM_GROUP, {
-    refetchQueries: [GET_CLUB],
+    refetchQueries: [GET_CLUB], onCompleted: ()=>(navigate('/profile')),
   })
 
   const handleNavigation = (discussionId: string) => {
@@ -51,10 +51,8 @@ const ClubPage: React.FC = () => {
 
   const handleMemberSubmit = async (event: FormEvent)=> {
     event.preventDefault()
-    if (!data?.getClub?.users.map((user: any)=>(user.username)).includes(newMember)) {
-      await addUserToGroup({variables: { username: newMember, groupId: id}})
+      await inviteUserToGroup({variables: { username: newMember, groupId: id}})
       setNewMemberSwitch(false)
-    }
   }
 
   const handleLeaveClub = async () => {
@@ -62,8 +60,6 @@ const ClubPage: React.FC = () => {
         await removeUserFromGroup({
             variables: { groupId: id },
         });
-        alert('You have successfully left the club!');
-        navigate('/profile'); // Redirect to home after leaving
     } catch (err) {
         console.error(err);
         alert('Failed to leave the club. Please try again.');
@@ -112,7 +108,7 @@ const ClubPage: React.FC = () => {
           <Card.Body>
             {/* Button to toggle form visibility */}
             {!newMemberSwitch ? (
-              <Button className='card-btn' onClick={handleMemberSwitch}>Add new member</Button>
+              <Button className='card-btn' onClick={handleMemberSwitch}>Invite new member</Button>
             ) : (
               <form onSubmit={handleMemberSubmit}>
                 <p>Enter username of new member</p>
@@ -123,8 +119,8 @@ const ClubPage: React.FC = () => {
                   onChange={handleChange} 
                   required 
                 />
-                <Button type='submit' className='card-btn'>Add member</Button>
-                {addUser.error && <p style={{ color: 'red' }}>User not found</p>}
+                <Button type='submit' className='card-btn'>Invite member</Button>
+                {inviteUser.error && <p style={{ color: 'red' }}>{`${inviteUser.error}`}</p>}
               </form>
             )}
           </Card.Body>
@@ -165,8 +161,8 @@ const ClubPage: React.FC = () => {
         
         
         
-  <Button className="leave-btn" onClick={handleLeaveClub} disabled={removing}><span>Done Reading? You Can Leave The Club </span>
-    {removing ? 'Leaving...' : 'here'}
+  <Button className="leave-btn" onClick={handleLeaveClub} disabled={removing}><span>Leave Club </span>
+    {removing ? 'Leaving...' : ''}
   </Button>
   {removeError && <p className="error-message">Error: {removeError.message}</p>}
 </div>

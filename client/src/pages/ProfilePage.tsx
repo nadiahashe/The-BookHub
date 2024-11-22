@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries';
+import { ADD_USER_TO_GROUP } from '../utils/mutations.js';
 // import Auth from '../utils/auth.js'
 import { Link } from 'react-router-dom';
 import './css/Profile.css';
@@ -8,16 +9,14 @@ import placeholder from '../assets/placeholderpic.png'
 import { CiCirclePlus } from "react-icons/ci";
 import ProfilePicEditor from './ProfilePicEditor.js';
 // import { CiCamera } from "react-icons/ci";
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import { GoBookmark } from "react-icons/go";
-
 
 
 const ProfilePage: React.FC = () => {
   // Replace 'logged-in-user-id' with the actual logged-in user's ID from context or props
   const { data, loading, error } = useQuery(GET_ME, {fetchPolicy:'cache-and-network'});
-
-  console.log(data);
+  const [addUserToGroup] = useMutation(ADD_USER_TO_GROUP, {refetchQueries: [GET_ME]})
 
   const [profilePic, setProfilePic] = useState<string>(placeholder); // Add state for profile picture
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -36,7 +35,9 @@ const ProfilePage: React.FC = () => {
     setIsEditing(false); 
   };
 
-
+  const handleInvitation = (groupId: any, accepted: boolean) => {
+    addUserToGroup({variables: {groupId, accepted}})
+  }
 
   return (
     <div className="profile-page">
@@ -76,6 +77,21 @@ const ProfilePage: React.FC = () => {
             />
           </Modal.Body>
         </Modal>
+
+{/* Pending club invitations */}
+            <div>
+              {user?.invitations && user?.invitations.length>0?(
+                <ul>
+                  {user?.invitations.map((invite: any)=>(
+                    <li key={invite._id}>
+                      <p>{`The club "${invite.groupname}" has invited you to join`}</p>
+                      <Button onClick={()=>{handleInvitation(invite._id, true)}}>Accept</Button>
+                      <Button onClick={()=>{handleInvitation(invite._id, false)}}>Decline</Button>
+                    </li>
+                  ))}
+                </ul>):(<></>)}
+            </div>
+
 
 
         <section className="container">

@@ -18,6 +18,10 @@ export const GET_ME=gql`
         groupname
         description
       }
+      invitations {
+        _id
+        groupname
+      }
     }
   }
 `

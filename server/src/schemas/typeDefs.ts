@@ -5,6 +5,7 @@ type User {
     email: String!
     books: [Book]
     groups: [Group]
+    invitations: [Group]
 }
 
 type Book {
@@ -68,9 +69,10 @@ type Mutation {
     createDiscussion(groupId: ID!, title: String!, authors: [String], image: String, bookId: String): Discussion
     createComment(discussionId: ID!, content: String, username: String): Discussion
     updateProgress(bookId: ID!, progress: Int!): Book
-    addUserToGroup(username: String!, groupId: ID!): Group
     bookSearch(string: String!): [Book]
     removeUserFromGroup(groupId: ID!): Group
+    addUserToGroup(groupId: ID!, accepted: Boolean!): User
+    inviteUserToGroup(username: String!, groupId: ID!): String
 }
 
 
