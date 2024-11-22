@@ -29,12 +29,7 @@ jobs:
 
       # Run Cypress Component Tests
       - name: Run Cypress Component Tests
-        uses: cypress-io/github-action@v5
-        with:
-          runTests: true
-          record: false
-          configFile: cypress.config.ts 
-          testingType: component
+        run: npx cypress run --component
 
       - name: deploy
         if: github.ref == 'refs/heads/main'
