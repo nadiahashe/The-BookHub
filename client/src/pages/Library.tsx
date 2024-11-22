@@ -49,7 +49,7 @@ const LibraryPage: React.FC = () => {
         <div className="library-container ">
           <div className="row">
             {/* Left Column */}
-            <div style={{backgroundColor:'#faefe0', height:'100vh'}} className="col-12 col-lg-3">
+            <div  style={{backgroundColor:'#faefe0'}} className="col-12 col-lg-3 dynamic-height">
               <div className="welcome-section text-center">
                 <h2 className="mb-4" style={{ fontFamily: 'Open Sauce Sans', fontSize: '24px', marginTop:'15%' }}>
                   Welcome to Your Library, {user?.username?.split(' ')[0]}

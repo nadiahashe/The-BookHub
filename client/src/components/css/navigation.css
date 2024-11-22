@@ -1,34 +1,40 @@
 
 
   #nav-header {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
   }
    
   .header-navbar {
     width: 100%;
     padding: 5px;
-    background-color: #faefe0; ;  
+    background-color: #faefe0; ;  /* Adjust as needed */
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between; /* Align container to the left */
     align-items: center;
-    position: relative;  
+    position: fixed;  /* Necessary for absolute positioning of navbar */
+    top: 0;
+    left: 0;
+    z-index: 1000;  /* Ensure the navbar is above other content */
   }
   
+  /* Align logo and header text to the left */
   .container-nav {
     display: flex;
     align-items: center;
   }
+
+  
   
   .navbar {
     display: flex;
-    justify-content: space-between; 
-    gap: 20px; 
+    justify-content: space-between; /* Distributes nav items evenly */
+    gap: 20px; /* Adds space between nav items */
     margin: 0;
     padding: 0;
     list-style: none;
-    position: absolute; 
-    top: 20px; 
-    right: 20px;
+    position: absolute; /* Position the navbar in the top-right corner */
+    top: 20px; /* Distance from the top of the screen */
+    right: 20px; /* Distance from the right side */
   }
   
   .navbar li {
@@ -37,32 +43,55 @@
   
   .navbar a {
     text-decoration: none;
-    color: #333;  
+    color: #333;  /* Set your text color */
     padding: 10px 20px;
     font-size: 16px;
-    border-radius: 5px;  
-    position: relative;  
-    display: inline-block;
+    border-radius: 5px;  /* Optional: add rounded corners */
+    position: relative;  /* Position relative for the pseudo-element */
+    display: inline-block; /* Ensure the links are inline-blocks */
   }
   
   /* Create the hover effect */
   .navbar a::after {
     content: "";
     position: absolute;
-    bottom: 0; 
+    bottom: 0; /* Place it at the bottom of the link */
     left: 0;
-    width: 0%; 
-    height: 2px; 
-    background-color: black; 
-    transition: width 0.4s ease-in-out; 
+    width: 0%; /* Start with no width */
+    height: 2px; /* Thickness of the underline */
+    background-color: black; /* Color of the underline */
+    transition: width 0.4s ease-in-out; /* Smooth transition for the underline */
   }
   
   /* Apply the hover effect */
   .navbar a:hover::after {
-    width: 100%; 
+    width: 100%; /* Underline the full width on hover */
   }
   
-
+  /* Optional: Color of the text on hover */
   .navbar a:hover {
-    color: #000; 
+    color: #000; /* Adjust to your preferred color on hover */
+  }
+
+  @media (max-width: 768px) {
+    .navbar a {
+      text-decoration: none;
+      color: #333;  /* Set your text color */
+      font-size: 15px;
+      border-radius: 5px;  /* Optional: add rounded corners */
+      position: relative;  /* Position relative for the pseudo-element */
+      display: inline-block; /* Ensure the links are inline-blocks */
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center; /* Distributes nav items evenly */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: relative; /* Position the navbar in the top-right corner */
+      top: 20px; /* Distance from the top of the screen */
+      right: 20px; /* Distance from the right side */
+      gap: 0;
+    }
   }
