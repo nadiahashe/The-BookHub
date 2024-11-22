@@ -22,6 +22,7 @@ type Review {
     content: String
     username: String
     shared: Boolean
+    _id: ID
 }
 
 type Group {

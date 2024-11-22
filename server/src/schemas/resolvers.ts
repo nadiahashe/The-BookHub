@@ -1,4 +1,5 @@
 // Imports
+import { Types } from "mongoose";
 import { Book, User, Discussion, Group } from "../models/index.js";
 import { signToken } from "../services/auth.js";
 import bcrypt from 'bcrypt';
@@ -69,7 +70,7 @@ const resolvers = {
         },
         // create book: arg title, author, image, bookId, return book object; updates logged-in user's book array
         addBook: async (_parent: any, { title, authors, image, bookId }: any, context: any) => {
-            const newBook = await Book.create({ title, authors, image, bookId });
+            const newBook = await Book.create({ title, authors, image, bookId, "review._id": new Types.ObjectId() });
             if (!newBook) {
                 throw new Error("Failed to add new book");
             }

@@ -30,7 +30,6 @@ const bookSchema = new Schema<IBook>(
         bookId: {
             type: String,
             required: true,
-            unique: true
         },
         progress: {
             type: Number

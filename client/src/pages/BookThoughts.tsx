@@ -18,7 +18,7 @@ const BookThoughtsPage: React.FC = ()=>{
                 <h2>Here's what people thought</h2>
                 <ul>
                     {data?.bookReviews.map((book: any)=>(
-                        <li key={book.review.reviewId}>
+                        <li key={book.review._id}>
                             <p>{book.review.username}</p>
                             <p>{book.review.content}</p>
                         </li>
