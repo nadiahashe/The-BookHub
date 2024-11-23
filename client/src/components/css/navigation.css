@@ -1,63 +1,7 @@
-/* .header-navbar {
-    display: flex;
-    flex-direction: row;
-    background-color: #faefe0; 
-    padding-bottom: 0;
-    border-bottom: 2px solid black;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 15px;
-  }
 
-.header-navbar .header-text {
-    font-size: 30px;  
-    
-    margin-left: 10px;  
-    font-family: 'Open Sauce Sans', 'Arial', sans-serif;
-    margin-top: 20px;
-  }
-  
-.header-navbar  .logo {
-    width: 30px;  
-    height: 30px;
-    margin-top: 20px;
-  }
-  
-.header-navbar  .navbar {
-    display: flex;
-    flex-direction: row;
-    width:80%;
-    justify-content: start;
-  }
-
-.navbar .cta-button {
-    padding: 0.4rem 1rem;
-    background-color: #d0ba9e; 
-    color: #fff;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 0.5rem;
-    margin-right: 10px;
-    border-color: black;
-  }
-  
-  
-.navbar .cta-button:hover {
-    background-color: rgb(131, 114, 92); 
-  }
-
-.navbar .btn-logout {
-    margin-left:auto;
-  }
-
-.navbar .btn.active {
-    background-color:#d0ba9e;
-    color:#000   
-  } */
 
   #nav-header {
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
   }
    
   .header-navbar {
@@ -67,7 +11,10 @@
     display: flex;
     justify-content: space-between; /* Align container to the left */
     align-items: center;
-    position: relative;  /* Necessary for absolute positioning of navbar */
+    position: fixed;  /* Necessary for absolute positioning of navbar */
+    top: 0;
+    left: 0;
+    z-index: 1000;  /* Ensure the navbar is above other content */
   }
   
   /* Align logo and header text to the left */
@@ -75,6 +22,8 @@
     display: flex;
     align-items: center;
   }
+
+  
   
   .navbar {
     display: flex;
@@ -122,4 +71,27 @@
   /* Optional: Color of the text on hover */
   .navbar a:hover {
     color: #000; /* Adjust to your preferred color on hover */
+  }
+
+  @media (max-width: 768px) {
+    .navbar a {
+      text-decoration: none;
+      color: #333;  /* Set your text color */
+      font-size: 15px;
+      border-radius: 5px;  /* Optional: add rounded corners */
+      position: relative;  /* Position relative for the pseudo-element */
+      display: inline-block; /* Ensure the links are inline-blocks */
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: center; /* Distributes nav items evenly */
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      position: relative; /* Position the navbar in the top-right corner */
+      top: 20px; /* Distance from the top of the screen */
+      right: 20px; /* Distance from the right side */
+      gap: 0;
+    }
   }

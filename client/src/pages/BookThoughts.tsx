@@ -3,7 +3,7 @@ import React from "react"
 import { useParams } from "react-router-dom"
 import { GET_BOOK_REVIEWS } from "../utils/queries"
 import './css/BookThoughts.css'
-import BookThoughtsPic from '../assets/linenpic2.png'
+// import BookThoughtsPic from '../assets/linenpic2.png'
 
 
 const BookThoughtsPage: React.FC = ()=>{
@@ -15,7 +15,7 @@ const BookThoughtsPage: React.FC = ()=>{
 
     return (
         <div className="thoughts-page">
-          <img src={BookThoughtsPic} alt="book" className="review-background" />
+          {/* <img src={BookThoughtsPic} alt="book" className="review-background" /> */}
 
         <div className="content-container">
 

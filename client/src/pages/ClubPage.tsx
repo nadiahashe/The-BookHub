@@ -7,7 +7,7 @@ import './css/ClubPage.css';
 import BookPic from '../assets/background-book.png'
 import { Button, Card, Collapse } from 'react-bootstrap';
 import Memberpic from '../assets/members.png'
-import NewMember from '../assets/new-member.png'
+import NewMember from '../assets/addmember.png'
 import Discussions from '../assets/discussions.png'
 import { CiCirclePlus } from "react-icons/ci";
 

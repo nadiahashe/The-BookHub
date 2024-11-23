@@ -4,7 +4,7 @@ import { GET_ME } from "../utils/queries"
 import { GOOGLE_BOOK_SEARCH, ADD_BOOK } from "../utils/mutations"
 import { useNavigate, Link } from "react-router-dom"
 import './css/BookSearch.css'
-import BookSearchPic from '../assets/linenpic2.png';
+import BookSearchPic from '../assets/search2.png';
 
 
 const BookSearchPage: React.FC = ()=> {

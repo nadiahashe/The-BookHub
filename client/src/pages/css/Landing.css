@@ -12,11 +12,21 @@
     justify-content: center;
   }
 
+  .header-navbar {
+    width: 100%;
+    padding: 5px;
+    background-color: #faefe0; ;  
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    position: relative;  
+  }
+
   header {
     display: flex;
     background-color: #faefe0; 
     padding-bottom: 2%;
-    border-bottom: 5px solid black;
+    border-bottom: 2px solid black;
     justify-content: space-between;
     align-items: center;
   }
@@ -62,9 +72,16 @@
   }
 
   .hero-image {
-    width: 100%; /* Make the image take up 100% of the width of the hero section */
-    height: auto; /* Maintain the aspect ratio */
-    max-width: 800px; /* Limit the width of the image */
-    object-fit: cover; /* Make sure the image covers the area without distortion */
+    width: 100%; 
+    height: auto; 
+    max-width:2000px; 
+    object-fit: cover; 
     margin-top: 30px;
+    border-radius: 5px;
+  }
+
+  @media (max-width: 768px) {
+ .hero-image {
+  margin-bottom: 10px;
+ }
   }

@@ -22,6 +22,10 @@
     height: 100vh;
     object-fit: cover; 
     opacity: 0.5; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
    
   }
   .search-page {
@@ -59,4 +63,36 @@
 .review-btn a {
     color: black;
     
+}
+
+@media (max-width: 768px) {
+  .search-background {
+      background-attachment: scroll; /* Allow normal scrolling on small screens */
+      width: auto;
+
+  }
+}
+
+@media (max-width: 996px) {
+  .search-background {
+      background-attachment: scroll; /* Allow normal scrolling on small screens */
+      width: auto;
+
+  }
+}
+
+@media (max-width: 1200px) {
+  .search-background {
+      background-attachment: scroll; /* Allow normal scrolling on small screens */
+      width: auto;
+
+  }
+}
+
+@media (max-width: 1400px) {
+  .search-background {
+      background-attachment: scroll; /* Allow normal scrolling on small screens */
+      width: auto;
+
+  }
 }

@@ -1,66 +1,87 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
 
-html, body {
-    background-color: #faefe0;
-    min-height: 100vh;
-   
+
+.body {
+  overflow: hidden;
 }
-.icon-style {
-        font-size: 20px; 
-        color: rgb(131, 114, 92);  
-        transition: color 0.3s ease; 
+
+      .book-list .book-row:nth-child(odd) {
+        background-color: #f1eeef; 
       }
       
-      .icon-style:hover {
-        color: rgba(165, 42, 42, 0.213); 
-        cursor: pointer; 
+      .book-list .book-row:nth-child(even) {
+        background-color: #ffffff; 
       }
       
-      .library-page {
-        position: relative;
-        width: 100%;
-        height: 100vh; 
+      .book-image {
+        object-fit: contain;
+        border: none; 
+        outline: none; 
+        box-shadow: none;
+      }
+
+      .add-book-btn-container {
+        position: sticky; /* Keeps the container fixed */
+        top: 10px; /* Distance from the top */
+        z-index: 10; /* Ensure it's above other content */
+        padding: 10px 0; /* Optional: Padding for spacing */
+      }
+      
+      .dynamic-height {
+        height: 100vh; /* Default for smaller screens */
+    }
+
+      .add-book-btn {
+        background-color: rgb(57, 57, 57);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        text-decoration: none;
         display: flex;
-        justify-content: center; 
-        align-items: flex-start; 
-        overflow-y: auto; 
-      }
-      
-      .library-container {
-          width: 90%;
-          max-width: 1600px;
-          height: 85%; /* Fixed height based on the viewport height */
-          background-color: transparent;
-          border-radius: 15px;
-          padding: 20px;
-          overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
-          position: relative;
-          margin-top: 30px;
-      }
-
-
-      .library-background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        object-fit: cover; 
-        opacity: 0.5; 
-       
-      }
-
-      .remove-btn {
-        padding: 0.75rem;
-        font-size: 1rem;
-        background-color: #d0ba9e;
-        color: black;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        width: 50%;
-        font-family: 'Open Sauce Sans', 'Arial', sans-serif;
-        display: flex;
-        justify-content: center;
         align-items: center;
+        gap: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+        max-width: 150px;
+        margin: 0 auto;
+        position: absolute;
+        right: 10px;
       }
+      
+      .add-book-btn a {
+        color: white;
+        text-decoration: none;
+      }
+      
+      .add-book-btn:hover {
+        background-color: black;
+        cursor: pointer;
+      }
+      
+      
+    @media (max-width: 765px) {
+  .add-book-btn-container {
+    top: 5px; /* Adjust spacing for smaller screens */
+    padding: 5px 0;
+  }
+
+  .add-book-btn {
+    font-size: 10px; /* Slightly smaller font for smaller screens */
+    padding: 8px 12px;
+    max-width: 120px; /* Adjust max width */
+  }
+.dynamic-height {
+  height: auto;
+}
+ 
+}
+
+@media (max-width: 990px) {
+  .dynamic-height {
+    height: auto;
+  }
+}
+
+

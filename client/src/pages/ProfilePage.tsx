@@ -83,10 +83,14 @@ const ProfilePage: React.FC = () => {
               {user?.invitations && user?.invitations.length>0?(
                 <ul>
                   {user?.invitations.map((invite: any)=>(
-                    <li key={invite._id}>
+                    <li className='invite-btn'key={invite._id}>
+                        <div className="invite-container">
                       <p>{`The club "${invite.groupname}" has invited you to join`}</p>
-                      <Button onClick={()=>{handleInvitation(invite._id, true)}}>Accept</Button>
-                      <Button onClick={()=>{handleInvitation(invite._id, false)}}>Decline</Button>
+                      <div className="button-group">
+                      <Button className='accept-btn'onClick={()=>{handleInvitation(invite._id, true)}}>Accept</Button>
+                      <Button className='decline-btn'onClick={()=>{handleInvitation(invite._id, false)}}>Decline</Button>
+                    </div>
+                    </div>
                     </li>
                   ))}
                 </ul>):(<></>)}
