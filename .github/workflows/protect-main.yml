@@ -1,0 +1,19 @@
+# this github action protected the main branch, allowing only 'develop' to be merged into it.
+
+name: protect_main
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check_branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: branch check
+        if: github.head_ref != 'develop'
+        run: |
+          echo "Only develop can merge into main"
+          exit 1

@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
+
+.content-container {
+    display: flex;
+    justify-content: center;  /* Center horizontally */
+    text-align: center;       /* Center text inside elements */
+    width: 90%;
+    max-width: 1600px;
+    height: 100%; /* Fixed height based on the viewport height */
+    background-color: white;
+    /* border-radius: 15px; */
+    padding: 20px;
+    overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
+    position: relative;
+    /* margin-top: 30px; */
+  }
+  
+  /* Center the content inside the center div horizontally */
+  .center {
+    max-width: 800px;         /* Restrict max width */
+    width: 100%;              /* Ensure it uses full width */
+    padding: 2rem;            /* Space around the content */
+    display: flex;
+    flex-direction: column;   /* Stack items vertically */
+    align-items: center;      /* Center items horizontally */
+    gap: 1rem;                /* Add some space between the heading and list */
+  }
+  
+  /* Styling for the review section */
+  .review-section {
+    width: 100%;
+    background-color: #f1eeef;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  ul li {
+    padding: 0.5rem;
+  }
+  
+  h2 {
+    margin-bottom: 1rem;  /* Space below the heading */
+  }
+  
+  .review-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; 
+    opacity: 0.5; 
+  }
+
+  .thoughts-page {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    overflow-y: auto; 
+    background-color: #faefe0;
+  }

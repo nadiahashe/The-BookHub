@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
+
+
+.body {
+  overflow: hidden;
+}
+
+      .book-list .book-row:nth-child(odd) {
+        background-color: #f1eeef; 
+      }
+      
+      .book-list .book-row:nth-child(even) {
+        background-color: #ffffff; 
+      }
+      
+      .book-image {
+        object-fit: contain;
+        border: none; 
+        outline: none; 
+        box-shadow: none;
+      }
+
+      .add-book-btn-container {
+        position: sticky; /* Keeps the container fixed */
+        top: 10px; /* Distance from the top */
+        z-index: 10; /* Ensure it's above other content */
+        padding: 10px 0; /* Optional: Padding for spacing */
+      }
+      
+      .dynamic-height {
+        height: 100vh; /* Default for smaller screens */
+    }
+
+      .add-book-btn {
+        background-color: rgb(57, 57, 57);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+        max-width: 150px;
+        margin: 0 auto;
+        position: absolute;
+        right: 10px;
+      }
+      
+      .add-book-btn a {
+        color: white;
+        text-decoration: none;
+      }
+      
+      .add-book-btn:hover {
+        background-color: black;
+        cursor: pointer;
+      }
+      
+      
+    @media (max-width: 765px) {
+  .add-book-btn-container {
+    top: 5px; /* Adjust spacing for smaller screens */
+    padding: 5px 0;
+  }
+
+  .add-book-btn {
+    font-size: 10px; /* Slightly smaller font for smaller screens */
+    padding: 8px 12px;
+    max-width: 120px; /* Adjust max width */
+  }
+.dynamic-height {
+  height: auto;
+}
+ 
+}
+
+@media (max-width: 990px) {
+  .dynamic-height {
+    height: auto;
+  }
+}
+
+

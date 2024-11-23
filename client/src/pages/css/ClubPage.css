@@ -1,0 +1,125 @@
+@import url("https://fonts.googleapis.com/css?family=Sofia");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sauce+Sans:wght@400;700&display=swap');
+
+
+
+
+.club-page {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: flex-start; 
+    overflow-y: auto; 
+  }
+  
+  .club-container {
+    width: 60%;
+    max-width: 1600px;
+    height: 100%; /* Fixed height based on the viewport height */
+    background-color: #f6f1eb;
+    padding: 20px;
+    overflow-y: auto; /* Allows internal scrolling if content exceeds container height */
+    position: relative;
+  
+  }
+  
+  
+  
+  .club-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; 
+    opacity: 0.8; 
+  }
+
+  .card-btn {
+    padding: 0.75rem;
+  font-size: 1rem;
+  background-color: #d0ba9e;
+  color: black;
+  border: none;
+  /* border-radius: 50px; */
+  cursor: pointer;
+  width: 100%;
+  font-family: 'Open Sauce Sans', 'Arial', sans-serif; 
+  }
+  
+  .card-btn:hover {
+    background-color: #0056b3;       
+    border-color: #0056b3;            
+  }
+  
+  .card-btn:focus {
+    outline: none;                   
+  }
+
+  .club-body {
+    margin-top: 10%;
+  }
+
+  .leave-btn {
+    position: relative;
+    bottom: -150px; 
+    left: 50%;
+    transform: translateX(-50%); 
+    border-radius: none;
+    background-color: #d0ba9e;
+    border: none;
+    color: black;
+    width: 40%;
+    font-family: 'Open Sauce Sans';
+    margin-bottom: 10px;
+    
+  }
+
+
+  
+ 
+
+  .create-discussion {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .create-discussion span {
+    margin-right: 8px;
+  }
+  
+  .create-discussion::after {
+    content: "";
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 0%;
+    height: 2px; 
+    background-color: black; 
+    transition: width 0.4s ease-in-out; 
+  }
+  
+  .create-discussion:hover::after {
+    width: 100%; 
+  }
+  
+  .create-discussion:hover {
+    color: #000; 
+  }
+
+  .disc {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  /* .disc:hover {
+    transform: scale(1.1);
+  }
+   */
+
+ 
