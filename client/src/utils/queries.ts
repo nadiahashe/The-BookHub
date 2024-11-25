@@ -51,6 +51,9 @@ export const GET_BOOK_REVIEWS=gql`
   query BookReviews($bookId: String!) {
     bookReviews(bookId: $bookId) {
       _id
+      title
+      authors
+      image
       review {
         content
         username
