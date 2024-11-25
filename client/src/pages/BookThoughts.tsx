@@ -51,7 +51,7 @@ const BookThoughtsPage: React.FC = () => {
                                     <ul className="comment-section">
                                         {data?.bookReviews.map((book: any) => (
                                             <li style={{ fontFamily: 'Open Sauce Sans' }} className="commentItem" key={book.review._id}>
-                                                < span className="commentUser">{book.review.username}</span>:
+                                                < span className="commentUser">{book.review.username}</span>: 
                                                 <span className="commentContent">{book.review.content}</span>
                                             </li>
                                         ))}
