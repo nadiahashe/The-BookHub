@@ -115,6 +115,7 @@ export const GET_DISCUSSION = gql`
       image
       authors
       bookId
+      groupId
       comments {
         commentId
         content
