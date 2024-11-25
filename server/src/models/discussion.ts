@@ -1,7 +1,7 @@
 // discussions will contains a book and an array of comments
 // comments will be a subdocument that contains an id, content, and a username string
 
-import { Schema, model, Document } from "mongoose";
+import { Schema, model, Document, ObjectId } from "mongoose";
 
 export interface IComment extends Document {
     commentId: Schema.Types.ObjectId;
@@ -14,7 +14,8 @@ export interface IDiscussion extends Document {
     authors: string[];
     image: string;
     comments: Schema.Types.ObjectId[];
-    bookId: string
+    bookId: string;
+    groupId: ObjectId;
 }
 
 const commentSchema =  new Schema<IComment>(
@@ -51,6 +52,10 @@ const discussionSchema = new Schema<IDiscussion>(
         bookId: {
             type: String,
             required: true
+        },
+        groupId: {
+            type: Schema.Types.ObjectId,
+            ref: 'Group'
         }
     }
 )

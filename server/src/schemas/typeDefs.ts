@@ -40,6 +40,7 @@ type Discussion {
     image: String
     comments: [Comment]
     bookId: String!
+    groupId: ID!
 }
 
 type Comment {
