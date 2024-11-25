@@ -76,6 +76,7 @@ export const CREATE_DISCUSSION = gql`
       image
       authors
       bookId
+      groupId
       comments {
         commentId
         content

@@ -133,11 +133,9 @@ const ClubPage: React.FC = () => {
         <Card>
           <Card.Img variant='top' src={Discussions} alt={'discussions'} />
           <Card.Body>
-          {data?.getClub.discussions.map((discussion: any)=>(
-            <li style={{listStyle:'none'}} key={discussion._id}>
-               <Button onClick={toggleDiscussions} aria-expanded={openDiscussions ? 'true' : 'false'} className="card-btn">
-                    {openDiscussions ? 'Hide Discussions' : 'Show Discussions'}
-                  </Button>
+          <Button onClick={toggleDiscussions} aria-expanded={openDiscussions ? 'true' : 'false'} className="card-btn">
+            {openDiscussions ? 'Hide Discussions' : 'Show Discussions'}
+          </Button>
                   <Collapse in={openDiscussions}>
                     <div>
                       {data?.getClub.discussions.map((discussion: any) => (
@@ -149,8 +147,6 @@ const ClubPage: React.FC = () => {
                       ))}
                     </div>
                   </Collapse>
-            </li>
-          ))}
         
         <div className="create-discussion" onClick={newDiscussionHandler}><span><CiCirclePlus />
         </span>Create new discussion</div>

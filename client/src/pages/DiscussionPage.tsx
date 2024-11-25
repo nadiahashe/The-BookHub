@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useParams } from "react-router-dom";
-import { GET_DISCUSSION } from "../utils/queries.js";
+import { useParams, Link } from "react-router-dom";
+import { GET_CLUB, GET_DISCUSSION } from "../utils/queries.js";
 import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_COMMENT } from "../utils/mutations.js";
 import Auth from "../utils/auth.js"
@@ -10,8 +10,9 @@ const DiscussionPage: React.FC = ()=> {
 
     const {id} = useParams()
     const {data, loading} = useQuery(GET_DISCUSSION, { variables: {discussionId: id}})
-    const [createComment] = useMutation(CREATE_COMMENT, { refetchQueries: [GET_DISCUSSION]})
-    
+    const club = useQuery(GET_CLUB, {variables: {clubId: data?.getDiscussion?.groupId}})
+    const [createComment] = useMutation(CREATE_COMMENT, { refetchQueries: [GET_DISCUSSION, GET_CLUB]})
+
     const [newComment, setNewComment] = useState("")
 
     const handleChange = (event: ChangeEvent<HTMLTextAreaElement>)=>{
@@ -32,6 +33,7 @@ const DiscussionPage: React.FC = ()=> {
     if (loading) {return <p>Loading...</p>}
     return (
         <div className="discussion-page">
+          <h2><Link style={{color: 'black', marginLeft: '3%'}} to={`/club/${club?.data?.getClub?._id}`}>{`${club?.data?.getClub?.groupname}`}</Link></h2>
           <div className="container py-4">
             <div className="row align-items-center">
               {/* Book Image Section */}
