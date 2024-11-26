@@ -42,7 +42,7 @@ MongoDB
 Installation
 Clone the repository:
 
-git clone https://github.com/yourusername/The-BookHub.git
+git clone https://github.com/nadiahashe/The-BookHub.git
 cd The-BookHub
 Install dependencies for both the client and server:
 
