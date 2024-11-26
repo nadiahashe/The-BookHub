@@ -5,9 +5,13 @@ The BookHub revolutionizes how users manage their personal libraries. With seaml
 Features 🚀
 
 Book Tracking: Add, remove, and monitor progress on books in your collection.
+
 Group Collaboration: Create or join book clubs to pick new reads and discuss them.
+
 Book Search: Effortlessly search for books and add them to your library.
+
 Thought Sharing: Share your thoughts and read reviews from the community.
+
 Discussion Management: Start discussions with your groups and collaborate with others.
 
 Why The BookHub? 🌟
